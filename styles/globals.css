@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --aside-height: 100vh;
+}
+
+:root:has(nav > div[aria-expanded="true"]) {
+  --open: 1;
+  --rotate: 90deg;
+}
+::selection {
+  @apply bg-sky-700 text-rose-200 rounded;
+}
+::-webkit-scrollbar {
+  @apply w-2;
+}
+::-webkit-scrollbar-track {
+  @apply bg-teal-300;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-teal-500 rounded;
+}
+
+::-webkit-file-upload-button {
+  cursor: pointer;
+}
+
+@layer base {
+  body {
+    overflow-x: hidden;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  legend {
+    font-variant: small-caps;
+  }
+}
+
+@layer components {
+  .form-control.active + .form-label,
+  .form-control:focus + .form-label {
+    top: 0.3rem;
+    background: linear-gradient(white 65%, transparent);
+    transform: translateY(-1rem) translateY(0.1rem) scale(0.8);
+  }
+
+  .loading svg {
+    font-size: 5px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: text 2s ease-in-out infinite;
+  }
+  @keyframes text {
+    50% {
+      opacity: 0.1;
+    }
+  }
+  .loading polygon {
+    stroke-dasharray: 22;
+    stroke-dashoffset: 1;
+    animation: dash 4s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite
+      alternate-reverse;
+  }
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 234;
+    }
+  }
+
+  .main {
+    @apply flex w-full flex-1 flex-col items-center justify-center px-20 text-center;
+  }
+}
+
+@layer utilities {
+  .cssAnimationJumping {
+    animation: jumping 3s ease-in-out 1 forwards;
+  }
+
+  @keyframes jumping {
+    0% {
+      transform: translateY(-10rem);
+    }
+    5% {
+      transform: translateY(1rem);
+    }
+    10% {
+      transform: translateY(0);
+    }
+
+    85% {
+      transform: translateY(0);
+    }
+
+    90% {
+      transform: translateY(1rem);
+    }
+    95% {
+      transform: translateY(-100rem);
+    }
+    100% {
+      transform: translateY(-100rem);
+    }
+  }
+
+  .cssAnimationFalling {
+    animation: Falling 0.3s cubic-bezier(0.48, 0.54, 0.46, 1.46) 1;
+  }
+
+  @keyframes Falling {
+    from {
+      transform: translateY(-20rem);
+    }
+  }
+}
