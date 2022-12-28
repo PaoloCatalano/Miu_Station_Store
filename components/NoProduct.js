@@ -19,7 +19,7 @@ export default function PleaseSign() {
           margin-top: 5rem;
         }
       `}</style>
-      <NextSeo title={`${process.env.WEBSITE_NAME} | Product Not Available`} />
+      <NextSeo title={`${process.env.WEBSITE_NAME} | Page Not Available`} />
       <div className="_center">
         <h1 className="_center _h1style">
           <span>
@@ -35,16 +35,16 @@ export default function PleaseSign() {
               quality={100}
             /> */}
           </span>
-          ops!, this product is not available
+          Oops!, this page is no longer available
         </h1>
       </div>
       <div className="_center">
         <Link href="/">
           <button
             type="button"
-            className="btn btn-warning w-100 text-uppercase m-5"
+            className="btn btn-warning w-full uppercase m-5"
           >
-            <a> enjoy shopping </a>
+            enjoy shopping
           </button>
         </Link>
       </div>
