@@ -114,4 +114,14 @@
       transform: translateY(-20rem);
     }
   }
+
+  .progress {
+    animation: trackProgress 2.6s linear forwards;
+  }
+
+  @keyframes trackProgress {
+    to {
+      width: 0%;
+    }
+  }
 }

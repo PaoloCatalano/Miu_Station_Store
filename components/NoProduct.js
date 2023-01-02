@@ -5,9 +5,9 @@ import Image from "next/image";
 import { rgbDataURL } from "utils/blurData";
 import GoBack from "./GoBack";
 
-export default function PleaseSign() {
+export default function NoProduct() {
   return (
-    <div className="home_page">
+    <div className="home_page animate-fade-in">
       <style jsx>{`
         ._center {
           display: flex;

@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import Users from "models/userModel";
-import { emailSchema, password } from "validators/valid";
+import { emailSchema, passwordSchema } from "validators/valid";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 
@@ -28,10 +28,7 @@ const resetPassword = async (req, res) => {
 
     const user = await Users.findOne({ email });
 
-    //   console.log(token);
-    //   console.log(user.passwordToken);
-
-    if (!user) res.status(400).json({ err: `Email ${email} error.` });
+    if (!user) res.status(400).json({ err: `Wrong Email: ${email}.` });
 
     const currentDate = new Date();
 
@@ -66,7 +63,7 @@ const resetPassword = async (req, res) => {
         });
       }
     }
-  } catch (error) {
+  } catch (err) {
     if (err instanceof ZodError) {
       const validationError = fromZodError(err);
       return res.status(400).json({ err: validationError.details[0].message });

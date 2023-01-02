@@ -1,15 +1,38 @@
 import { z } from "zod";
-import { nameSchema } from "./valid";
+import { positiveNumberSchema } from "./valid";
 
-const productSchema = z.object({
-  title: z.string().trim().min(1),
-  price: z.number().nonnegative(),
-  inStock: z.number().nonnegative(),
-  description: z.string(),
-  content: z.string(),
-  category: nameSchema,
-  onSale: z.boolean(),
-  images: z.array(z.object({ url: z.string().url() })),
+const positiveNumberFromStringSchema = z
+  .string()
+  .regex(/^[0-9]+$/, { message: "Must be a positive number" })
+  .transform(Number);
+
+const notEmptyStringSchema = z.string().trim().min(1);
+
+const booleanCheckboxSchema = z.string().optional().transform(Boolean);
+
+export const ProductSchema = z.object({
+  title: notEmptyStringSchema,
+  price: positiveNumberFromStringSchema,
+  inStock: positiveNumberFromStringSchema,
+  description: notEmptyStringSchema,
+  content: notEmptyStringSchema,
+  category: notEmptyStringSchema.refine(
+    (category) => {
+      return !category.includes("all");
+    },
+    { message: "Select a Category" }
+  ),
+  onSale: booleanCheckboxSchema,
+  images: z.object({ size: z.number().gt(0, { message: "File missing" }) }),
+  // .catchall(z.any()),
 });
 
-export default productSchema;
+export const ServerProductSchema = z.object({
+  title: notEmptyStringSchema,
+  price: positiveNumberSchema,
+  inStock: positiveNumberSchema,
+  description: notEmptyStringSchema,
+  content: notEmptyStringSchema,
+  category: notEmptyStringSchema,
+  onSale: z.boolean(),
+});

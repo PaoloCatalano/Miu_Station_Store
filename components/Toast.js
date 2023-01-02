@@ -13,6 +13,7 @@ const Toast = ({ msg, handleShow, bgColor }) => {
         >
           x
         </button>
+        <div className="progress absolute h-1.5 w-full bottom-0 left-0 bg-sky-500 rounded-bl"></div>
       </div>
 
       <div className="p-3">{msg.msg}</div>

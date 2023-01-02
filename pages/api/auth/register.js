@@ -1,7 +1,7 @@
 import connectDB from "utils/connectDB";
 import Users from "models/userModel";
 import bcrypt from "bcrypt";
-// import sendVerificationEmail from "utils/sendVerificationEmail";
+import sendVerificationEmail from "utils/sendVerificationEmail";
 import { confirmPasswordSchema } from "validators/valid";
 import userSchema from "validators/userSchema";
 import { ZodError } from "zod";
@@ -52,12 +52,12 @@ const register = async (req, res) => {
       verificationToken,
     });
 
-    // await sendVerificationEmail({
-    //   name,
-    //   email,
-    //   verificationToken,
-    //   origin: process.env.BASE_URL,
-    // });
+    await sendVerificationEmail({
+      name,
+      email,
+      verificationToken,
+      origin: process.env.BASE_URL,
+    });
 
     await newUser.save();
     res.json({ msg: "Success! Please check your email", newUser });

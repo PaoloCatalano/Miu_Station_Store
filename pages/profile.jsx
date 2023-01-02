@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState } from "react";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,8 +12,12 @@ import { FiCamera } from "react-icons/fi";
 import { FaTimes, FaCheck } from "react-icons/fa";
 import Button from "components/Button";
 import Input from "components/Input";
-import { confirmPasswordSchema } from "validators/valid";
-import { nameSchema, addressSchema, mobileSchema } from "validators/valid";
+import {
+  nameSchema,
+  addressSchema,
+  mobileSchema,
+  confirmPasswordSchema,
+} from "validators/valid";
 import LogoutBtn from "../components/LogoutBtn";
 
 /**@TODO reset password functionality */
@@ -87,7 +91,7 @@ const Profile = () => {
 
   if (
     FormSchema instanceof ZodSchema === false &&
-    FormPassSchema instanceof ZodSchema
+    FormPassSchema instanceof ZodSchema === false
   ) {
     throw Error("useZorm must have a ZodSchema as second argument");
   }
@@ -256,20 +260,20 @@ const Profile = () => {
                   <tr key={order._id}>
                     <Link href={`/order/${order._id}`}>
                       <td className="p-2" style={{ cursor: "pointer" }}>
-                        <a>{order._id.slice(0, 9)}...</a>
+                        {order._id.slice(0, 9)}...
                       </td>
                     </Link>
                     {auth.user.root && (
                       <td className="p-2">
                         {order?.user?._id ? (
                           <Link href={`/edit_user/${order.user._id}`}>
-                            <a
+                            <div
                               className={`text-lowercase ${
                                 order.user.isVerified ? "" : "text-danger"
                               }`}
                             >
                               {order.user.email}
-                            </a>
+                            </div>
                           </Link>
                         ) : (
                           <div className="text-danger">USER DELETED</div>

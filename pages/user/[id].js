@@ -3,9 +3,14 @@ import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import { useCtx } from "store/globalState";
 import { ACTIONS } from "store/actions";
+import Input from "components/Input";
+import CheckBox from "components/CheckBox";
+import Button from "components/Button";
 import GoBack from "components/GoBack";
 import { patchData } from "utils/fetchData";
 import PleaseSign from "components/PleaseSign";
+import NoProduct from "components/NoProduct";
+import Loading from "components/Loading";
 
 const EditUser = () => {
   const router = useRouter();
@@ -17,11 +22,16 @@ const EditUser = () => {
   const [checkAdmin, setCheckAdmin] = useState(false);
   const [num, setNum] = useState(0);
 
+  const [checkLoad, setCheckLoad] = useState(true);
+
   useEffect(() => {
+    setCheckLoad(false);
+
     users.forEach((user) => {
       if (user._id === id) {
         setEditUser(user);
         setCheckAdmin(user.role === "admin" ? true : false);
+        setCheckLoad(true);
       }
     });
   }, [users]);
@@ -33,6 +43,7 @@ const EditUser = () => {
 
   const handleSubmit = () => {
     let role = checkAdmin ? "admin" : "user";
+
     if (num % 2 !== 0) {
       notify({ loading: true });
       patchData(`user/${editUser._id}`, { role }, auth.token).then((res) => {
@@ -50,10 +61,16 @@ const EditUser = () => {
 
         return notify({ success: res.msg });
       });
+    } else {
+      notify({ info: "Nothing to change." });
     }
   };
 
   if (!auth.user || auth.user.role !== "admin") return <PleaseSign />;
+
+  if (editUser.length === 0) return <NoProduct />;
+
+  if (!checkLoad) return <Loading />;
 
   return (
     <div className="edit_user my-3">
@@ -63,66 +80,58 @@ const EditUser = () => {
         <h2 className="text-uppercase text-secondary">Edit User</h2>
 
         <div className="form-group">
-          <label htmlFor="name" className="d-block">
-            Name
-          </label>
-          <input type="text" id="name" defaultValue={editUser.name} disabled />
+          <Input
+            type="text"
+            label="Name"
+            defaultValue={editUser.name}
+            isDisabled
+          />
         </div>
 
         <div className="form-group">
-          <label htmlFor="email" className="d-block">
-            Email
-          </label>
-          <input
+          <Input
             type="text"
-            id="email"
+            label="Email"
             defaultValue={editUser.email}
-            disabled
-            readOnly
+            isDisabled
+            isReadOnly
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="id" className="d-block">
-            ID
-          </label>
-          <input type="text" id="id" defaultValue={editUser._id} readOnly />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="verified" className="d-block">
-            Verified
-          </label>
-          <input
+          <Input
             type="text"
-            id="verified"
-            defaultValue={editUser.isVerified}
-            disabled
-            className={editUser.isVerified ? "text-success" : "text-danger"}
+            label="ID"
+            defaultValue={editUser._id}
+            isReadOnly
           />
         </div>
 
         <div className="form-group">
-          <input
-            type="checkbox"
-            id="isAdmin"
-            checked={checkAdmin}
+          <CheckBox
+            isSelected={editUser.isVerified}
+            isDisabled
+            className={editUser.isVerified ? "text-success" : "text-danger"}
+          >
+            Verified
+          </CheckBox>
+        </div>
+
+        <div className="form-group">
+          <CheckBox
+            isSelected={checkAdmin}
             style={{ width: "20px", height: "20px" }}
             onChange={handleCheck}
-          />
-
-          <label
-            htmlFor="isAdmin"
-            style={{ transform: "translate(4px, -3px)" }}
           >
-            isAdmin
-          </label>
+            Admin
+          </CheckBox>
         </div>
 
-        <button className="btn btn-dark" onClick={handleSubmit}>
+        <Button className="btn btn-dark" onClick={handleSubmit}>
           Update
-        </button>
+        </Button>
       </div>
+
       <GoBack />
     </div>
   );

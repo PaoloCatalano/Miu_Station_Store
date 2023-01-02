@@ -11,7 +11,7 @@ import Filter from "components/Filter";
 import { rgbDataURL } from "utils/blurData";
 // import product_pic from "public/products.png";
 
-const Home = (props) => {
+const Products = (props) => {
   const [products, setProducts] = useState(props.products);
   const [isCheck, setIsCheck] = useState(false);
   const [isAll, setIsAll] = useState(false);
@@ -172,4 +172,4 @@ export async function getServerSideProps({ query }) {
   };
 }
 
-export default Home;
+export default Products;

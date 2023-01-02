@@ -1,64 +1,115 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
+import { ZodSchema } from "zod";
+import { useZorm } from "react-zorm";
 import { useCtx } from "store/globalState";
 import { imageUpload } from "utils/imageUpload";
 import { postData, getData, putData } from "utils/fetchData";
 import PleaseSign from "components/PleaseSign";
 import GoBack from "components/GoBack";
+import Button from "components/Button";
+import CheckBox from "components/CheckBox";
+import Input from "components/Input";
+import Loading from "components/Loading";
+import NoProduct from "components/NoProduct";
+import ErrorMessage from "components/ErrorMessage";
+import TextArea from "components/TextArea";
+import { ProductSchema } from "validators/productSchema";
 
-const ProductsManager = () => {
-  const [checkOnSale, setCheckOnSale] = useState(false);
+const EditProductSchema = ProductSchema.omit({ images: true });
 
-  const initialState = {
-    title: "",
-    price: 0,
-    inStock: 0,
-    description: "",
-    content: "",
-    category: "",
-    onSale: false,
-  };
-  const [product, setProduct] = useState(initialState);
+const CreateProduct = () => {
+  const [product, setProduct] = useState({});
 
-  const { title, price, inStock, description, content, category } = product;
+  const [checkLoad, setCheckLoad] = useState(true);
+  const [readyToEdit, setReadyToEdit] = useState(false);
+  const [noProd, setNoProd] = useState(false);
 
   const [images, setImages] = useState([]);
 
   const { categories, auth, notify } = useCtx();
 
+  const { title, price, inStock, description, content, category, onSale } =
+    product;
+
   const router = useRouter();
   const { id } = router.query;
   const [onEdit, setOnEdit] = useState(false);
 
+  if (
+    ProductSchema instanceof ZodSchema === false ||
+    EditProductSchema instanceof ZodSchema === false
+  ) {
+    throw Error("useZorm must have a ZodSchema as second argument");
+  }
+
+  const zo = useZorm("createProduct", ProductSchema, {
+    onValidSubmit(e) {
+      e.preventDefault();
+      setProduct({ ...e.data, images });
+      //useEffect trigger handleSubmit()
+    },
+  });
+  const zoEdit = useZorm("editProduct", EditProductSchema, {
+    onValidSubmit(e) {
+      e.preventDefault();
+      setProduct({ ...e.data, images });
+      setReadyToEdit(true);
+      //useEffect trigger handleSubmit()
+    },
+  });
+
+  const disabled = zo.validation?.success === false;
+
+  const errorField = `border-2 border-red-500`;
+
+  useEffect(() => {
+    if (auth.user && Object.keys(product).length !== 0 && !onEdit) {
+      handleSubmit();
+    }
+  }, [product]);
+
+  useEffect(() => {
+    if (readyToEdit) {
+      // console.log(product);
+      handleSubmit();
+
+      setReadyToEdit(false);
+    }
+  }, [readyToEdit]);
+
   useEffect(() => {
     if (id) {
       setOnEdit(true);
+      setCheckLoad(false);
       getData(`product/${id}`).then((res) => {
+        if (res.err) {
+          notify({ error: res.err });
+          return setNoProd(true);
+        }
+
         setProduct(res.product);
-        setCheckOnSale(res.product.onSale);
         setImages(res.product.images);
+        setCheckLoad(true);
       });
     } else {
       setOnEdit(false);
-      setProduct(initialState);
+      setProduct({});
       setImages([]);
     }
   }, [id]);
 
-  useEffect(() => {
-    setProduct({ ...product, onSale: checkOnSale });
-  }, [checkOnSale]);
+  // useEffect(() => {
+  //   setProduct({ ...product, onSale: checkLoad });
+  // }, [checkLoad]);
 
   const handleChangeInput = (e) => {
-    const { name, value } = e.target;
-
-    setProduct({ ...product, [name]: value });
     notify({});
   };
 
   const handleCheck = () => {
-    setCheckOnSale(!checkOnSale);
+    setCheckLoad(!checkLoad);
   };
 
   const handleUploadInput = (e) => {
@@ -96,11 +147,9 @@ const ProductsManager = () => {
     setImages(newArr);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     if (auth.user.role !== "admin")
-      return notify({ error: "Authentication not valid." });
+      notify({ error: "Authentication not valid." });
 
     if (
       !title ||
@@ -142,113 +191,113 @@ const ProductsManager = () => {
 
   if (!auth.user || auth.user.role !== "admin") return <PleaseSign />;
 
+  if (noProd) return <NoProduct />;
+
+  if (!checkLoad) return <Loading />;
+
   return (
     <div className="products_manager">
       <NextSeo title={`${process.env.WEBSITE_NAME} | Create Product`} />
-      <form className="row" onSubmit={handleSubmit}>
+
+      <form className="row" ref={onEdit ? zoEdit.ref : zo.ref}>
         <div className="col-md-6">
-          <input
+          <Input
             type="text"
-            name="title"
-            value={title}
-            placeholder="Title"
-            className="d-block my-4 w-100 p-2"
-            onChange={handleChangeInput}
+            name={zo.fields.title()}
+            errorMessage={zo.errors.title((e) => e.message)}
+            label="Title"
+            className={`px-2 ${zo.errors.title(errorField)}`}
+            defaultValue={title ? title : null}
           />
 
           <div className="row">
             <div className="col-sm-6">
-              <label htmlFor="price">Price</label>
-              <input
+              <Input
                 type="number"
-                name="price"
-                value={price}
+                name={zo.fields.price()}
+                errorMessage={zo.errors.price((e) => e.message)}
                 min={0}
-                placeholder="Price"
-                className="d-block w-100 p-2"
-                onChange={handleChangeInput}
+                label="Price"
+                className={`px-2 ${zo.errors.price(errorField)}`}
+                defaultValue={price ? price : null}
               />
             </div>
 
             <div className="col-sm-6">
-              <label htmlFor="price">In Stock</label>
-              <input
+              <Input
                 type="number"
-                name="inStock"
-                value={inStock}
+                name={zo.fields.inStock()}
+                errorMessage={zo.errors.inStock((e) => e.message)}
                 min={0}
-                placeholder="inStock"
-                className="d-block w-100 p-2"
-                onChange={handleChangeInput}
+                label="inStock"
+                className={`px-2 ${zo.errors.inStock(errorField)}`}
+                defaultValue={inStock ? inStock : null}
               />
             </div>
           </div>
 
-          <textarea
-            name="description"
-            id="description"
+          <Input
+            name={zo.fields.description()}
+            errorMessage={zo.errors.description((e) => e.message)}
             cols="30"
             rows="3"
-            placeholder="Description"
-            onChange={handleChangeInput}
-            className="d-block my-4 w-100 p-2"
-            value={description}
+            label="Description"
+            className={`px-2 ${zo.errors.description(errorField)}`}
+            defaultValue={description ? description : null}
           />
 
-          <textarea
-            name="content"
-            id="content"
+          <TextArea
+            name={zo.fields.content()}
+            errorMessage={zo.errors.content((e) => e.message)}
             cols="30"
             rows="4"
-            placeholder="Content"
-            onChange={handleChangeInput}
-            className="d-block my-4 w-100 p-2"
-            value={content}
+            label="Content"
+            className={`px-2 ${zo.errors.content(errorField)}`}
+            defaultValue={content ? content : null}
           />
 
           <div className="input-group mb-3">
             <div className="input-group-prepend">
               <div className="input-group-text">
-                <input
-                  type="checkbox"
-                  aria-label="Checkbox for on sale input"
-                  onChange={handleCheck}
-                  id="onSale"
-                  name="onSale"
-                  checked={checkOnSale}
+                <CheckBox
+                  label="on sale"
+                  // onChange={handleCheck}
+                  name={zo.fields.onSale()}
+                  errorMessage={zo.errors.onSale((e) => e.message)}
+                  isSelected={onSale ? onSale : false}
                   style={{ width: "20px", height: "20px" }}
-                />
+                  className={`px-2 ${zo.errors.onSale(errorField)}`}
+                >
+                  Product on Sale?
+                </CheckBox>
               </div>
             </div>
-            <input
-              type="text"
-              className="form-control"
-              aria-label="Text input with checkbox"
-              disabled
-              value="On Sale?"
-            />
           </div>
 
           <div className="input-group-prepend px-0 my-2">
-            <select
-              name="category"
-              id="category"
-              value={category}
-              onChange={handleChangeInput}
-              className="custom-select text-capitalize"
-            >
-              <option value="all">All Products</option>
-              {categories.map((item) => (
-                <option key={item._id} value={item._id}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
+            {checkLoad && (
+              <select
+                name={zo.fields.category()}
+                // errorMessage={zo.errors.category((e) => e.message)}
+                className={`px-2 ${zo.errors.category(errorField)}`}
+                defaultValue={category ? category : "all"}
+              >
+                <option value="all">All Products</option>
+                {categories.map((item) => (
+                  <option key={item._id} value={item._id}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            )}
+            {zo.errors.category((e) => (
+              <ErrorMessage message={e.message} />
+            ))}
           </div>
 
-          <button type="submit" className="btn btn-info my-2 px-4">
+          <Button isDisabled={disabled} type="submit">
             {onEdit ? "Update" : "Create"}
-          </button>
+          </Button>
         </div>
 
         <div className="col-md-6 my-4">
@@ -259,11 +308,15 @@ const ProductsManager = () => {
             <div className="custom-file border rounded">
               <input
                 type="file"
-                className="custom-file-input"
+                name={zo.fields.images()}
                 onChange={handleUploadInput}
                 multiple
                 accept="image/*"
+                // defaultValue={images ? images[0] : null}
               />
+              {zo.errors.images.size((e) => (
+                <ErrorMessage message={e.message} />
+              ))}
             </div>
           </div>
 
@@ -282,9 +335,10 @@ const ProductsManager = () => {
           </div>
         </div>
       </form>
+
       <GoBack />
     </div>
   );
 };
 
-export default ProductsManager;
+export default CreateProduct;

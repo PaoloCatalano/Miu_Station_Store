@@ -1,10 +1,4 @@
-import {
-  useReducer,
-  useContext,
-  createContext,
-  useEffect,
-  useState,
-} from "react";
+import { useReducer, useContext, createContext, useEffect } from "react";
 import reducers from "./reducers";
 import { ACTIONS } from "./actions";
 import { getData, deleteData } from "utils/fetchData";
@@ -28,7 +22,7 @@ const initialState = {
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducers, initialState);
-  const { cart, auth, categories } = state;
+  const { cart, auth } = state;
 
   //dispatch all actions
   function isMenuOpen(isOpen) {
@@ -52,7 +46,7 @@ const AppProvider = ({ children }) => {
     });
   }
 
-  function notify(objMsg /* OBJECT {error or success??} */) {
+  function notify(objMsg /* OBJECT {error, success or info} */) {
     /* dispatch({ type: "NOTIFY", payload: { error: res.err } }); */
     dispatch({ type: ACTIONS.NOTIFY, payload: objMsg });
   }
@@ -167,6 +161,7 @@ const AppProvider = ({ children }) => {
 
   function deleteProduct(item) {
     notify({ loading: true });
+    console.log("first");
     deleteData(`product/${item.id}`, auth.token).then((res) => {
       if (res.err) return notify({ error: res.err });
       /**@TODO decide: refresh page or getData("products")?? */

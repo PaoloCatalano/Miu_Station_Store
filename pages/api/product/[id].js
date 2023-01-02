@@ -2,7 +2,7 @@ import connectDB from "../../../utils/connectDB";
 import Products from "../../../models/productModel";
 import auth from "../../../middleware/auth";
 import { ZodError } from "zod";
-import productSchema from "validators/productSchema";
+import { ServerProductSchema } from "validators/productSchema";
 import { fromZodError } from "zod-validation-error";
 
 connectDB();
@@ -28,6 +28,7 @@ const getProduct = async (req, res) => {
     const { id } = req.query;
 
     const product = await Products.findById(id);
+
     if (!product)
       return res
         .status(404)
@@ -68,7 +69,7 @@ const updateProduct = async (req, res) => {
     )
       return res.status(400).json({ err: "Please add all the fields." });
 
-    productSchema.parse({
+    ServerProductSchema.parse({
       title,
       price,
       inStock,
@@ -76,7 +77,6 @@ const updateProduct = async (req, res) => {
       content,
       onSale,
       category,
-      images,
     });
 
     await Products.findOneAndUpdate(

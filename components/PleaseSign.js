@@ -3,6 +3,7 @@ import Link from "next/link";
 import { NextSeo } from "next-seo";
 import GoBack from "./GoBack";
 import Loading from "./Loading";
+import Button from "./Button";
 
 export default function PleaseSign() {
   const [show, setShow] = useState(true);
@@ -30,12 +31,12 @@ export default function PleaseSign() {
           </h1>
           <div style={{ display: "grid", placeItems: "center" }}>
             <Link href="/login">
-              <button
+              <Button
                 type="button"
                 className="btn btn-outline-info d-block my-3 px-5"
               >
-                Please Sign in!
-              </button>
+                Please Login!
+              </Button>
             </Link>
           </div>
           <GoBack />

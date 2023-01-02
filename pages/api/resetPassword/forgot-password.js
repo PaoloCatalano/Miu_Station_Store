@@ -48,12 +48,13 @@ const forgotPassword = async (req, res) => {
     }
 
     res.status(200).json({
-      msg: "Check in your emails and click on the reset password link",
+      msg: "Check your emails and click on the reset password link",
     });
-  } catch (error) {
+  } catch (err) {
     if (err instanceof ZodError) {
-const validationError = fromZodError(err);
-return res.status(400).json({ err: validationError.details[0].message });    }
+      const validationError = fromZodError(err);
+      return res.status(400).json({ err: validationError.details[0].message });
+    }
     return res.status(500).json({ err: err.message });
   }
 };

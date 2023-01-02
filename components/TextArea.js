@@ -4,13 +4,19 @@ import { useState, useRef, useEffect } from "react";
 export default function TextField(props) {
   let { label, defaultValue, onChange } = props;
   let ref = useRef();
-  const [valueState, setValueState] = useState(defaultValue || null);
+  const [valueState, setValueState] = useState(defaultValue || "");
   let { labelProps, inputProps, descriptionProps, errorMessageProps } =
-    useTextField(props, ref);
+    useTextField(
+      {
+        ...props,
+        inputElementType: "textarea",
+      },
+      ref
+    );
 
   useEffect(() => {
-    // console.log(ref.current.name + ": " + ref.current.value);
-    setValueState(defaultValue);
+    // console.log(ref.current.value);
+    if (defaultValue !== null) setValueState(defaultValue);
   }, [defaultValue]);
 
   useEffect(() => {
@@ -19,45 +25,27 @@ export default function TextField(props) {
     }
   }, [props.errorMessage]);
 
-  const handleOnChange = (e) => {
-    if (onChange) {
-      onChange();
-    }
-
-    ref.current.blur();
-    ref.current.focus();
-
-    setValueState(e.target.value);
-  };
-
-  const inputStyle = `peer ${
-    props.errorMessage
-      ? "border-red-300 focus:border-red-500"
-      : "border-sky-200 focus:border-2 focus:border-sky-500"
-  } form-control max-w-xs outline-none border-2 rounded-md py-[0.32rem] px-3 transition text-slate-700  ${
-    valueState ? "active" : ""
-  }`;
-
-  //textarea works better
-  /* 
-   <textarea
-            {...inputProps}
-            rows="1"
-            onChange={handleOnChange}
-            ref={ref}
-            className={inputStyle}
-            style={{ resize: "none" }}
-          />
-  */
-
   return (
     <div className=" mb-2">
       <div className="relative max-w-min mx-auto ">
-        <input
+        <textarea
           {...inputProps}
-          onChange={handleOnChange}
+          onChange={(e) => {
+            if (onChange) {
+              onChange();
+            }
+            ref.current.blur();
+            ref.current.focus();
+            setValueState(e.target.value);
+          }}
           ref={ref}
-          className={inputStyle}
+          className={`peer ${
+            props.errorMessage
+              ? "border-red-300 focus:border-red-500"
+              : "border-sky-200 focus:border-2 focus:border-sky-500"
+          } form-control max-w-xs outline-none border-2 rounded-md py-[0.32rem] px-3 transition text-slate-700  ${
+            valueState ? "active" : ""
+          }`}
         />
         <label
           className={`form-label absolute top-[0.4rem] left-3 max-w-[90%] whitespace-nowrap overflow-hidden text-ellipsis mb-0 ml-0 px-1 align-bottom  pointer-events-none origin-top-left transition-all ease-out text-slate-500 ${

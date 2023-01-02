@@ -61,7 +61,16 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if (Object.keys(auth).length !== 0) router.push("/");
+    if (Object.keys(auth).length !== 0) {
+      notify({ info: "Already Logged in! Redirect to Home" });
+    }
+
+    const timer = setTimeout(() => {
+      if (Object.keys(auth).length !== 0) {
+        return router.push("/");
+      }
+    }, 3000);
+    return () => clearTimeout(timer);
   }, [auth]);
 
   return (
@@ -105,6 +114,15 @@ export default function Login() {
           <p>{JSON.stringify(zo.validation, null, 1)}</p>
         </pre> */}
       </form>
+      <section className="mb-10">
+        <p className="my-2">Did you forget your password?</p>
+        <Link
+          href="/forgot-password"
+          className="text-slate-800 text-center font-bold underline-offset-4 decoration-2 hover:decoration-dashed hover:underline"
+        >
+          Reset password
+        </Link>
+      </section>
       <section className="mb-10">
         <p className="my-2">You don't have an account yet?</p>
         <Link

@@ -2,7 +2,7 @@ import connectDB from "utils/connectDB";
 import Products from "models/productModel";
 import auth from "middleware/auth";
 import { ZodError } from "zod";
-import productSchema from "validators/productSchema";
+import { ServerProductSchema } from "validators/productSchema";
 import { fromZodError } from "zod-validation-error";
 
 connectDB();
@@ -129,7 +129,7 @@ const createProduct = async (req, res) => {
     });
 
     //parsing with zod
-    productSchema.parse(newProduct);
+    ServerProductSchema.parse(newProduct);
 
     await newProduct.save();
 

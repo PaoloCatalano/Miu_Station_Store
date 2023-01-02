@@ -7,8 +7,7 @@ import { useProduct } from "utils/swr";
 // import AddButton from "./AddButton";
 
 const ProductItem = ({ product, handleCheck }) => {
-  const { cart, auth, categories, addToCart, notify, deleteProduct, addModal } =
-    useCtx();
+  const { cart, auth, categories, addToCart, addModal } = useCtx();
   const router = useRouter();
 
   const noSalePage = router.pathname !== "/sales";
@@ -63,7 +62,7 @@ const ProductItem = ({ product, handleCheck }) => {
                 data: "",
                 id: product._id,
                 title: product.title,
-                type: deleteProduct,
+                type: "deleteProduct",
               },
             ])
           }

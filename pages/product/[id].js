@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { NextSeo, ProductJsonLd } from "next-seo";
 import Link from "next/link";
 import Image from "next/image";
@@ -10,18 +10,17 @@ import { useProduct } from "utils/swr";
 // import AddButton from "components/AddButton";
 import GoBack from "components/GoBack";
 
-const DetailProduct = (props) => {
+const SingleProduct = (props) => {
   //if(props.product === null)
   if (Object.values(props).includes(null)) {
     return <NoProduct />;
   }
+  const { cart, categories, addToCart } = useCtx();
 
   const prodID = props.product._id;
 
   const [product] = useState(props.product);
   const [tab, setTab] = useState(0);
-
-  const { cart, categories, addToCart, notify } = useCtx();
 
   const nameCategory = categories
     .filter((category) => category._id === product.category)
@@ -53,7 +52,7 @@ const DetailProduct = (props) => {
           ],
         }}
       />
-
+      {/**@TODO change vercel  */}
       <ProductJsonLd
         productName={product.title}
         images={product.images.map((i) => i.url)}
@@ -185,18 +184,18 @@ const DetailProduct = (props) => {
 export async function getServerSideProps({ params: { id } }) {
   const res = await getData(`product/${id}`);
 
-  if (!res) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
+  // if (res.err) {
+  //   return {
+  //     redirect: {
+  //       destination: "/",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 
   return {
-    props: { product: res.product || null },
+    props: { product: res.product || null, err: res.err || null },
   };
 }
 
-export default DetailProduct;
+export default SingleProduct;
