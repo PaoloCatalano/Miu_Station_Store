@@ -11,8 +11,7 @@ import { useProduct } from "utils/swr";
 import GoBack from "components/GoBack";
 
 const SingleProduct = (props) => {
-  //if(props.product === null)
-  if (Object.values(props).includes(null)) {
+  if (props.product === null) {
     return <NoProduct />;
   }
   const { cart, categories, addToCart } = useCtx();

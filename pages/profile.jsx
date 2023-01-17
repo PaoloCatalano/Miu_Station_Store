@@ -12,6 +12,8 @@ import { FiCamera } from "react-icons/fi";
 import { FaTimes, FaCheck } from "react-icons/fa";
 import Button from "components/Button";
 import Input from "components/Input";
+import Fieldset from "components/Fieldset";
+import Banner from "components/Banner";
 import {
   nameSchema,
   addressSchema,
@@ -33,10 +35,6 @@ const FormPassSchema = confirmPasswordSchema;
 const Profile = () => {
   const { auth, authUser, notify, orders } = useCtx();
   const [data, setData] = useState(null);
-
-  const handleChange = (e) => {
-    notify({});
-  };
 
   const updatePassword = (password) => {
     notify({ loading: true });
@@ -114,8 +112,6 @@ const Profile = () => {
 
   const disabledPass = zoPass.validation?.success === false;
 
-  const errorField = `border-2 border-red-500`;
-
   if (!auth.user) return <>login again</>;
 
   return (
@@ -124,11 +120,7 @@ const Profile = () => {
         title={`${process.env.WEBSITE_NAME} | ${auth?.user.name} Profile`}
       />
       {!auth.user.isVerified && (
-        <div className="p-2 bg-red-400 rounded" role="alert">
-          <div className="text-center">
-            <h4>Check your email to verify account</h4>
-          </div>
-        </div>
+        <Banner role="alert" text="Check your email to verify account" />
       )}
       <section className="my-3">
         <div className="col-md-4">
@@ -161,10 +153,7 @@ const Profile = () => {
           </div>
           {/* FORM info */}
           <form ref={zo.ref} className="">
-            <fieldset className="container max-w-[247.2px] flex flex-col gap-4  rounded border-2 border-sky-500 my-3 p-3">
-              <legend className="px-1 text-sky-600 select-none">
-                Update Information
-              </legend>
+            <Fieldset legend="Your Details">
               <Input
                 maxLength={20}
                 label="Name"
@@ -200,39 +189,30 @@ const Profile = () => {
               <Button isDisabled={disabled} type="submit">
                 Update Info
               </Button>
-            </fieldset>
-            {/* <pre className="text-left">
-              zo.validation:
-              <p>{JSON.stringify(zo.validation, null, 1)}</p>
-            </pre> */}
+            </Fieldset>
           </form>
         </div>
         <div>
-          {/* FORM info */}
+          {/* FORM password */}
           <form ref={zoPass.ref} className="">
-            <fieldset className="container max-w-[247.2px] flex flex-col gap-4  rounded border-2 border-sky-500 my-3 p-3">
-              <legend className="px-1 text-sky-600 select-none">
-                Update Password
-              </legend>
+            <Fieldset legend="Update your Password">
               <Input
                 label="Password"
                 type="password"
                 description="minimum 6 characters"
                 name={zoPass.fields.password()}
-                className={`px-2 ${zoPass.errors.password(errorField)}`}
                 errorMessage={zoPass.errors.password((e) => e.message)}
               />
               <Input
                 label="Confirm Password"
                 type="password"
                 name={zoPass.fields.confirmPassword()}
-                className={`px-2 ${zoPass.errors.confirmPassword(errorField)}`}
                 errorMessage={zoPass.errors.confirmPassword((e) => e.message)}
               />
               <Button isDisabled={disabledPass} type="submit">
                 Update Password
               </Button>
-            </fieldset>
+            </Fieldset>
           </form>
         </div>
 

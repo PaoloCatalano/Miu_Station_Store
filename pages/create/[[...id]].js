@@ -21,6 +21,7 @@ const EditProductSchema = ProductSchema.omit({ images: true });
 
 const CreateProduct = () => {
   const [product, setProduct] = useState({});
+  const [checkOnSale, setCheckOnSale] = useState(false);
 
   const [checkLoad, setCheckLoad] = useState(true);
   const [readyToEdit, setReadyToEdit] = useState(false);
@@ -62,8 +63,6 @@ const CreateProduct = () => {
 
   const disabled = zo.validation?.success === false;
 
-  const errorField = `border-2 border-red-500`;
-
   useEffect(() => {
     if (auth.user && Object.keys(product).length !== 0 && !onEdit) {
       handleSubmit();
@@ -72,7 +71,6 @@ const CreateProduct = () => {
 
   useEffect(() => {
     if (readyToEdit) {
-      // console.log(product);
       handleSubmit();
 
       setReadyToEdit(false);
@@ -90,6 +88,7 @@ const CreateProduct = () => {
         }
 
         setProduct(res.product);
+        setCheckOnSale(res.product.onSale);
         setImages(res.product.images);
         setCheckLoad(true);
       });
@@ -100,17 +99,13 @@ const CreateProduct = () => {
     }
   }, [id]);
 
-  // useEffect(() => {
-  //   setProduct({ ...product, onSale: checkLoad });
-  // }, [checkLoad]);
-
-  const handleChangeInput = (e) => {
-    notify({});
-  };
-
   const handleCheck = () => {
-    setCheckLoad(!checkLoad);
+    setCheckOnSale(!checkOnSale);
   };
+
+  useEffect(() => {
+    setProduct({ ...product, onSale: checkOnSale });
+  }, [checkOnSale]);
 
   const handleUploadInput = (e) => {
     notify({});
@@ -206,7 +201,6 @@ const CreateProduct = () => {
             name={zo.fields.title()}
             errorMessage={zo.errors.title((e) => e.message)}
             label="Title"
-            className={`px-2 ${zo.errors.title(errorField)}`}
             defaultValue={title ? title : null}
           />
 
@@ -218,7 +212,6 @@ const CreateProduct = () => {
                 errorMessage={zo.errors.price((e) => e.message)}
                 min={0}
                 label="Price"
-                className={`px-2 ${zo.errors.price(errorField)}`}
                 defaultValue={price ? price : null}
               />
             </div>
@@ -230,7 +223,6 @@ const CreateProduct = () => {
                 errorMessage={zo.errors.inStock((e) => e.message)}
                 min={0}
                 label="inStock"
-                className={`px-2 ${zo.errors.inStock(errorField)}`}
                 defaultValue={inStock ? inStock : null}
               />
             </div>
@@ -242,7 +234,6 @@ const CreateProduct = () => {
             cols="30"
             rows="3"
             label="Description"
-            className={`px-2 ${zo.errors.description(errorField)}`}
             defaultValue={description ? description : null}
           />
 
@@ -252,7 +243,6 @@ const CreateProduct = () => {
             cols="30"
             rows="4"
             label="Content"
-            className={`px-2 ${zo.errors.content(errorField)}`}
             defaultValue={content ? content : null}
           />
 
@@ -261,12 +251,11 @@ const CreateProduct = () => {
               <div className="input-group-text">
                 <CheckBox
                   label="on sale"
-                  // onChange={handleCheck}
+                  onChange={handleCheck}
                   name={zo.fields.onSale()}
                   errorMessage={zo.errors.onSale((e) => e.message)}
-                  isSelected={onSale ? onSale : false}
+                  isSelected={checkOnSale}
                   style={{ width: "20px", height: "20px" }}
-                  className={`px-2 ${zo.errors.onSale(errorField)}`}
                 >
                   Product on Sale?
                 </CheckBox>
@@ -278,8 +267,6 @@ const CreateProduct = () => {
             {checkLoad && (
               <select
                 name={zo.fields.category()}
-                // errorMessage={zo.errors.category((e) => e.message)}
-                className={`px-2 ${zo.errors.category(errorField)}`}
                 defaultValue={category ? category : "all"}
               >
                 <option value="all">All Products</option>

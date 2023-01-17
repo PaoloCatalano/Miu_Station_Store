@@ -6,6 +6,7 @@ import { useCtx } from "store/globalState";
 import { postData } from "utils/fetchData";
 import Button from "components/Button";
 import Input from "components/Input";
+import Fieldset from "components/Fieldset";
 import userSchema from "validators/userSchema";
 import { passwordSchema } from "validators/valid";
 
@@ -21,14 +22,8 @@ const FormSchema = userSchema
 /**@TODO limit register API */
 
 export default function Register() {
-  const { auth, notify, notifyStatus } = useCtx();
+  const { notify, notifyStatus } = useCtx();
   const router = useRouter();
-
-  const handleChangeInput = (e) => {
-    // const { name, value } = e.target;
-    // setUserData({ ...userData, [name]: value });
-    notify({});
-  };
 
   const handleSubmit = async (userObj) => {
     notify({ loading: true });
@@ -53,8 +48,6 @@ export default function Register() {
 
   const disabled = zo.validation?.success === false;
 
-  const errorField = `border-2 border-red-500`;
-
   return (
     <main className="main">
       <NextSeo
@@ -66,10 +59,7 @@ export default function Register() {
       />
       <h1 className="text-6xl font-bold mb-10">Register</h1>
       <form ref={zo.ref} className="">
-        <fieldset className="container max-w-[247.2px] flex flex-col gap-4  rounded border-2 border-sky-500 my-3 p-3">
-          <legend className="px-1 text-sky-600 select-none">
-            Register Form
-          </legend>
+        <Fieldset legend="Create your Account">
           <Input
             maxLength={20}
             label="Name"
@@ -101,24 +91,18 @@ export default function Register() {
             type="password"
             description="minimum 6 characters"
             name={zo.fields.password()}
-            className={`px-2 ${zo.errors.password(errorField)}`}
             errorMessage={zo.errors.password((e) => e.message)}
           />
           <Input
             label="Confirm Password"
             type="password"
             name={zo.fields.cf_password()}
-            className={`px-2 ${zo.errors.cf_password(errorField)}`}
             errorMessage={zo.errors.cf_password((e) => e.message)}
           />
           <Button isDisabled={disabled} type="submit">
-            Signup
+            Create Account
           </Button>
-        </fieldset>
-        {/* <pre className="text-left">
-          zo.validation:
-          <p>{JSON.stringify(zo.validation, null, 1)}</p>
-        </pre> */}
+        </Fieldset>
       </form>
       <section className="mb-10">
         <p className="my-2">Have you got an account?</p>

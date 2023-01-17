@@ -5,6 +5,7 @@ import { postData } from "utils/fetchData";
 import { useRouter } from "next/router";
 import Input from "components/Input";
 import Button from "components/Button";
+import Fieldset from "components/Fieldset";
 import { useZorm } from "react-zorm";
 import { z, ZodSchema } from "zod";
 import { confirmPasswordSchema } from "validators/valid";
@@ -32,8 +33,6 @@ const ResetPassword = () => {
   });
 
   const disabledPass = zoPass.validation?.success === false;
-
-  const errorField = `border-2 border-red-500`;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -63,29 +62,24 @@ const ResetPassword = () => {
       <NextSeo title={`${process.env.WEBSITE_NAME} | Reset Password`} />
 
       <form ref={zoPass.ref} className="">
-        <fieldset className="container max-w-[247.2px] flex flex-col gap-4  rounded border-2 border-sky-500 my-3 p-3">
-          <legend className="px-1 text-sky-600 select-none">
-            Update Password
-          </legend>
+        <Fieldset legend="Insert new Password">
           <Input
             label="Password"
             type="password"
             description="minimum 6 characters"
             name={zoPass.fields.password()}
-            className={`px-2 ${zoPass.errors.password(errorField)}`}
             errorMessage={zoPass.errors.password((e) => e.message)}
           />
           <Input
             label="Confirm Password"
             type="password"
             name={zoPass.fields.confirmPassword()}
-            className={`px-2 ${zoPass.errors.confirmPassword(errorField)}`}
             errorMessage={zoPass.errors.confirmPassword((e) => e.message)}
           />
           <Button isDisabled={disabledPass} type="submit">
             Update Password
           </Button>
-        </fieldset>
+        </Fieldset>
       </form>
     </div>
   );

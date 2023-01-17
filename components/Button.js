@@ -12,7 +12,7 @@ export default function Button(props) {
       ref={ref}
       className={`${
         isDisabled && "animate-boeing brightness-75 pointer-events-none"
-      } bg-sky-400 p-2 rounded max-w-xs  transition hover:ring-4 hover:ring-sky-200 active:scale-x-[.95] active:scale-y-[1.05] focus:outline-none focus:ring-4 focus:ring-sky-200`}
+      } bg-slate-400 p-2 rounded max-w-xs  transition hover:ring-4 hover:ring-slate-200 active:scale-x-[.95] active:scale-y-[1.05] focus:outline-none focus:ring-4 focus:ring-slate-200`}
     >
       {props.children}
     </button>

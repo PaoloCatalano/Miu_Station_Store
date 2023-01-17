@@ -9,6 +9,8 @@ import { postData } from "utils/fetchData";
 import { useRouter } from "next/router";
 import Button from "components/Button";
 import Input from "components/Input";
+import Fieldset from "components/Fieldset";
+import Banner from "components/Banner";
 import { emailSchema, passwordSchema } from "validators/valid";
 
 const FormSchema = z.object({
@@ -32,19 +34,12 @@ export default function Login() {
 
   const disabled = zo.validation?.success === false;
 
-  const errorField = `border-2 border-red-500`;
-
-  const handleChangeInput = (e) => {
-    // const { name, value } = e.target;
-    // setUserData({ ...userData, [name]: value });
-    notify({});
-  };
-
   const handleSubmit = async (userObj) => {
     notify({ loading: true });
     const res = await postData("auth/login", userObj);
 
     if (res.err) return notify({ error: res.err });
+
     notify({ success: res.msg });
 
     authUser({
@@ -61,10 +56,6 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if (Object.keys(auth).length !== 0) {
-      notify({ info: "Already Logged in! Redirect to Home" });
-    }
-
     const timer = setTimeout(() => {
       if (Object.keys(auth).length !== 0) {
         return router.push("/");
@@ -83,23 +74,21 @@ export default function Login() {
         }}
       />
       <h1 className="text-6xl font-bold mb-10">Login</h1>
-
+      {Object.keys(auth).length !== 0 && (
+        <Banner text="Login Successful! Redirect" />
+      )}
       <form ref={zo.ref} className="">
-        <fieldset className="container max-w-[247.2px] flex flex-col gap-4  rounded border-2 border-sky-500 my-3 p-3">
-          <legend className="px-1 text-sky-600 select-none">Login Form</legend>
-
+        <Fieldset legend="Enter to your account">
           <Input
             label="Email"
             type="email"
             name={zo.fields.email()}
-            className={`px-2 ${zo.errors.email(errorField)}`}
             errorMessage={zo.errors.email((e) => e.message)}
           />
           <Input
             label="Password"
             type="password"
             name={zo.fields.password()}
-            className={`px-2 ${zo.errors.password(errorField)}`}
             errorMessage={zo.errors.password(
               "Must have more than 6 characters"
             )}
@@ -108,7 +97,7 @@ export default function Login() {
           <Button isDisabled={disabled} type="submit">
             Login
           </Button>
-        </fieldset>
+        </Fieldset>
         {/* <pre className="text-left">
           zo.validation:
           <p>{JSON.stringify(zo.validation, null, 1)}</p>
@@ -124,7 +113,7 @@ export default function Login() {
         </Link>
       </section>
       <section className="mb-10">
-        <p className="my-2">You don't have an account yet?</p>
+        <p className="my-2">Don't you have an account yet?</p>
         <Link
           href="/register"
           className="text-rose-500 text-center font-bold underline-offset-4 decoration-2 hover:decoration-dashed hover:underline"

@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --aside-height: 100vh;
+  --nav-height: 100vh;
 }
 
 :root:has(nav > div[aria-expanded="true"]) {
   --open: 1;
-  --rotate: 90deg;
+  /* --rotate: 90deg; */
 }
 ::selection {
   @apply bg-sky-700 text-rose-200 rounded;
@@ -17,10 +17,10 @@
   @apply w-2;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-teal-300;
+  @apply bg-slate-300;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-teal-500 rounded;
+  @apply bg-slate-500 rounded;
 }
 
 ::-webkit-file-upload-button {
@@ -31,6 +31,7 @@
   body {
     overflow-x: hidden;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    @apply text-slate-800 bg-slate-50;
   }
   legend {
     font-variant: small-caps;
@@ -41,7 +42,7 @@
   .form-control.active + .form-label,
   .form-control:focus + .form-label {
     top: 0.3rem;
-    background: linear-gradient(white 65%, transparent);
+    background: linear-gradient(transparent, white 35%, white 65%, transparent);
     transform: translateY(-1rem) translateY(0.1rem) scale(0.8);
   }
 
@@ -75,6 +76,10 @@
 }
 
 @layer utilities {
+  .errorField {
+    @apply border-2 border-blue-500;
+  }
+
   .cssAnimationJumping {
     animation: jumping 3s ease-in-out 1 forwards;
   }
@@ -122,6 +127,158 @@
   @keyframes trackProgress {
     to {
       width: 0%;
+    }
+  }
+
+  /* MENU */
+
+  @keyframes topBar-open {
+    0% {
+      transform: translateY(0px) rotate(0deg);
+      width: 60px !important ;
+    }
+    10% {
+      transform: translateY(-8px) rotate(0deg);
+      width: 60px !important;
+    }
+    50% {
+      transform: translateY(25px) rotate(45deg);
+      width: 84px !important;
+    }
+    75% {
+      transform: translateY(12px) rotate(45deg);
+      width: 84px !important;
+    }
+    100% {
+      transform: translateY(17px) rotate(45deg);
+      width: 84px !important;
+    }
+  }
+
+  @keyframes bottomBar-open {
+    0% {
+      transform: translateY(0px) rotate(0deg);
+      width: 60px !important;
+    }
+    10% {
+      transform: translateY(-4px) rotate(0deg);
+      width: 60px !important;
+    }
+    60% {
+      transform: translateY(0px) rotate(-45deg);
+      width: 84px !important;
+    }
+    75% {
+      transform: translateY(-10px) rotate(-45deg);
+      width: 84px !important;
+    }
+    100% {
+      transform: translateY(-4px) rotate(-45deg);
+      width: 84px !important;
+    }
+  }
+
+  @keyframes menuLabel-open {
+    0% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+    25% {
+      transform: translateY(-18px);
+      opacity: 1;
+    }
+    45% {
+      transform: translateY(44px);
+      opacity: 0;
+    }
+    48% {
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes topBar-close {
+    0% {
+      transform: translateY(17px) rotate(45deg);
+      width: 84px !important;
+    }
+    35% {
+      transform: translateY(-8px) rotate(-4deg);
+      width: 60px !important;
+    }
+    53% {
+      transform: translateY(10px) rotate(3deg);
+      width: 60px !important;
+    }
+    70% {
+      transform: translateY(-6px) rotate(0deg);
+      width: 60px !important;
+    }
+    100% {
+      transform: translateY(-2px) rotate(0deg);
+      width: 60px !important;
+    }
+  }
+
+  @keyframes bottomBar-close {
+    0% {
+      transform: translateY(-8px) rotate(-45deg);
+      width: 84px !important;
+    }
+    35% {
+      transform: translateY(-18px) rotate(6deg);
+      width: 60px !important;
+    }
+    53% {
+      transform: translateY(0px) rotate(-3deg);
+      width: 60px !important;
+    }
+    68% {
+      transform: translateY(-7px) rotate(0deg);
+      width: 60px !important;
+    }
+    100% {
+      transform: translateY(0px) rotate(0deg);
+      width: 60px !important;
+    }
+  }
+
+  @keyframes menuLabel-close {
+    0% {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    5% {
+      transform: translateY(25px);
+      opacity: 0;
+    }
+    25% {
+      transform: translateY(-30px);
+      opacity: 0;
+    }
+    37% {
+      transform: translateY(-22px);
+      opacity: 0;
+    }
+    45% {
+      transform: translateY(-22px);
+      opacity: 1;
+    }
+    58% {
+      transform: translateY(8px) rotate(-10deg);
+      opacity: 1;
+    }
+    83% {
+      transform: translateY(-6px) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
     }
   }
 }

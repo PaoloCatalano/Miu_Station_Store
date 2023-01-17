@@ -10,6 +10,22 @@ module.exports = {
       center: true,
     },
     extend: {
+      transformOrigin: {
+        "left-center": "left center",
+        "right-center": "right center",
+      },
+      colors: {
+        "miu-50": "#d1ecf1",
+        "miu-100": "#a2dae3",
+        "miu-200": "8ad0db",
+        "miu-300": "#74c7d4",
+        "miu-400": "#45b5c6",
+        "miu-500": "#17a2b8",
+        "miu-600": "#128293",
+        "miu-700": "#0e616e",
+        "miu-800": "#09414a",
+        "miu-900": "#052025",
+      },
       keyframes: {
         fadeIn: {
           "0%": {
@@ -46,6 +62,7 @@ module.exports = {
       animation: {
         "fade-in": "fadeIn 1s ease-in 1",
         boeing: "boeing 3s linear infinite",
+        "boeing-once": "boeing 3s linear 1",
       },
     },
   },

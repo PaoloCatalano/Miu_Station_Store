@@ -3,11 +3,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import { useCtx } from "store/globalState";
-import CartItem from "components/CartItem";
 import { getData, postData } from "utils/fetchData";
+import CartItem from "components/CartItem";
 import GoBack from "components/GoBack";
 import Button from "components/Button";
 import Input from "components/Input";
+import Fieldset from "components/Fieldset";
 import {
   cartSchema,
   positiveNumberSchema,
@@ -28,9 +29,6 @@ const Cart = () => {
 
   const [total, setTotal] = useState(0);
 
-  const [addressEffect, setAddressEffect] = useState("");
-  const [mobileEffect, setMobileEffect] = useState("");
-  const [isNumb, setIsNumb] = useState(true);
   const [errorMsg, setErrorMsg] = useState(null);
 
   const [callback, setCallback] = useState(false);
@@ -44,15 +42,6 @@ const Cart = () => {
     },
   });
   const disabled = zo.validation?.success === false;
-
-  const errorField = `border-2 border-red-500`;
-
-  useEffect(() => {
-    if (auth?.user) {
-      setAddressEffect(auth.user.address !== null ? auth.user.address : "");
-      setMobileEffect(auth.user.mobile !== null ? auth.user.mobile : "");
-    }
-  }, [auth]);
 
   useEffect(() => {
     const getTotal = () => {
@@ -232,20 +221,13 @@ const Cart = () => {
       </div>
       <div className="col-md-4 my-3 text-right text-uppercase text-secondary">
         <form ref={zo.ref}>
-          <fieldset className="container max-w-[247.2px] flex flex-col gap-4  rounded border-2 border-sky-500 my-3 p-3">
-            <legend className="px-1 text-sky-600 select-none">
-              Shipping Form
-            </legend>
-
+          <Fieldset legend="Shipping Details">
             {auth.user && (
               <Input
                 label="Address"
                 type="text"
                 name={zo.fields.address()}
                 id={zo.fields.address("id")}
-                className={`px-2 ${zo.errors.address(errorField)}`}
-                // value={address}
-                // onChange={(e) => setAddressEffect(e.target.value)}
                 errorMessage={zo.errors.address((e) => e.message)}
                 defaultValue={auth?.user?.address}
               />
@@ -255,28 +237,22 @@ const Cart = () => {
                 label="Mobile"
                 type="text"
                 id={zo.fields.mobile("id")}
-                // value={mobile}
-                // onChange={(e) => setMobileEffect(e.target.value)}
-                // placeholder="Your mobile"
-                // onInput={handleNumber}
-                //
                 maxLength={15}
                 name={zo.fields.mobile()}
                 errorMessage={zo.errors.mobile((e) => e.message)}
-                className={`px-2 ${zo.errors.mobile(errorField)}`}
                 defaultValue={auth?.user?.mobile}
               />
             )}
             <h2>
               Total: <span className="text-danger">${total}</span>
             </h2>
-            {errorMsg && <p className="text-red-500">{errorMsg}</p>}
+            {errorMsg && <p className="text-red-400">{errorMsg}</p>}
             {auth?.user ? (
               <Button
                 isDisabled={disabled || errorMsg ? true : false}
                 type="submit"
                 className="btn btn-dark my-2"
-                // onClick={handlePayment}
+                onClick={handlePayment}
               >
                 Proceed with payment
               </Button>
@@ -285,7 +261,7 @@ const Cart = () => {
                 <Button>Login to proceed with the payment</Button>
               </Link>
             )}
-          </fieldset>
+          </Fieldset>
         </form>
       </div>
       <GoBack />

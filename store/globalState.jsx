@@ -161,7 +161,7 @@ const AppProvider = ({ children }) => {
 
   function deleteProduct(item) {
     notify({ loading: true });
-    console.log("first");
+    console.log("check @TODO");
     deleteData(`product/${item.id}`, auth.token).then((res) => {
       if (res.err) return notify({ error: res.err });
       /**@TODO decide: refresh page or getData("products")?? */
