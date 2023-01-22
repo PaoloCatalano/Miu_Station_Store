@@ -10,6 +10,10 @@ module.exports = {
       center: true,
     },
     extend: {
+      boxShadow: {
+        out: "inset 1px 1px 1px #ffffff60, inset -1px -1px 1px rgba(94, 104, 121, 0.692)",
+        in: "inset -1px -1px 1px #ffffff60, inset 1px 1px 1px rgba(94, 104,121, 0.692)",
+      },
       transformOrigin: {
         "left-center": "left center",
         "right-center": "right center",

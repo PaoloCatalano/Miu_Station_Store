@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
@@ -7,6 +8,7 @@ import { postData } from "utils/fetchData";
 import Button from "components/Button";
 import Input from "components/Input";
 import Fieldset from "components/Fieldset";
+import CheckBox from "components/CheckBox";
 import userSchema from "validators/userSchema";
 import { passwordSchema } from "validators/valid";
 
@@ -22,6 +24,7 @@ const FormSchema = userSchema
 /**@TODO limit register API */
 
 export default function Register() {
+  const [showPassword, setShowPassword] = useState(false);
   const { notify, notifyStatus } = useCtx();
   const router = useRouter();
 
@@ -57,7 +60,7 @@ export default function Register() {
           url: "https://miustationstore.netlify.app/register",
         }}
       />
-      <h1 className="text-6xl font-bold mb-10">Register</h1>
+      <h1 className="text-6xl font-bold mb-10 text-slate-600">Register</h1>
       <form ref={zo.ref} className="">
         <Fieldset legend="Create your Account">
           <Input
@@ -88,29 +91,31 @@ export default function Register() {
           />
           <Input
             label="Password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             description="minimum 6 characters"
             name={zo.fields.password()}
             errorMessage={zo.errors.password((e) => e.message)}
           />
           <Input
             label="Confirm Password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             name={zo.fields.cf_password()}
             errorMessage={zo.errors.cf_password((e) => e.message)}
           />
+          <div className="ml-2 mb-3 text-sm">
+            <CheckBox onChange={() => setShowPassword(!showPassword)}>
+              Show Passwords
+            </CheckBox>
+          </div>
           <Button isDisabled={disabled} type="submit">
             Create Account
           </Button>
         </Fieldset>
       </form>
-      <section className="mb-10">
+      <section className="mt-10 mb-14">
         <p className="my-2">Have you got an account?</p>
-        <Link
-          href="/login"
-          className="text-rose-500 text-center font-bold underline-offset-4 decoration-2 hover:decoration-dashed hover:underline"
-        >
-          Login Now
+        <Link href="/login">
+          <Button cta>Login Now</Button>
         </Link>
       </section>
     </main>

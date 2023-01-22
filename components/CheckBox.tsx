@@ -13,7 +13,7 @@ export default function Checkbox(props: AriaCheckboxProps) {
   let { focusProps, isFocusVisible } = useFocusRing();
 
   let checkboxClassName = `${
-    state.isSelected ? "bg-indigo-500 group-active:bg-indigo-600" : "bg-white"
+    state.isSelected ? "bg-slate-500 group-active:bg-slate-600" : "bg-white"
   }
     text-white
     border-2
@@ -22,7 +22,7 @@ export default function Checkbox(props: AriaCheckboxProps) {
       props.isDisabled
         ? "border-gray-300"
         : isFocusVisible || state.isSelected
-        ? "border-indigo-500 group-active:border-indigo-600"
+        ? "border-slate-500 group-active:border-slate-600"
         : "border-gray-500 group-active:border-gray-600"
     }
     w-5
@@ -41,7 +41,7 @@ export default function Checkbox(props: AriaCheckboxProps) {
   let labelClassName = `${
     props.isDisabled
       ? "text-gray-400"
-      : "text-gray-700 group-active:text-gray-800"
+      : "text-slate-500 group-active:text-gray-800"
   }
     select-none
   `;

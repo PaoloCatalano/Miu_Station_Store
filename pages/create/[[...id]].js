@@ -25,14 +25,14 @@ const CreateProduct = () => {
 
   const [checkLoad, setCheckLoad] = useState(true);
   const [readyToEdit, setReadyToEdit] = useState(false);
+  const [readyToCreate, setReadyToCreate] = useState(false);
   const [noProd, setNoProd] = useState(false);
 
   const [images, setImages] = useState([]);
 
   const { categories, auth, notify } = useCtx();
 
-  const { title, price, inStock, description, content, category, onSale } =
-    product;
+  const { title, price, inStock, description, content, category } = product;
 
   const router = useRouter();
   const { id } = router.query;
@@ -49,6 +49,7 @@ const CreateProduct = () => {
     onValidSubmit(e) {
       e.preventDefault();
       setProduct({ ...e.data, images });
+      setReadyToCreate(true);
       //useEffect trigger handleSubmit()
     },
   });
@@ -64,15 +65,20 @@ const CreateProduct = () => {
   const disabled = zo.validation?.success === false;
 
   useEffect(() => {
-    if (auth.user && Object.keys(product).length !== 0 && !onEdit) {
+    if (
+      auth.user &&
+      Object.keys(product).length !== 0 &&
+      !onEdit &&
+      readyToCreate
+    ) {
       handleSubmit();
+      setReadyToEdit(false);
     }
-  }, [product]);
+  }, [readyToCreate]);
 
   useEffect(() => {
     if (readyToEdit) {
       handleSubmit();
-
       setReadyToEdit(false);
     }
   }, [readyToEdit]);
@@ -104,7 +110,9 @@ const CreateProduct = () => {
   };
 
   useEffect(() => {
-    setProduct({ ...product, onSale: checkOnSale });
+    if (Object.keys(product).length !== 0) {
+      setProduct({ ...product, onSale: checkOnSale });
+    }
   }, [checkOnSale]);
 
   const handleUploadInput = (e) => {

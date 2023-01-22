@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import Image from "next/image";
@@ -10,10 +11,13 @@ import { rgbDataURL } from "utils/blurData";
 import { imageUpload } from "utils/imageUpload";
 import { FiCamera } from "react-icons/fi";
 import { FaTimes, FaCheck } from "react-icons/fa";
+import { FcPaid } from "react-icons/fc";
+import { TbTruckDelivery } from "react-icons/tb";
 import Button from "components/Button";
 import Input from "components/Input";
 import Fieldset from "components/Fieldset";
 import Banner from "components/Banner";
+import CheckBox from "components/CheckBox";
 import {
   nameSchema,
   addressSchema,
@@ -33,8 +37,10 @@ const FormSchema = z.object({
 const FormPassSchema = confirmPasswordSchema;
 
 const Profile = () => {
+  const router = useRouter();
   const { auth, authUser, notify, orders } = useCtx();
   const [data, setData] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const updatePassword = (password) => {
     notify({ loading: true });
@@ -112,7 +118,18 @@ const Profile = () => {
 
   const disabledPass = zoPass.validation?.success === false;
 
-  if (!auth.user) return <>login again</>;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!auth.user) {
+        return router.push("/login");
+      }
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [auth]);
+
+  /** @TODO Skeleton  */
+
+  if (!auth.user) return <>Skeleton Profile</>;
 
   return (
     <div className="main">
@@ -123,7 +140,7 @@ const Profile = () => {
         <Banner role="alert" text="Check your email to verify account" />
       )}
       <section className="my-3">
-        <div className="col-md-4">
+        <article>
           <h3 className="text-center uppercase">
             {auth.user.role === "user" ? "User Profile" : "Admin Profile"}
           </h3>
@@ -151,8 +168,10 @@ const Profile = () => {
               />
             </span>
           </div>
+        </article>
+        <article className="flex flex-col justify-between items-center  md:flex-row ">
           {/* FORM info */}
-          <form ref={zo.ref} className="">
+          <form ref={zo.ref}>
             <Fieldset legend="Your Details">
               <Input
                 maxLength={20}
@@ -191,64 +210,83 @@ const Profile = () => {
               </Button>
             </Fieldset>
           </form>
-        </div>
-        <div>
+
           {/* FORM password */}
-          <form ref={zoPass.ref} className="">
+          <form ref={zoPass.ref}>
             <Fieldset legend="Update your Password">
               <Input
                 label="Password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 description="minimum 6 characters"
                 name={zoPass.fields.password()}
                 errorMessage={zoPass.errors.password((e) => e.message)}
               />
               <Input
                 label="Confirm Password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name={zoPass.fields.confirmPassword()}
                 errorMessage={zoPass.errors.confirmPassword((e) => e.message)}
               />
+              <div className="ml-2 mb-3 text-sm">
+                <CheckBox onChange={() => setShowPassword(!showPassword)}>
+                  Show Passwords
+                </CheckBox>
+              </div>
               <Button isDisabled={disabledPass} type="submit">
                 Update Password
               </Button>
             </Fieldset>
           </form>
-        </div>
+        </article>
 
         <div className="col-md-8 mt-5">
           <h3 className="uppercase">Orders</h3>
-
+          <div className="pl-4 text-slate-500">
+            <p>
+              <span className="flex items-center">
+                <FcPaid
+                  aria-label="paid"
+                  title="paid"
+                  className="text-xl mr-2 "
+                />{" "}
+                Paid
+              </span>
+            </p>
+            <p>
+              <span className="flex items-center">
+                <TbTruckDelivery
+                  aria-label="delivered"
+                  title="delivered"
+                  className="text-xl mr-2"
+                />{" "}
+                Delivered
+              </span>
+            </p>
+          </div>
           <div className="my-3 ">
-            <table
-              className="table-bordered table-hover w-100 text-uppercase"
-              style={{ minWidth: "600px" }}
-            >
-              <thead className="bg-light font-weight-bold">
+            <table className="text-sm  ">
+              <thead className="bg-slate-300 ">
                 <tr>
-                  <td className="p-2">id</td>
-                  {auth.user.root && <td className="p-2">user email</td>}
-                  <td className="p-2">date</td>
-                  <td className="p-2">total</td>
-                  <td className="p-2">delivered</td>
-                  <td className="p-2">paid</td>
+                  {auth.user.root && <th className="p-2">user email</th>}
+                  <th className="p-2">date</th>
+                  <th className="p-2">total</th>
+                  <th className="p-2">status</th>
+                  <th className="p-2">info</th>
                 </tr>
               </thead>
 
-              <tbody>
+              <tbody className="text-slate-500">
                 {orders?.map((order) => (
-                  <tr key={order._id}>
-                    <Link href={`/order/${order._id}`}>
-                      <td className="p-2" style={{ cursor: "pointer" }}>
-                        {order._id.slice(0, 9)}...
-                      </td>
-                    </Link>
+                  <tr
+                    key={order._id}
+                    className="[&:nth-child(even)]:bg-slate-200"
+                  >
                     {auth.user.root && (
-                      <td className="p-2">
+                      <td className="p-2 ">
                         {order?.user?._id ? (
-                          <Link href={`/edit_user/${order.user._id}`}>
+                          <Link href={`/user/${order.user._id}`}>
                             <div
-                              className={`text-lowercase ${
+                              className={`lowercase underline ${
                                 order.user.isVerified ? "" : "text-danger"
                               }`}
                             >
@@ -260,23 +298,36 @@ const Profile = () => {
                         )}
                       </td>
                     )}
+
                     <td className="p-2">
                       {new Date(order.createdAt).toLocaleDateString()}
                     </td>
                     <td className="p-2">${order.total}</td>
-                    <td className="p-2">
-                      {order.delivered ? (
-                        <FaCheck className="text-success"></FaCheck>
-                      ) : (
-                        <FaTimes className="text-danger"></FaTimes>
-                      )}
+
+                    <td className="p-2 flex justify-evenly ">
+                      <span>
+                        {order.paid && (
+                          <FcPaid
+                            aria-label="paid"
+                            title="paid"
+                            accessibility={true}
+                          />
+                        )}
+                      </span>
+                      <span>
+                        {order.delivered && (
+                          <TbTruckDelivery
+                            aria-label="delivered"
+                            title="delivered"
+                            accessibility={true}
+                          />
+                        )}
+                      </span>
                     </td>
-                    <td className="p-2">
-                      {order.paid ? (
-                        <FaCheck className="text-success"></FaCheck>
-                      ) : (
-                        <FaTimes className="text-danger"></FaTimes>
-                      )}
+                    <td className="p-2 cursor-pointer">
+                      <Link href={`/order/${order._id}`} className="underline">
+                        more
+                      </Link>
                     </td>
                   </tr>
                 ))}

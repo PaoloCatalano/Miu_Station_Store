@@ -2,32 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --nav-height: 100vh;
-}
-
-:root:has(nav > div[aria-expanded="true"]) {
-  --open: 1;
-  /* --rotate: 90deg; */
-}
-::selection {
-  @apply bg-sky-700 text-rose-200 rounded;
-}
-::-webkit-scrollbar {
-  @apply w-2;
-}
-::-webkit-scrollbar-track {
-  @apply bg-slate-300;
-}
-::-webkit-scrollbar-thumb {
-  @apply bg-slate-500 rounded;
-}
-
-::-webkit-file-upload-button {
-  cursor: pointer;
-}
-
 @layer base {
+  :root {
+    --nav-height: 100vh;
+  }
+
+  :root:has(nav > div[aria-expanded="true"]) {
+    --open: 1;
+    /* --rotate: 90deg; */
+  }
+  ::selection {
+    @apply bg-sky-700 text-rose-200 rounded;
+  }
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-300;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-500 rounded;
+  }
+
+  ::-webkit-file-upload-button {
+    cursor: pointer;
+  }
+  *:focus {
+    @apply outline-1 outline-dashed outline-slate-300 rounded-md;
+  }
   body {
     overflow-x: hidden;
     font-family: Verdana, Geneva, Tahoma, sans-serif;

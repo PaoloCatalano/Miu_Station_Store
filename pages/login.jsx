@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NextSeo } from "next-seo";
 import { z, ZodSchema } from "zod";
 import { useZorm } from "react-zorm";
@@ -11,6 +11,7 @@ import Button from "components/Button";
 import Input from "components/Input";
 import Fieldset from "components/Fieldset";
 import Banner from "components/Banner";
+import CheckBox from "components/CheckBox";
 import { emailSchema, passwordSchema } from "validators/valid";
 
 const FormSchema = z.object({
@@ -19,6 +20,7 @@ const FormSchema = z.object({
 });
 
 export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
   if (FormSchema instanceof ZodSchema === false) {
     throw Error("useZorm must have a ZodSchema as second argument");
   }
@@ -73,10 +75,8 @@ export default function Login() {
           url: "https://miustationstore.netlify.app/login",
         }}
       />
-      <h1 className="text-6xl font-bold mb-10">Login</h1>
-      {Object.keys(auth).length !== 0 && (
-        <Banner text="Login Successful! Redirect" />
-      )}
+      <h1 className="text-6xl font-bold mb-10 text-slate-600">Login</h1>
+
       <form ref={zo.ref} className="">
         <Fieldset legend="Enter to your account">
           <Input
@@ -87,38 +87,35 @@ export default function Login() {
           />
           <Input
             label="Password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             name={zo.fields.password()}
             errorMessage={zo.errors.password(
               "Must have more than 6 characters"
             )}
           />
-
+          <div className="ml-2 mb-3 text-sm">
+            <CheckBox onChange={() => setShowPassword(!showPassword)}>
+              Show Password
+            </CheckBox>
+          </div>
           <Button isDisabled={disabled} type="submit">
             Login
           </Button>
         </Fieldset>
-        {/* <pre className="text-left">
-          zo.validation:
-          <p>{JSON.stringify(zo.validation, null, 1)}</p>
-        </pre> */}
       </form>
+      {Object.keys(auth).length !== 0 && (
+        <Banner text="Login Successful! Redirect" />
+      )}
       <section className="mb-10">
         <p className="my-2">Did you forget your password?</p>
-        <Link
-          href="/forgot-password"
-          className="text-slate-800 text-center font-bold underline-offset-4 decoration-2 hover:decoration-dashed hover:underline"
-        >
-          Reset password
+        <Link href="/forgot-password">
+          <Button hipster>Reset Password</Button>
         </Link>
       </section>
-      <section className="mb-10">
+      <section className="mb-14">
         <p className="my-2">Don't you have an account yet?</p>
-        <Link
-          href="/register"
-          className="text-rose-500 text-center font-bold underline-offset-4 decoration-2 hover:decoration-dashed hover:underline"
-        >
-          Register Now
+        <Link href="/register">
+          <Button cta>Register Now</Button>
         </Link>
       </section>
     </main>
