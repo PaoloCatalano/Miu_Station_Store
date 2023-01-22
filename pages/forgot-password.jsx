@@ -5,6 +5,7 @@ import { useCtx } from "store/globalState";
 import { postData } from "utils/fetchData";
 import Input from "components/Input";
 import Button from "components/Button";
+import Banner from "components/Banner";
 import Fieldset from "components/Fieldset";
 import { useZorm } from "react-zorm";
 import { z, ZodSchema } from "zod";
@@ -42,10 +43,11 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div>
+    <>
       <NextSeo title={`${process.env.WEBSITE_NAME} | Forgot Password`} />
-      {message && <h1 className="bg-green-500 rounded p-2">{message}</h1>}
-      <form className="mx-auto my-4" style={{ maxWidth: "500px" }} ref={zo.ref}>
+      <h1 className="my-5">Password Forgotten?</h1>
+      {message && <Banner text={message} />}
+      <form ref={zo.ref}>
         <Fieldset legend="Insert your Email">
           <div className="form-group">
             <Input
@@ -65,16 +67,13 @@ const ForgotPassword = () => {
           </Button>
         </Fieldset>
       </form>
-      <section className="mb-10">
-        <p className="my-2">You don't have an account yet?</p>
-        <Link
-          href="/register"
-          className="text-rose-500 text-center font-bold underline-offset-4 decoration-2 hover:decoration-dashed hover:underline"
-        >
-          Register Now
+      <section className="mb-14">
+        <p className="my-2">Don't you have an account yet?</p>
+        <Link href="/register">
+          <Button cta>Register Now</Button>
         </Link>
       </section>
-    </div>
+    </>
   );
 };
 

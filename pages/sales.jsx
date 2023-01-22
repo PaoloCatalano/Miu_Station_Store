@@ -22,7 +22,7 @@ const OnSale = (props) => {
   };
   /**@TODO change vercel */
   return (
-    <div className="home_page">
+    <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | On Sale`}
         canonical="https://miu-shop.vercel.app/sales"
@@ -63,7 +63,7 @@ const OnSale = (props) => {
         )}
       </div>
       <GoBack />
-    </div>
+    </>
   );
 };
 

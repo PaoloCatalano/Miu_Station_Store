@@ -132,14 +132,14 @@ const Profile = () => {
   if (!auth.user) return <>Skeleton Profile</>;
 
   return (
-    <div className="main">
+    <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | ${auth?.user.name} Profile`}
       />
       {!auth.user.isVerified && (
         <Banner role="alert" text="Check your email to verify account" />
       )}
-      <section className="my-3">
+      <section className="my-3 md:w-full md:max-w-xl flex flex-col justify-center">
         <article>
           <h3 className="text-center uppercase">
             {auth.user.role === "user" ? "User Profile" : "Admin Profile"}
@@ -239,9 +239,9 @@ const Profile = () => {
           </form>
         </article>
 
-        <div className="col-md-8 mt-5">
+        <article className="mt-10">
           <h3 className="uppercase">Orders</h3>
-          <div className="pl-4 text-slate-500">
+          <div className="my-8 pl-4 text-slate-500">
             <p>
               <span className="flex items-center">
                 <FcPaid
@@ -264,10 +264,12 @@ const Profile = () => {
             </p>
           </div>
           <div className="my-3 ">
-            <table className="text-sm  ">
+            <table className="text-sm  mx-auto">
               <thead className="bg-slate-300 ">
                 <tr>
-                  {auth.user.root && <th className="p-2">user email</th>}
+                  {auth.user.root && (
+                    <th className="p-2 hidden md:table-cell">user email</th>
+                  )}
                   <th className="p-2">date</th>
                   <th className="p-2">total</th>
                   <th className="p-2">status</th>
@@ -282,7 +284,7 @@ const Profile = () => {
                     className="[&:nth-child(even)]:bg-slate-200"
                   >
                     {auth.user.root && (
-                      <td className="p-2 ">
+                      <td className="p-2 hidden md:table-cell">
                         {order?.user?._id ? (
                           <Link href={`/user/${order.user._id}`}>
                             <div
@@ -307,11 +309,7 @@ const Profile = () => {
                     <td className="p-2 flex justify-evenly ">
                       <span>
                         {order.paid && (
-                          <FcPaid
-                            aria-label="paid"
-                            title="paid"
-                            accessibility={true}
-                          />
+                          <FcPaid aria-label="paid" title="paid" />
                         )}
                       </span>
                       <span>
@@ -319,7 +317,6 @@ const Profile = () => {
                           <TbTruckDelivery
                             aria-label="delivered"
                             title="delivered"
-                            accessibility={true}
                           />
                         )}
                       </span>
@@ -334,12 +331,12 @@ const Profile = () => {
               </tbody>
             </table>
           </div>
-        </div>
+        </article>
       </section>
-      <section className="w-full m-10 flex justify-center">
+      <section className="w-full my-10 flex justify-center">
         <LogoutBtn />
       </section>
-    </div>
+    </>
   );
 };
 

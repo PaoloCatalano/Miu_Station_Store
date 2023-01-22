@@ -13,29 +13,39 @@ const Users = () => {
 
   if (!auth.user || auth.user.role !== "admin") return <PleaseSign />;
   return (
-    <div className="table-responsive">
+    <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Users`}
         openGraph={{
           url: "https://miu-shop.vercel.app/users",
         }}
       />
-
-      <legend className="mt-5">
-        <div className="_alert bg-rose-200 _legend">ADMIN ROOT</div>
-        <div className="_alert bg-sky-200 _legend">ADMIN</div>
-      </legend>
+      <h1>All Users</h1>
+      <div className="my-8 pl-4 text-slate-500 self-start">
+        <p className="bg-rose-200 px-2">ADMIN ROOT</p>
+        <p className="bg-sky-200 px-2">ADMIN</p>
+        <p>
+          {" "}
+          <span className="flex items-center">
+            <FaCheck
+              aria-label="paid"
+              title="paid"
+              className="text-xl mr-2 text-green-500"
+            />{" "}
+            Verified
+          </span>
+        </p>
+      </div>
 
       <table className="table w-100">
         <thead>
           <tr>
-            <th></th>
-            <th>Avatar</th>
-            <th>Name</th>
+            <th className="hidden md:table-cell"></th>
+            <th className="hidden md:table-cell">Img</th>
+            <th className="hidden md:table-cell">Name</th>
             <th>Email</th>
-            <th>Verified</th>
-            <th>Action</th>
-            <th>ID</th>
+            <th>Status</th>
+            <th>Info</th>
           </tr>
         </thead>
 
@@ -43,84 +53,77 @@ const Users = () => {
           {users.map((user, index) => (
             <tr
               key={user._id}
-              style={
+              className={
                 user.root && user.role === "admin"
-                  ? { background: "pink" }
+                  ? "bg-rose-200"
                   : user.role === "admin"
-                  ? { background: "lightblue" }
-                  : null
+                  ? "bg-sky-200"
+                  : "bg-transparent"
               }
             >
-              <th>{index + 1}</th>
+              <td className="p-2 hidden md:table-cell">{index + 1}</td>
 
-              <th>
+              <td className="p-2 hidden md:table-cell">
                 <Image
                   src={user.avatar}
                   alt={user.avatar}
                   //   layout="fixed"
                   width={30}
                   height={30}
-                  className="overflow-hidden rounded-circle _border-icon-gray"
+                  className="overflow-hidden rounded-full shadow"
                 />
-              </th>
-              <th>{user.name}</th>
-              <th>{user.email}</th>
-              <th>
-                {user.isVerified ? (
-                  <FaCheck className="text-sky-500" />
-                ) : (
-                  <FaTimes className="text-red-500" />
-                )}
-              </th>
-              <th>
-                <div className="d-flex justify-content-between">
-                  <Link
-                    href={
-                      auth.user.root && auth.user.email !== user.email
-                        ? `/user/${user._id}`
-                        : "#!"
-                    }
-                  >
-                    <FaEdit className="text-info mr-2" title="Edit" />
-                  </Link>
-
-                  {auth.user.root && auth.user.email !== user.email ? (
-                    <span
-                      style={{ cursor: "pointer" }}
-                      className="text-danger ml-2"
-                      title="Remove"
-                      data-toggle="modal"
-                      data-target="#exampleModal"
-                      onClick={() =>
-                        addModal([
-                          {
-                            data: users,
-                            id: user._id,
-                            title: user.name,
-                            type: ACTIONS.ADD_USER, //deleteUser()
-                          },
-                        ])
-                      }
-                    >
-                      <FaTrashAlt />
-                    </span>
-                  ) : (
-                    <span>
-                      <FaTrashAlt
-                        className="text-success ml-2"
-                        title="Can't Remove"
-                        style={{ cursor: "not-allowed" }}
+              </td>
+              <td className="p-0 hidden md:table-cell">{user.name}</td>
+              <td className="p-0 text-xs md:p-2 md:text-base">{user.email}</td>
+              <td className="p-2 ">
+                <div className="flex justify-between">
+                  <span>
+                    {user.isVerified && (
+                      <FaCheck
+                        aria-label="verified"
+                        title="verified"
+                        className="text-green-500 m-0"
                       />
-                    </span>
-                  )}
+                    )}
+                  </span>
+                  <div className="flex items-center">
+                    {auth.user.root && auth.user.email !== user.email && (
+                      <span
+                        className="text-red-500 ml-2 cursor-pointer"
+                        onClick={() =>
+                          addModal([
+                            {
+                              data: users,
+                              id: user._id,
+                              title: user.name,
+                              type: ACTIONS.ADD_USER, //deleteUser()
+                            },
+                          ])
+                        }
+                      >
+                        <FaTrashAlt aria-label="delete" title="delete" />
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </th>
-              <th className="text-sm">{user._id}</th>
+              </td>
+              <td className="p-2 cursor-pointer">
+                <Link
+                  href={
+                    auth.user.root && auth.user.email !== user.email
+                      ? `/user/${user._id}`
+                      : "#!"
+                  }
+                  className="underline"
+                >
+                  more
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
-    </div>
+    </>
   );
 };
 

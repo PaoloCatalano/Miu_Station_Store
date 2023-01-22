@@ -38,6 +38,9 @@
   legend {
     font-variant: small-caps;
   }
+  main {
+    @apply flex w-screen flex-1 flex-col items-center justify-center px-16 text-center;
+  }
 }
 
 @layer components {
@@ -70,10 +73,6 @@
     to {
       stroke-dashoffset: 234;
     }
-  }
-
-  .main {
-    @apply flex w-full flex-1 flex-col items-center justify-center px-20 text-center;
   }
 }
 

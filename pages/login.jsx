@@ -77,7 +77,7 @@ export default function Login() {
       />
       <h1 className="text-6xl font-bold mb-10 text-slate-600">Login</h1>
 
-      <form ref={zo.ref} className="">
+      <form ref={zo.ref}>
         <Fieldset legend="Enter to your account">
           <Input
             label="Email"

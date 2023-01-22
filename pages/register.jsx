@@ -52,7 +52,7 @@ export default function Register() {
   const disabled = zo.validation?.success === false;
 
   return (
-    <main className="main">
+    <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Register`}
         canonical="https://miustationstore.netlify.app/register"
@@ -118,6 +118,6 @@ export default function Register() {
           <Button cta>Login Now</Button>
         </Link>
       </section>
-    </main>
+    </>
   );
 }

@@ -5,6 +5,7 @@ import { postData } from "utils/fetchData";
 import { useCtx } from "store/globalState";
 import { useRouter } from "next/router";
 import Button from "components/Button";
+import Banner from "components/Banner";
 
 export default function VerifyEmail() {
   const { auth, notify } = useCtx();
@@ -17,6 +18,8 @@ export default function VerifyEmail() {
 
     if (token && email) {
       verifyingEmail({ token, email });
+    } else {
+      setError(true);
     }
   }, [router.query, auth]);
 
@@ -36,20 +39,16 @@ export default function VerifyEmail() {
   }
 
   return (
-    <div className="row mx-auto">
+    <>
       <NextSeo title={`${process.env.WEBSITE_NAME} | Verify Email`} />
-      <div className=" w-100  table-responsive my-5 ">
+      <div className="mb-10 ">
         {Object.keys(router.query).length > 0 && !error && (
-          <h2 className="text-uppercase alert-success px-3">
-            Thank you! Your account has been verified correctly.
-          </h2>
+          <Banner text="Thank you! Your account has been verified correctly." />
         )}
       </div>
-      <Link href="/">
-        <Button type="button" className="btn btn-warning w-100 text-uppercase">
-          enjoy shopping
-        </Button>
+      <Link href="/products">
+        <Button cta>enjoy shopping</Button>
       </Link>
-    </div>
+    </>
   );
 }

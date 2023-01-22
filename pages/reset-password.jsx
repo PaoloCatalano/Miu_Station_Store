@@ -58,10 +58,10 @@ const ResetPassword = () => {
   };
 
   return (
-    <div>
+    <>
       <NextSeo title={`${process.env.WEBSITE_NAME} | Reset Password`} />
-
-      <form ref={zoPass.ref} className="">
+      <h1 className="my-5">Reset Password</h1>
+      <form ref={zoPass.ref}>
         <Fieldset legend="Insert new Password">
           <Input
             label="Password"
@@ -81,7 +81,7 @@ const ResetPassword = () => {
           </Button>
         </Fieldset>
       </form>
-    </div>
+    </>
   );
 };
 

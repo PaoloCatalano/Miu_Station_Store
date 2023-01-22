@@ -10,7 +10,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Notify />
       <Navbar />
       <Modal />
-      <div className="grow pt-10">{children}</div>
+      <main className="grow pt-24 md:pt-10">{children}</main>
       <Footer />
     </div>
   );

@@ -22,6 +22,15 @@ export default function Navbar() {
       >
         &#9776;
       </button> */}
+      <div
+        className={`${
+          open ? "static h-0" : "fixed h-20"
+        } w-screen  z-0 bg-slate-100 shadow-out md:hidden`}
+      >
+        <div className="absolute top-2 left-0 text-center w-full  md:static md:grow md:w-fit md:text-start">
+          <Link href="/">LOGO</Link>
+        </div>
+      </div>
       <div onClick={() => isMenuOpen(!open)}>
         <Hamburger open={open} />
       </div>
@@ -31,7 +40,7 @@ export default function Navbar() {
       >
         <ul className="flex flex-col items-center justify-evenly  bg-gradient-to-tr from-slate-200/30 to-slate-200/100 backdrop-blur-2xl h-[var(--nav-height)] p-6  border-b-2 border-slate-500 shadow-md md:flex-row md:h-auto md:items-baseline md:space-x-5 md:from-slate-100 md:to-slate-50">
           <div className="absolute top-2 left-0 text-center w-full  md:static md:grow md:w-fit md:text-start">
-            LOGO
+            <Link href="/">LOGO</Link>
           </div>
           {auth.user?.role === "admin" &&
             linksAuth.map((link) => <Links key={link.url} {...link} />)}
