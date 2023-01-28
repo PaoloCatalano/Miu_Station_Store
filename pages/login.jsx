@@ -11,7 +11,8 @@ import Button from "components/Button";
 import Input from "components/Input";
 import Fieldset from "components/Fieldset";
 import Banner from "components/Banner";
-import CheckBox from "components/CheckBox";
+import ShowPassword from "../components/ShowPassword";
+import CheckBox from "../components/CheckBox";
 import { emailSchema, passwordSchema } from "validators/valid";
 
 const FormSchema = z.object({
@@ -21,6 +22,7 @@ const FormSchema = z.object({
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const [session, setSession] = useState(false);
   if (FormSchema instanceof ZodSchema === false) {
     throw Error("useZorm must have a ZodSchema as second argument");
   }
@@ -54,7 +56,11 @@ export default function Login() {
       expires: 7,
     });
 
-    localStorage.setItem("firstLogin", true);
+    if (session) {
+      sessionStorage.setItem("sessionLogin", true);
+    } else {
+      localStorage.setItem("firstLogin", true);
+    }
   };
 
   useEffect(() => {
@@ -93,29 +99,36 @@ export default function Login() {
               "Must have more than 6 characters"
             )}
           />
-          <div className="ml-2 mb-3 text-sm">
-            <CheckBox onChange={() => setShowPassword(!showPassword)}>
-              Show Password
+          <ShowPassword
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+          />
+          <div className="ml-2 mb-3 text-xs">
+            <CheckBox onChange={() => setSession(!session)}>
+              Log me out after closing session
             </CheckBox>
           </div>
           <Button isDisabled={disabled} type="submit">
             Login
           </Button>
+          <p className="mb-2">
+            <Link
+              href="/forgot-password"
+              className="text-slate-500 text-xs underline"
+            >
+              Forgot Password?
+            </Link>
+          </p>
         </Fieldset>
       </form>
       {Object.keys(auth).length !== 0 && (
         <Banner text="Login Successful! Redirect" />
       )}
-      <section className="mb-10">
-        <p className="my-2">Did you forget your password?</p>
-        <Link href="/forgot-password">
-          <Button hipster>Reset Password</Button>
-        </Link>
-      </section>
+      <section className="mb-10"></section>
       <section className="mb-14">
         <p className="my-2">Don't you have an account yet?</p>
         <Link href="/register">
-          <Button cta>Register Now</Button>
+          <Button hipster>Register Now</Button>
         </Link>
       </section>
     </main>

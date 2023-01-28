@@ -5,23 +5,28 @@ import { useCtx } from "store/globalState";
 import Button from "./Button";
 
 export default function LogoutBtn() {
-  const { notify, authUser } = useCtx();
+  const { notify, authUser, isMenuOpen } = useCtx();
   const router = useRouter();
   const handleLogout = () => {
     Cookie.remove("refreshtoken", { path: "api/auth/accessToken" });
     localStorage.removeItem("firstLogin");
+    sessionStorage.removeItem("sessionLogin");
     authUser({});
     notify({ success: "Logged out!" });
+    isMenuOpen(false);
     return router.push("/");
   };
   return (
-    <div className="relative">
-      <span className="absolute text-slate-500 text-3xl top-1 -left-9">
-        <TbLogout />
-      </span>
-      <Button onClick={handleLogout} hipster>
+    <div className="w-full mx-auto my-1 flex justify-end ">
+      <button
+        className="text-slate-500 relative mr-5 hover:text-slate-700 text-sm"
+        onClick={handleLogout}
+      >
+        <span className="absolute pointer-events-none text-slate-500 text-xl -left-6">
+          <TbLogout />
+        </span>
         Logout
-      </Button>
+      </button>
     </div>
   );
 }

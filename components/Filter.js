@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { useCtx } from "store/globalState";
 import filterSearch from "utils/filterSearch";
 import useDebounce from "utils/useDebounce";
-import { useRouter } from "next/router";
+import Fieldset from "components/Fieldset";
+import Input from "components/Input";
 
-const Filter = ({ state }) => {
+const Filter = () => {
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
@@ -43,52 +45,65 @@ const Filter = ({ state }) => {
   }, [debouncedSearchTerm]);
 
   return (
-    <div className="input-group border border-info rounded-pill">
+    <Fieldset legend="filter" className="">
       <form
         autoComplete="off"
-        className="d-flex  _search-form"
+        className=""
         onSubmit={(e) => e.preventDefault()}
       >
-        <div className="input-group-prepend col-md-4 px-0 mt-2 mb-2">
+        <div className="">
           <select
-            className="custom-select text-capitalize"
+            className="capitalize bg-slate-50 w-full mb-2 p-2 appearance-none "
             value={sort}
+            placeholder="Order"
             onChange={handleSort}
           >
-            <option value="-createdAt">Newest</option>
-            <option value="oldest">Oldest</option>
-            <option value="-sold">Best sales</option>
-            <option value="price">Lowest Price</option>
-            <option value="-price">Highest Price</option>
+            <optgroup label="Order" className="bg-slate-400 text-xl">
+              <option className="text-left" value="-createdAt">
+                Newest
+              </option>
+              <option value="oldest">Oldest</option>
+              <option value="-sold">Best sales</option>
+              <option value="price">Lowest Price</option>
+              <option value="-price">Highest Price</option>
+            </optgroup>
           </select>
         </div>
 
-        <div className="input-group-prepend col-md-4 px-0 mt-2 mb-2">
+        <div className="">
           <select
-            className="custom-select text-capitalize"
+            className="capitalize bg-slate-50 w-full mb-2 p-2 appearance-none"
             value={category}
             onChange={handleCategory}
           >
-            <option value="all">All Category</option>
-
-            {categories.sort(AZsort).map((item) => (
-              <option key={item._id} value={item._id}>
-                {item.name}
-              </option>
-            ))}
+            <optgroup label="Category" className="bg-slate-400 text-xl">
+              <option value="all">All Category</option>
+              {categories.sort(AZsort).map((item) => (
+                <option key={item._id} value={item._id}>
+                  {item.name}
+                </option>
+              ))}
+            </optgroup>
           </select>
         </div>
 
-        <input
+        {/* <input
           placeholder="Search..."
           type="search"
-          className="form-control-plaintext col-md-8 mt-2 mb-2"
+          className=""
           list="title_product"
-          value={search.toLowerCase()}
+          value={search?.toLowerCase()}
           onChange={(e) => setSearch(e.target.value)}
+        /> */}
+
+        <Input
+          label="Search"
+          type="search"
+          value={search.toLowerCase()}
+          onChange={setSearch}
         />
       </form>
-    </div>
+    </Fieldset>
   );
 };
 

@@ -11,6 +11,7 @@ import Fieldset from "components/Fieldset";
 import CheckBox from "components/CheckBox";
 import userSchema from "validators/userSchema";
 import { passwordSchema } from "validators/valid";
+import ShowPassword from "../components/ShowPassword";
 
 const FormSchema = userSchema
   .extend({
@@ -102,20 +103,19 @@ export default function Register() {
             name={zo.fields.cf_password()}
             errorMessage={zo.errors.cf_password((e) => e.message)}
           />
-          <div className="ml-2 mb-3 text-sm">
-            <CheckBox onChange={() => setShowPassword(!showPassword)}>
-              Show Passwords
-            </CheckBox>
-          </div>
+          <ShowPassword
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+          />
           <Button isDisabled={disabled} type="submit">
             Create Account
           </Button>
         </Fieldset>
       </form>
       <section className="mt-10 mb-14">
-        <p className="my-2">Have you got an account?</p>
+        <p className="my-2">Already an account?</p>
         <Link href="/login">
-          <Button cta>Login Now</Button>
+          <Button hipster>Login Now</Button>
         </Link>
       </section>
     </>

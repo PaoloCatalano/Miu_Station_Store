@@ -3,7 +3,7 @@ import { useCtx } from "store/globalState";
 import Link from "next/link";
 import Image from "next/image";
 import PleaseSign from "components/PleaseSign";
-import { FaTimes, FaCheck, FaEdit, FaTrashAlt } from "react-icons/fa";
+import { FaCheck, FaEdit, FaTrashAlt } from "react-icons/fa";
 import { ACTIONS } from "store/actions";
 
 const Users = () => {

@@ -9,10 +9,12 @@ import Fieldset from "components/Fieldset";
 import { useZorm } from "react-zorm";
 import { z, ZodSchema } from "zod";
 import { confirmPasswordSchema } from "validators/valid";
+import ShowPassword from "../components/ShowPassword";
 
 const FormPassSchema = confirmPasswordSchema;
 
 const ResetPassword = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const { notify } = useCtx();
   const [pushToLogin, setPushToLogin] = useState(false);
 
@@ -65,16 +67,20 @@ const ResetPassword = () => {
         <Fieldset legend="Insert new Password">
           <Input
             label="Password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             description="minimum 6 characters"
             name={zoPass.fields.password()}
             errorMessage={zoPass.errors.password((e) => e.message)}
           />
           <Input
             label="Confirm Password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             name={zoPass.fields.confirmPassword()}
             errorMessage={zoPass.errors.confirmPassword((e) => e.message)}
+          />
+          <ShowPassword
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
           />
           <Button isDisabled={disabledPass} type="submit">
             Update Password

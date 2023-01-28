@@ -4,7 +4,8 @@ import { useRouter } from "next/router";
 import { useCtx } from "store/globalState";
 import { rgbDataURL } from "utils/blurData";
 import { useProduct } from "utils/swr";
-// import AddButton from "./AddButton";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
+import Button from "components/Button";
 
 const ProductItem = ({ product, handleCheck }) => {
   const { cart, auth, categories, addToCart, addModal } = useCtx();
@@ -20,26 +21,19 @@ const ProductItem = ({ product, handleCheck }) => {
 
   const userLink = () => {
     return (
-      <>
-        <Link href={`/product/${product._id}`}>
-          <div
-            className="btn btn-outline-info"
-            style={{ marginRight: "5px", flex: 1 }}
-          >
-            View
-          </div>
-        </Link>
-        <button
-          className="btn btn-warning"
-          style={{ marginLeft: "5px", flex: 1 }}
-          disabled={prodSWR?.product?.inStock === 0 ? true : false}
-          onClick={() => {
-            return addToCart(product, cart);
-          }}
+      <div className="flex space-x-4">
+        <Button
+          className="grow animate-none"
+          cta
+          isDisabled={prodSWR?.product?.inStock === 0 ? true : false}
+          onClick={() => addToCart(product, cart)}
         >
-          {/* <AddButton /> */} add to cart
-        </button>
-      </>
+          <MdOutlineAddShoppingCart className="mx-auto text-2xl" />
+        </Button>
+        <Link href={`/product/${product._id}`}>
+          <Button hipster>Info</Button>
+        </Link>
+      </div>
     );
   };
 
@@ -73,10 +67,8 @@ const ProductItem = ({ product, handleCheck }) => {
     );
   };
   return (
-    <div className="card _custom-card">
-      <div className="text-uppercase text-center font-weight-bold _nameCategory-title">
-        {nameCategory}
-      </div>
+    <div className="w-[247.2px] rounded border-2 border-slate-500 my-5 p-2  shadow-md">
+      <div className="uppercase text-md mb-2">{product.title}</div>
 
       {noSalePage && auth.user && auth.user.role === "admin" && (
         <input
@@ -88,61 +80,49 @@ const ProductItem = ({ product, handleCheck }) => {
         />
       )}
       <Link href={`/product/${product._id}`}>
-        <div className="card-img-top position-relative">
+        <div className="relative">
           {product.onSale && (
-            <div className="polygon">
-              <p>sale</p>
+            <div className="triangle z-[1] absolute -top-[7px] -right-[7px] float-left w-12 h-12 bg-slate-500/80 text-white rotate-45 text-center">
+              <p className="mt-1">sale</p>
             </div>
           )}
           <Image
-            className="card-img-top"
+            className="w-full h-full object-cover"
             src={product.images[0].url}
             alt={product.images[0].url}
-            // objectFit="cover"
             placeholder="blur"
             blurDataURL={rgbDataURL()}
             sizes="50vw"
             quality={100}
-            priority={true}
-            width={100}
-            height={100}
+            width={200}
+            height={200}
           />
         </div>
       </Link>
-      <div className="_division"></div>
-      <div className="card-body">
-        <h5
-          className="card-title text-capitalize text-center _gray-text"
-          title={product.title}
-        >
-          {product.title}
-        </h5>
+      <div className="">
+        <div className="text-slate-500 text-right capitalize">
+          {nameCategory}
+        </div>
 
-        <div className="row justify-content-between mx-0">
-          <h6 className="_info-bold">€{product.price}</h6>
+        <div className="flex flex-col items-center justify-start mt-3 mb-6">
+          <h6 className="text-slate-600 font-bold text-4xl">
+            €{product.price}
+          </h6>
           {prodSWR ? (
             prodSWR.product?.inStock > 0 ? (
-              <h6 className="_info-bold">
-                In Stock: {prodSWR.product.inStock}
-              </h6>
+              <div className="text-slate-500 text-xs">
+                {prodSWR.product.inStock} in stock
+              </div>
             ) : (
-              <h6 className="text-danger">Out Stock</h6>
+              <div className="text-red-500">Out Stock</div>
             )
           ) : (
             <h6 className="text-danger">
-              <span>{isLoading && "⌛"}</span>
-              {isError && `maybe in Stock: ${product.inStock}`}
+              <span>{isLoading && "..."}</span>
+              {isError && `${product.inStock} in stock`}
             </h6>
           )}
         </div>
-
-        <p
-          className="card-text text-muted text-capitalize"
-          style={{ height: 35 }}
-          title={product.description}
-        >
-          {product.description}
-        </p>
 
         <div className="row justify-content-between mx-0">
           {!auth.user || auth.user.role !== "admin" ? userLink() : adminLink()}

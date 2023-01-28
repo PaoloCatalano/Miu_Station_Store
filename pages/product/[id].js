@@ -7,7 +7,6 @@ import { getData } from "utils/fetchData";
 import { useCtx } from "store/globalState";
 import { rgbDataURL } from "utils/blurData";
 import { useProduct } from "utils/swr";
-// import AddButton from "components/AddButton";
 import GoBack from "components/GoBack";
 
 const SingleProduct = (props) => {

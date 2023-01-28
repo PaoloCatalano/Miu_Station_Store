@@ -70,7 +70,7 @@ const ForgotPassword = () => {
       <section className="mb-14">
         <p className="my-2">Don't you have an account yet?</p>
         <Link href="/register">
-          <Button cta>Register Now</Button>
+          <Button hipster>Register Now</Button>
         </Link>
       </section>
     </>

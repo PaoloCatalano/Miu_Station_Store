@@ -2,7 +2,7 @@ import { useTextField } from "react-aria";
 import { useState, useRef, useEffect } from "react";
 
 export default function TextField(props) {
-  let { label, defaultValue, onChange, className = "" } = props;
+  let { label, defaultValue, callBack, className = "", search } = props;
   let ref = useRef();
   const [valueState, setValueState] = useState(defaultValue || null);
   let { labelProps, inputProps, descriptionProps, errorMessageProps } =
@@ -20,13 +20,13 @@ export default function TextField(props) {
   }, [props.errorMessage]);
 
   const handleOnChange = (e) => {
-    if (onChange) {
-      onChange();
+    if (callBack) {
+      callBack();
     }
 
     ref.current.blur();
     ref.current.focus();
-
+    //for notify the label of value presence
     setValueState(e.target.value);
   };
 
@@ -50,12 +50,14 @@ export default function TextField(props) {
           />
   */
 
+  /**   @TODO check if the change from onChange to onInput has no bugs */
+
   return (
     <div className=" mb-2">
       <div className="relative max-w-min mx-auto ">
         <input
           {...inputProps}
-          onChange={handleOnChange}
+          onInput={handleOnChange}
           ref={ref}
           className={`${className} ${inputStyle}`}
         />

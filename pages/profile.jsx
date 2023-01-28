@@ -10,21 +10,19 @@ import { patchData } from "utils/fetchData";
 import { rgbDataURL } from "utils/blurData";
 import { imageUpload } from "utils/imageUpload";
 import { FiCamera } from "react-icons/fi";
-import { FaTimes, FaCheck } from "react-icons/fa";
 import { FcPaid } from "react-icons/fc";
 import { TbTruckDelivery } from "react-icons/tb";
 import Button from "components/Button";
 import Input from "components/Input";
 import Fieldset from "components/Fieldset";
 import Banner from "components/Banner";
-import CheckBox from "components/CheckBox";
 import {
   nameSchema,
   addressSchema,
   mobileSchema,
   confirmPasswordSchema,
 } from "validators/valid";
-import LogoutBtn from "../components/LogoutBtn";
+import ShowPassword from "../components/ShowPassword";
 
 /**@TODO reset password functionality */
 
@@ -227,11 +225,10 @@ const Profile = () => {
                 name={zoPass.fields.confirmPassword()}
                 errorMessage={zoPass.errors.confirmPassword((e) => e.message)}
               />
-              <div className="ml-2 mb-3 text-sm">
-                <CheckBox onChange={() => setShowPassword(!showPassword)}>
-                  Show Passwords
-                </CheckBox>
-              </div>
+              <ShowPassword
+                showPassword={showPassword}
+                setShowPassword={setShowPassword}
+              />
               <Button isDisabled={disabledPass} type="submit">
                 Update Password
               </Button>
@@ -332,9 +329,6 @@ const Profile = () => {
             </table>
           </div>
         </article>
-      </section>
-      <section className="w-full my-10 flex justify-center">
-        <LogoutBtn />
       </section>
     </>
   );

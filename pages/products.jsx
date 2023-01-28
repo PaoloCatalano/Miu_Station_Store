@@ -7,24 +7,28 @@ import { getData } from "utils/fetchData";
 import ProductItem from "components/ProductItem";
 import filterSearch from "utils/filterSearch";
 import Filter from "components/Filter";
-// import CardLink from "components/CardLink";
 import { rgbDataURL } from "utils/blurData";
 // import product_pic from "public/products.png";
+import Button from "components/Button";
 
 const Products = (props) => {
   const [products, setProducts] = useState(props.products);
   const [isCheck, setIsCheck] = useState(false);
   const [isAll, setIsAll] = useState(false);
+  const [page, setPage] = useState(1);
+
   const router = useRouter();
 
-  const { auth, page, addModal } = useCtx();
+  const { auth, addModal } = useCtx();
 
   useEffect(() => {
     setProducts(props.products);
   }, [props.products]);
 
   useEffect(() => {
-    if (Object.keys(router.query).length === 0 /* setPage(1) */);
+    if (router.query && !router.query.page) setPage(1);
+
+    if (router.query?.page) setPage(Number.parseInt(router.query.page));
   }, [router.query]);
 
   const handleCheck = (id) => {
@@ -63,92 +67,77 @@ const Products = (props) => {
     // return router.reload();
   };
 
-  const handleLoadmore = () => {
-    // setPage(page + 1);
+  const handleLoadMore = () => {
+    // setPage((page) => page + 1);
     filterSearch({ router, page: page + 1 });
   };
 
   return (
-    <div className="home_page">
+    <>
       <NextSeo
         canonical="https://miu-shop.vercel.app/"
         openGraph={{
           url: "https://miu-shop.vercel.app/",
         }}
       />
+      <section className="relative flex flex-wrap items-start justify-center space-x-10">
+        <aside className="md:sticky top-1">
+          <Filter />
+        </aside>
+        <div>
+          {auth.user && auth.user.role === "admin" && (
+            <div
+              className="delete_all btn btn-danger mt-2"
+              style={{ marginBottom: "-10px" }}
+            >
+              <input
+                type="checkbox"
+                checked={isCheck}
+                onChange={handleCheckALL}
+                style={{
+                  width: "25px",
+                  height: "25px",
+                  transform: "translateY(8px)",
+                }}
+              />
 
-      {/* <CardLink /> */}
+              <button
+                className="btn bg-red-500 ml-2"
+                data-toggle="modal"
+                data-target="#exampleModal"
+                onClick={handleDeleteAll}
+              >
+                {isAll ? "DELETE ALL" : "Delete"}
+              </button>
+            </div>
+          )}
 
-      <div className="_image-container">
-        {/* <Image
-          className="rounded"
-          alt="logo miu shop"
-          src={product_pic}
-          layout="intrinsic"
-          placeholder="blur"
-          width={510}
-          height={382.5}
-          blurDataURL={rgbDataURL()}
-          quality={100}
-          priority
-        /> */}
-      </div>
-      <div className="_division mb-5" id="products"></div>
-
-      <Filter />
-
-      {auth.user && auth.user.role === "admin" && (
-        <div
-          className="delete_all btn btn-danger mt-2"
-          style={{ marginBottom: "-10px" }}
-        >
-          <input
-            type="checkbox"
-            checked={isCheck}
-            onChange={handleCheckALL}
-            style={{
-              width: "25px",
-              height: "25px",
-              transform: "translateY(8px)",
-            }}
-          />
-
-          <button
-            className="btn bg-red-500 ml-2"
-            data-toggle="modal"
-            data-target="#exampleModal"
-            onClick={handleDeleteAll}
-          >
-            {isAll ? "DELETE ALL" : "Delete"}
-          </button>
+          <div className="products">
+            {products.length === 0 ? (
+              <h2>No Products</h2>
+            ) : (
+              products.map((product) => (
+                <ProductItem
+                  key={product._id}
+                  product={product}
+                  handleCheck={handleCheck}
+                />
+              ))
+            )}
+          </div>
         </div>
-      )}
+      </section>
 
-      <div className="products">
-        {products.length === 0 ? (
-          <h2>No Products</h2>
-        ) : (
-          products.map((product) => (
-            <ProductItem
-              key={product._id}
-              product={product}
-              handleCheck={handleCheck}
-            />
-          ))
-        )}
-      </div>
-
-      {props.result < page * 6 ? (
-        ""
-      ) : (
-        <button
-          className="btn btn-outline-info d-block mx-auto mb-4"
-          onClick={handleLoadmore}
+      <section className="my-10">
+        <Button
+          isDisabled={props.result < page * 6}
+          className="animate-none"
+          onClick={handleLoadMore}
         >
           Load more
-        </button>
-      )}
-    </div>
+        </Button>
+      </section>
+    </>
   );
 };
 

@@ -15,10 +15,7 @@ const initialState = {
   orders: [],
   users: [],
   categories: [],
-  page: 1,
 };
-
-/**@TODO setPage action  */
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducers, initialState);
