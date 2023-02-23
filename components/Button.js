@@ -10,13 +10,17 @@ export default function Button(props) {
     <button
       {...buttonProps}
       ref={ref}
-      className={`${className ? className : ""} ${
-        isDisabled && "animate-boeing-once brightness-75 pointer-events-none"
-      }  bg-slate-400 p-2 text-slate-700 rounded max-w-xs transition-all hover:text-slate-800 hover:ring-4 hover:ring-slate-200  ${
-        hipster && "bg-slate-200 shadow-none"
-      } ${
-        cta && "bg-slate-500 text-slate-100 hover:text-white"
-      } shadow-out group active:shadow-in focus:outline-none focus:ring-4 focus:ring-slate-200`}
+      className={` group
+       bg-slate-400 p-2 text-slate-700 rounded max-w-xs transition-all hover:text-slate-800 hover:ring-4 hover:ring-slate-200 active:shadow-in focus:outline-none focus:ring-4 focus:ring-slate-200
+      ${isDisabled && "brightness-75 pointer-events-none"}  
+      ${isDisabled && !cta && "animate-boeing-once"}  
+      ${hipster && "bg-slate-200 hover:ring-slate-200 focus:ring-slate-200"}
+      ${
+        cta &&
+        "bg-slate-500 text-slate-100 hover:text-white hover:ring-slate-400 focus:ring-slate-400"
+      }
+      ${className ? className : ""}`}
+      /* shadow-out */
     >
       <div className="transition-all group-active:translate-x-[1px] group-active:translate-y-[1px]">
         {props.children}

@@ -11,7 +11,7 @@ import { rgbDataURL } from "utils/blurData";
 import { imageUpload } from "utils/imageUpload";
 import { FiCamera } from "react-icons/fi";
 import { FcPaid } from "react-icons/fc";
-import { TbTruckDelivery } from "react-icons/tb";
+import { TbTruckDelivery, TbUsers } from "react-icons/tb";
 import Button from "components/Button";
 import Input from "components/Input";
 import Fieldset from "components/Fieldset";
@@ -139,9 +139,9 @@ const Profile = () => {
       )}
       <section className="my-3 md:w-full md:max-w-xl flex flex-col justify-center">
         <article>
-          <h3 className="text-center uppercase">
+          <div className="text-center uppercase">
             {auth.user.role === "user" ? "User Profile" : "Admin Profile"}
-          </h3>
+          </div>
 
           <div className="group relative w-[150px] h-[150px] overflow-hidden my-4 mx-auto ring-2 ring-offset-2 ring-sky-400 rounded-full">
             <Image
@@ -237,7 +237,7 @@ const Profile = () => {
         </article>
 
         <article className="mt-10">
-          <h3 className="uppercase">Orders</h3>
+          <div className="uppercase">Orders</div>
           <div className="my-8 pl-4 text-slate-500">
             <p>
               <span className="flex items-center">
@@ -330,6 +330,13 @@ const Profile = () => {
           </div>
         </article>
       </section>
+      {auth.user.role === "admin" && (
+        <section className="mt-10">
+          <Link href="/users" className="w-100 flex hover:underline">
+            <TbUsers className="text-xl text-slate-600 mr-2" /> View all Users
+          </Link>
+        </section>
+      )}
     </>
   );
 };

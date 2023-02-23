@@ -27,9 +27,7 @@
   ::-webkit-file-upload-button {
     cursor: pointer;
   }
-  button:focus {
-    @apply outline-1 outline-dashed outline-slate-500 rounded;
-  }
+
   body {
     overflow-x: hidden;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -37,9 +35,6 @@
   }
   legend {
     font-variant: small-caps;
-  }
-  main {
-    @apply flex w-screen flex-1 flex-col items-center justify-center px-16 text-center;
   }
 }
 

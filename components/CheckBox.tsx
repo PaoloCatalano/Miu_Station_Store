@@ -6,7 +6,9 @@ import { VisuallyHidden } from "@react-aria/visually-hidden";
 import { useFocusRing } from "@react-aria/focus";
 import { mergeProps } from "@react-aria/utils";
 
-export default function Checkbox(props: AriaCheckboxProps) {
+type AriaCheckboxPropsWithClassName = AriaCheckboxProps & { className: string };
+
+export default function Checkbox(props: AriaCheckboxPropsWithClassName) {
   let state = useToggleState(props);
   let ref = useRef<HTMLInputElement>(null);
   let { inputProps } = useCheckbox(props, state, ref);
@@ -36,6 +38,7 @@ export default function Checkbox(props: AriaCheckboxProps) {
     transition
     ease-in-out
     duration-150
+    // ${props.className ? props.className : ""}
  `;
 
   let labelClassName = `${
@@ -47,12 +50,12 @@ export default function Checkbox(props: AriaCheckboxProps) {
   `;
 
   return (
-    <label className="flex items-center group">
+    <label className="flex items-center group ">
       <VisuallyHidden>
         <input {...mergeProps(inputProps, focusProps)} ref={ref} />
       </VisuallyHidden>
       <div className={checkboxClassName} aria-hidden="true">
-        <svg className="stroke-current w-3 h-3" viewBox="0 0 18 18">
+        <svg className="stroke-current w-3 h-3 " viewBox="0 0 18 18">
           <polyline
             points="1 9 7 14 15 4"
             fill="none"

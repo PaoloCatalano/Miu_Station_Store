@@ -73,7 +73,7 @@ export default function Login() {
   }, [auth]);
 
   return (
-    <main className="main">
+    <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Login`}
         canonical="https://miustationstore.netlify.app/login"
@@ -131,6 +131,6 @@ export default function Login() {
           <Button hipster>Register Now</Button>
         </Link>
       </section>
-    </main>
+    </>
   );
 }

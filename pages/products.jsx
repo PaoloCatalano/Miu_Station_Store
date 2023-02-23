@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import { MdOutlineNewLabel } from "react-icons/md";
 import { useCtx } from "store/globalState";
 import { getData } from "utils/fetchData";
 import ProductItem from "components/ProductItem";
 import filterSearch from "utils/filterSearch";
 import Filter from "components/Filter";
+import CheckBox from "components/CheckBox";
 import { rgbDataURL } from "utils/blurData";
 // import product_pic from "public/products.png";
 import Button from "components/Button";
@@ -14,7 +17,6 @@ import Button from "components/Button";
 const Products = (props) => {
   const [products, setProducts] = useState(props.products);
   const [isCheck, setIsCheck] = useState(false);
-  const [isAll, setIsAll] = useState(false);
   const [page, setPage] = useState(1);
 
   const router = useRouter();
@@ -42,7 +44,6 @@ const Products = (props) => {
     products.forEach((product) => (product.checked = !isCheck));
     setProducts([...products]);
     setIsCheck(!isCheck);
-    setIsAll(!isAll);
   };
 
   const handleDeleteAll = () => {
@@ -52,11 +53,7 @@ const Products = (props) => {
         deleteArr.push({
           data: "",
           id: product._id,
-          title: `${
-            isAll
-              ? "___WARNING___ Delete ALL products?"
-              : "Delete selected products?"
-          }`,
+          title: "Delete selected products?",
           type: "deleteProduct",
         });
       }
@@ -80,39 +77,18 @@ const Products = (props) => {
           url: "https://miu-shop.vercel.app/",
         }}
       />
-      <section className="relative flex flex-wrap items-start justify-center space-x-10">
-        <aside className="md:sticky top-1">
+      <section className="relative w-full container flex flex-col md:flex-row items-start justify-center md:space-x-10">
+        <aside className="w-full top-1 md:sticky">
+          <Link href="/create">
+            <Button>
+              <MdOutlineNewLabel className="mx-auto my-1 text-3xl" />
+              Create New Product
+            </Button>
+          </Link>
           <Filter />
         </aside>
-        <div>
-          {auth.user && auth.user.role === "admin" && (
-            <div
-              className="delete_all btn btn-danger mt-2"
-              style={{ marginBottom: "-10px" }}
-            >
-              <input
-                type="checkbox"
-                checked={isCheck}
-                onChange={handleCheckALL}
-                style={{
-                  width: "25px",
-                  height: "25px",
-                  transform: "translateY(8px)",
-                }}
-              />
-
-              <button
-                className="btn bg-red-500 ml-2"
-                data-toggle="modal"
-                data-target="#exampleModal"
-                onClick={handleDeleteAll}
-              >
-                {isAll ? "DELETE ALL" : "Delete"}
-              </button>
-            </div>
-          )}
-
-          <div className="products">
+        <div className="grow">
+          <div className="flex flex-wrap justify-center gap-8">
             {products.length === 0 ? (
               <h2>No Products</h2>
             ) : (
@@ -137,6 +113,20 @@ const Products = (props) => {
           Load more
         </Button>
       </section>
+      {auth.user && auth.user.role === "admin" && (
+        <section className="bg-red-200 w-full py-10 px-6 rounded space-y-5">
+          <h1 className="text-center text-2xl">Danger Zone</h1>
+          <div className="w-100 flex-col space-y-4">
+            <CheckBox isSelected={isCheck} onChange={handleCheckALL}>
+              Delete All Products
+            </CheckBox>
+
+            <Button hipster onClick={handleDeleteAll} className="!bg-red-400">
+              DELETE
+            </Button>
+          </div>
+        </section>
+      )}
     </>
   );
 };

@@ -4,7 +4,7 @@ export default function ShowPassword({ setShowPassword, showPassword }) {
   return (
     <div className="flex justify-end -mt-3 mr-2 mb-3 text-sm">
       <button
-        className="flex flex-nowrap items-center space-x-2 "
+        className="flex flex-nowrap items-center space-x-2 focus:outline-none"
         type="button"
         onClick={() => setShowPassword(!showPassword)}
       >

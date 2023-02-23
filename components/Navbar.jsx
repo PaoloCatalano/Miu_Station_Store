@@ -2,10 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { GiShirtButton } from "react-icons/gi";
 import { AiFillTags } from "react-icons/ai";
-import { TbDiscount2, TbUsers } from "react-icons/tb";
+import { TbDiscount2 } from "react-icons/tb";
 import { TiShoppingCart } from "react-icons/ti";
 import { CgProfile } from "react-icons/cg";
-import { BsFillBagPlusFill } from "react-icons/bs";
 import Links from "./Links";
 import { useCtx } from "store/globalState";
 import Hamburger from "./Hamburger";
@@ -24,7 +23,7 @@ export default function Navbar() {
       </button> */}
       <div
         className={`${
-          open ? "static h-0" : "fixed h-20"
+          open ? "static h-0" : "fixed h-14"
         } w-screen  z-0 bg-slate-100 md:hidden`}
       >
         <div className="absolute top-2 left-0 text-center w-full  md:static md:grow md:w-fit md:text-start">
@@ -59,10 +58,6 @@ export default function Navbar() {
               )}
             </div>
           </div>
-
-          {auth.user?.role === "admin" &&
-            linksAuth.map((link) => <Links key={link.url} {...link} />)}
-
           {links.map((link) => (
             <Links key={link.url} {...link} />
           ))}
@@ -71,18 +66,6 @@ export default function Navbar() {
     </nav>
   );
 }
-const linksAuth = [
-  {
-    url: "/create",
-    title: "create",
-    icon: <BsFillBagPlusFill />,
-  },
-  {
-    url: "/users",
-    title: "users",
-    icon: <TbUsers />,
-  },
-];
 
 const links = [
   {

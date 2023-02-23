@@ -263,7 +263,6 @@ const CreateProduct = () => {
                   name={zo.fields.onSale()}
                   errorMessage={zo.errors.onSale((e) => e.message)}
                   isSelected={checkOnSale}
-                  style={{ width: "20px", height: "20px" }}
                 >
                   Product on Sale?
                 </CheckBox>

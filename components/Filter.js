@@ -45,49 +45,48 @@ const Filter = () => {
   }, [debouncedSearchTerm]);
 
   return (
-    <Fieldset legend="filter" className="">
-      <form
-        autoComplete="off"
-        className=""
-        onSubmit={(e) => e.preventDefault()}
-      >
-        <div className="">
-          <select
-            className="capitalize bg-slate-50 w-full mb-2 p-2 appearance-none "
-            value={sort}
-            placeholder="Order"
-            onChange={handleSort}
-          >
-            <optgroup label="Order" className="bg-slate-400 text-xl">
-              <option className="text-left" value="-createdAt">
-                Newest
-              </option>
-              <option value="oldest">Oldest</option>
-              <option value="-sold">Best sales</option>
-              <option value="price">Lowest Price</option>
-              <option value="-price">Highest Price</option>
-            </optgroup>
-          </select>
-        </div>
+    <>
+      <Fieldset legend="filter">
+        <form
+          autoComplete="off"
+          className=""
+          onSubmit={(e) => e.preventDefault()}
+        >
+          <div className="">
+            <select
+              className="capitalize bg-slate-50 w-full mb-2 p-2 appearance-none "
+              value={sort}
+              placeholder="Order"
+              onChange={handleSort}
+            >
+              <optgroup label="Order" className="bg-slate-400 text-xl">
+                <option value="-createdAt">Newest</option>
+                <option value="oldest">Oldest</option>
+                <option value="-sold">Best sales</option>
+                <option value="price">Lowest Price</option>
+                <option value="-price">Highest Price</option>
+              </optgroup>
+            </select>
+          </div>
 
-        <div className="">
-          <select
-            className="capitalize bg-slate-50 w-full mb-2 p-2 appearance-none"
-            value={category}
-            onChange={handleCategory}
-          >
-            <optgroup label="Category" className="bg-slate-400 text-xl">
-              <option value="all">All Category</option>
-              {categories.sort(AZsort).map((item) => (
-                <option key={item._id} value={item._id}>
-                  {item.name}
-                </option>
-              ))}
-            </optgroup>
-          </select>
-        </div>
+          <div className="">
+            <select
+              className="capitalize bg-slate-50 w-full mb-2 p-2 appearance-none"
+              value={category}
+              onChange={handleCategory}
+            >
+              <optgroup label="Category" className="bg-slate-400 text-xl">
+                <option value="all">All Category</option>
+                {categories.sort(AZsort).map((item) => (
+                  <option key={item._id} value={item._id}>
+                    {item.name}
+                  </option>
+                ))}
+              </optgroup>
+            </select>
+          </div>
 
-        {/* <input
+          {/* <input
           placeholder="Search..."
           type="search"
           className=""
@@ -96,14 +95,15 @@ const Filter = () => {
           onChange={(e) => setSearch(e.target.value)}
         /> */}
 
-        <Input
-          label="Search"
-          type="search"
-          value={search.toLowerCase()}
-          onChange={setSearch}
-        />
-      </form>
-    </Fieldset>
+          <Input
+            label="Search"
+            type="search"
+            value={search.toLowerCase()}
+            onChange={setSearch}
+          />
+        </form>
+      </Fieldset>
+    </>
   );
 };
 

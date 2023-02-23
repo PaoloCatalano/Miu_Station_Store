@@ -5,7 +5,9 @@ import { useCtx } from "store/globalState";
 import { rgbDataURL } from "utils/blurData";
 import { useProduct } from "utils/swr";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 import Button from "components/Button";
+import CheckBox from "components/CheckBox";
 
 const ProductItem = ({ product, handleCheck }) => {
   const { cart, auth, categories, addToCart, addModal } = useCtx();
@@ -28,7 +30,8 @@ const ProductItem = ({ product, handleCheck }) => {
           isDisabled={prodSWR?.product?.inStock === 0 ? true : false}
           onClick={() => addToCart(product, cart)}
         >
-          <MdOutlineAddShoppingCart className="mx-auto text-2xl" />
+          <MdOutlineAddShoppingCart className="inline text-2xl -mt-2" /> Add
+          Item
         </Button>
         <Link href={`/product/${product._id}`}>
           <Button hipster>Info</Button>
@@ -39,17 +42,15 @@ const ProductItem = ({ product, handleCheck }) => {
 
   const adminLink = () => {
     return (
-      <>
-        <Link href={`/create/${product._id}`}>
-          <div className="btn btn-info" style={{ marginRight: "5px", flex: 1 }}>
-            Edit
-          </div>
+      <div className="flex space-x-4">
+        <Link className="grow" href={`/create/${product._id}`}>
+          <Button className="w-full">
+            <FaEdit className="inline text-2xl -mt-2" /> Edit
+          </Button>
         </Link>
-        <button
-          className="btn bg-red-500"
-          style={{ marginLeft: "5px", flex: 1 }}
-          data-toggle="modal"
-          data-target="#exampleModal"
+        <Button
+          hipster
+          className="!text-red-500 "
           onClick={() =>
             addModal([
               {
@@ -62,32 +63,30 @@ const ProductItem = ({ product, handleCheck }) => {
           }
         >
           Delete
-        </button>
-      </>
+        </Button>
+      </div>
     );
   };
   return (
-    <div className="w-[247.2px] rounded border-2 border-slate-500 my-5 p-2  shadow-md">
+    <div className="group relative flex flex-col  w-[247.2px] rounded border-2 border-slate-500 my-5 p-2 overflow-hidden ">
       <div className="uppercase text-md mb-2">{product.title}</div>
 
       {noSalePage && auth.user && auth.user.role === "admin" && (
-        <input
-          type="checkbox"
-          checked={product.checked}
-          className="position-absolute"
-          style={{ height: "20px", width: "20px", zIndex: 1 }}
+        <CheckBox
+          isSelected={product.checked}
+          className="absolute z-[1] top-2 "
           onChange={() => handleCheck(product._id)}
         />
       )}
-      <Link href={`/product/${product._id}`}>
-        <div className="relative">
+      <Link href={`/product/${product._id}`} className="grow overflow-hidden">
+        <div className="relative h-full">
           {product.onSale && (
             <div className="triangle z-[1] absolute -top-[7px] -right-[7px] float-left w-12 h-12 bg-slate-500/80 text-white rotate-45 text-center">
-              <p className="mt-1">sale</p>
+              <p className="mt-[5px]">sale</p>
             </div>
           )}
           <Image
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover group-hover:scale-125 transition"
             src={product.images[0].url}
             alt={product.images[0].url}
             placeholder="blur"
@@ -99,15 +98,15 @@ const ProductItem = ({ product, handleCheck }) => {
           />
         </div>
       </Link>
-      <div className="">
+      <div>
         <div className="text-slate-500 text-right capitalize">
           {nameCategory}
         </div>
 
         <div className="flex flex-col items-center justify-start mt-3 mb-6">
-          <h6 className="text-slate-600 font-bold text-4xl">
+          <div className="text-slate-600 font-bold text-4xl">
             €{product.price}
-          </h6>
+          </div>
           {prodSWR ? (
             prodSWR.product?.inStock > 0 ? (
               <div className="text-slate-500 text-xs">
@@ -117,10 +116,10 @@ const ProductItem = ({ product, handleCheck }) => {
               <div className="text-red-500">Out Stock</div>
             )
           ) : (
-            <h6 className="text-danger">
+            <div className="text-slate-400 text-xs">
               <span>{isLoading && "..."}</span>
-              {isError && `${product.inStock} in stock`}
-            </h6>
+              {!isError && `${product.inStock} in stock (may vary)`}
+            </div>
           )}
         </div>
 
