@@ -13,7 +13,7 @@ export default function Navbar() {
   const { open, isMenuOpen, auth } = useCtx();
 
   return (
-    <nav className="relative w-screen flex justify-center z-10 bg-slate-100  border-b-2 border-slate-500">
+    <nav className="relative w-screen flex justify-center z-10 bg-gradient-to-t from-blue-100  via-white to-slate-50   border-b-2 border-slate-200">
       {/* <button
         aria-pressed={open}
         className="rotate-[var(--rotate,_0)] fixed z-20 top-0 right-0 bg-slate-500/30 backdrop-blur rounded-lg m-2 outline-0 transition h-min md:hidden py-2 px-3 select-none"
@@ -24,7 +24,7 @@ export default function Navbar() {
       <div
         className={`${
           open ? "static h-0" : "fixed h-14"
-        } w-screen  z-0 bg-slate-100 md:hidden`}
+        } w-screen  z-0 bg-gradient-to-b from-blue-100 to-slate-50 md:hidden`}
       >
         <div className="absolute top-2 left-0 text-center w-full  md:static md:grow md:w-fit md:text-start">
           <Link href="/">LOGO</Link>
@@ -37,7 +37,7 @@ export default function Navbar() {
         aria-expanded={open}
         className="fixed -top-[var(--nav-height)] w-full right-0 duration-500 ease-[cubic-bezier(1,1.6,.31,.69)] translate-y-[calc(var(--open,_0)_*_var(--nav-height))] md: max-w-screen-2xl md:sticky md:translate-y-0 md:top-0"
       >
-        <ul className="flex flex-col items-center justify-evenly  bg-slate-100 backdrop-blur-2xl h-[var(--nav-height)] p-6  border-b-2 border-slate-500 md:border-b-0 md:flex-row md:h-auto md:items-baseline md:space-x-5">
+        <ul className="flex flex-col items-center justify-evenly   bg-gradient-to-t from-blue-100  via-white to-slate-50 backdrop-blur-2xl h-[var(--nav-height)] p-6  border-b-2 border-slate-200 md:border-b-0 md:flex-row md:h-auto md:items-baseline md:space-x-5">
           <div
             onClick={() => isMenuOpen(false)}
             className="absolute top-2 left-0 text-center w-full  md:static md:grow md:w-fit md:text-start"

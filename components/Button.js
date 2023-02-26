@@ -11,14 +11,14 @@ export default function Button(props) {
       {...buttonProps}
       ref={ref}
       className={` group
-       bg-slate-400 p-2 text-slate-700 rounded max-w-xs transition-all hover:text-slate-800 hover:ring-4 hover:ring-slate-200 active:shadow-in focus:outline-none focus:ring-4 focus:ring-slate-200
+       bg-blue-400 p-2 text-white rounded max-w-xs transition-all  hover:ring-4 hover:ring-blue-200 active:shadow-in focus:outline-none focus:ring-4 focus:ring-blue-200
       ${isDisabled && "brightness-75 pointer-events-none"}  
       ${isDisabled && !cta && "animate-boeing-once"}  
-      ${hipster && "bg-slate-200 hover:ring-slate-200 focus:ring-slate-200"}
       ${
-        cta &&
-        "bg-slate-500 text-slate-100 hover:text-white hover:ring-slate-400 focus:ring-slate-400"
+        hipster &&
+        "bg-blue-200 text-sky-700 hover:ring-blue-200 focus:ring-blue-200"
       }
+      ${cta && "bg-blue-500  hover:ring-blue-400 focus:ring-blue-400"}
       ${className ? className : ""}`}
       /* shadow-out */
     >

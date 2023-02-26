@@ -67,9 +67,12 @@ const ProductItem = ({ product, handleCheck }) => {
       </div>
     );
   };
+  /*  w-[247.2px] */
   return (
-    <div className="group relative flex flex-col  w-[247.2px] rounded border-2 border-slate-500 my-5 p-2 overflow-hidden ">
-      <div className="uppercase text-md mb-2">{product.title}</div>
+    <div className=" relative flex flex-col max-w-md min-w-[247.2px]  rounded  my-5 p-2 overflow-hidden bg-gradient-to-b from-blue-200 via-slate-100 to-slate-200 ">
+      <div className="uppercase text-md mb-2 font-bold text-slate-600">
+        {product.title}
+      </div>
 
       {noSalePage && auth.user && auth.user.role === "admin" && (
         <CheckBox
@@ -81,12 +84,12 @@ const ProductItem = ({ product, handleCheck }) => {
       <Link href={`/product/${product._id}`} className="grow overflow-hidden">
         <div className="relative h-full">
           {product.onSale && (
-            <div className="triangle z-[1] absolute -top-[7px] -right-[7px] float-left w-12 h-12 bg-slate-500/80 text-white rotate-45 text-center">
+            <div className="triangle z-[1] absolute -top-[7px] -right-[7px] float-left w-12 h-12 bg-rose-500/80 text-white rotate-45 text-center">
               <p className="mt-[5px]">sale</p>
             </div>
           )}
           <Image
-            className="w-full h-full object-cover group-hover:scale-125 transition"
+            className="w-full h-full object-cover transition"
             src={product.images[0].url}
             alt={product.images[0].url}
             placeholder="blur"
@@ -99,7 +102,7 @@ const ProductItem = ({ product, handleCheck }) => {
         </div>
       </Link>
       <div>
-        <div className="text-slate-500 text-right capitalize">
+        <div className="text-blue-400 text-right capitalize">
           {nameCategory}
         </div>
 

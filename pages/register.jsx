@@ -12,6 +12,7 @@ import CheckBox from "components/CheckBox";
 import userSchema from "validators/userSchema";
 import { passwordSchema } from "validators/valid";
 import ShowPassword from "../components/ShowPassword";
+import AnimatedBg from "components/AnimatedBg";
 
 const FormSchema = userSchema
   .extend({
@@ -61,7 +62,8 @@ export default function Register() {
           url: "https://miustationstore.netlify.app/register",
         }}
       />
-      <h1 className="text-6xl font-bold mb-10 text-slate-600">Register</h1>
+      <AnimatedBg />
+      <h1 className="text-6xl font-bold mb-10 text-blue-400">Register</h1>
       <form ref={zo.ref} className="">
         <Fieldset legend="Create your Account">
           <Input

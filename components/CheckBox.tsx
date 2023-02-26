@@ -15,17 +15,20 @@ export default function Checkbox(props: AriaCheckboxPropsWithClassName) {
   let { focusProps, isFocusVisible } = useFocusRing();
 
   let checkboxClassName = `${
-    state.isSelected ? "bg-slate-500 group-active:bg-slate-600" : "bg-white"
+    state.isSelected
+      ? "bg-blue-400 group-active:bg-blue-500"
+      : "bg-white hover:border-blue-200"
   }
     text-white
     border-2
     rounded
+    
     ${
       props.isDisabled
         ? "border-gray-300"
         : isFocusVisible || state.isSelected
-        ? "border-slate-500 group-active:border-slate-600"
-        : "border-gray-500 group-active:border-gray-600"
+        ? "border-blue-200 group-active:border-blue-200"
+        : "border-slate-300 group-active:border-blue-200"
     }
     w-5
     h-5
@@ -35,7 +38,7 @@ export default function Checkbox(props: AriaCheckboxPropsWithClassName) {
     items-center
     mr-2
     ${isFocusVisible ? "shadow-outline" : ""}
-    transition
+    transition-all
     ease-in-out
     duration-150
     // ${props.className ? props.className : ""}

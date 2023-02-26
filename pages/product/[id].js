@@ -8,6 +8,8 @@ import { useCtx } from "store/globalState";
 import { rgbDataURL } from "utils/blurData";
 import { useProduct } from "utils/swr";
 import GoBack from "components/GoBack";
+import Button from "components/Button";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
 
 const SingleProduct = (props) => {
   if (props.product === null) {
@@ -27,12 +29,12 @@ const SingleProduct = (props) => {
   const { prodSWR, isLoading, isError } = useProduct(prodID);
 
   const isActive = (index) => {
-    if (tab === index) return " active";
+    if (tab === index) return " border-2 border-blue-200";
     return "";
   };
   /**@TODO change vercel */
   return (
-    <div className="row detail_page">
+    <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | ${product.title.toUpperCase()}`}
         description={product.description + ", " + product.content}
@@ -74,108 +76,124 @@ const SingleProduct = (props) => {
           },
         ]}
       />
-
-      <div className="col-md-6 ">
-        <div className="position-relative image-container">
-          <Image
-            className="d-block img-thumbnail rounded mt-4 w-100"
-            src={product.images[tab].url}
-            alt={product.images[tab].url}
-            // objectFit="contain"
-            placeholder="blur"
-            blurDataURL={rgbDataURL()}
-            sizes="50vw"
-            quality={100}
-            width={100}
-            height={100}
-          />
-        </div>
-
-        <div className="row mx-0" style={{ cursor: "pointer" }}>
-          {product.images.map((img, index) => (
+      <section className="relative w-full container px-1 flex flex-col items-center justify-center gap-5 md:flex-row md:items-start md:space-x-10">
+        <aside className="top-1 md:sticky ">
+          <div className="relative">
             <Image
-              key={index}
-              src={img.url}
-              alt={img.url}
-              className={`img-thumbnail rounded mr-1 mt-1 ${isActive(index)}`}
-              width={60}
-              height={65}
-              onClick={() => setTab(index)}
+              className="mx-auto rounded mt-4 w-100"
+              src={product.images[tab].url}
+              alt={product.images[tab].url}
+              // objectFit="contain"
+              placeholder="blur"
+              blurDataURL={rgbDataURL()}
+              sizes="50vw"
+              quality={100}
+              width={300}
+              height={300}
             />
-          ))}
-        </div>
-      </div>
+          </div>
 
-      <div className="col-md-6 mt-3">
-        <h2 className="text-uppercase text-center">{product.title}</h2>
-        <div className="_division mb-5"></div>
-        <h5 className="text-info">
-          Price: <span className="_info-bold">€ {product.price}</span>{" "}
-          {product.onSale && <i className="text-danger"> On Sale!</i>}
-        </h5>
-        <div className="row mx-0 d-flex justify-content-between">
-          {prodSWR ? (
-            prodSWR.product.inStock > 0 ? (
-              <h6 className="text-secondary">
-                In Stock: {prodSWR.product.inStock}
-              </h6>
+          <div className="flex flex-wrap mx-0 ">
+            {product.images.map((img, index) => (
+              <Image
+                key={index}
+                src={img.url}
+                alt={img.url}
+                className={`cursor-pointer rounded mr-1 mt-1 ${isActive(
+                  index
+                )}`}
+                width={60}
+                height={65}
+                onClick={() => setTab(index)}
+              />
+            ))}
+          </div>
+        </aside>
+        <div className="mt-10">
+          <div className="uppercase text-center my-5 text-2xl text-sky-700">
+            {product.title}
+          </div>
+          <div className="text-xl my-5 text-slate-500">
+            Price:{" "}
+            <span className="text-slate-700 font-bold">€ {product.price}</span>
+            <p>
+              {product.onSale && <i className="text-rose-500"> On Sale!</i>}
+            </p>
+          </div>
+          <div className="text-slate-500">
+            {prodSWR ? (
+              prodSWR.product.inStock > 0 ? (
+                <div>
+                  <span className="text-slate-700">
+                    {prodSWR.product.inStock}
+                  </span>{" "}
+                  in stock
+                </div>
+              ) : (
+                <div className="text-red-500">Out Stock</div>
+              )
             ) : (
-              <h6 className="text-red-500">Out Stock</h6>
-            )
-          ) : (
-            <h6 className="text-red-500">
-              <span>{isLoading && "⌛"}</span>
-              {isError && `maybe in Stock: ${product.inStock}`}
-            </h6>
-          )}
+              <div>
+                <span>{isLoading && "..."}</span>
+                {isError && <p>{product.inStock} in stock (may vary)</p>}
+              </div>
+            )}
 
-          {prodSWR ? (
-            <h6 className="text-secondary">Sold: {prodSWR.product.sold}</h6>
-          ) : (
-            <h6 className="text-secondary">
-              Sold {product.sold}?<span>{isLoading && "⌛"}</span>
-            </h6>
-          )}
-        </div>
-        <div className="d-inline-flex align-items-baseline ">
-          <h5 className="text-info mt-4 mr-2">Category:</h5>
-          <Link href={`/?category=${product.category}#products`}>
-            <div className="btn btn-outline-info text-capitalize">
-              {nameCategory}
+            {prodSWR ? (
+              <div>
+                {" "}
+                <span className="text-slate-700">
+                  {prodSWR.product.sold}
+                </span>{" "}
+                sold
+              </div>
+            ) : (
+              <div>
+                <span>{isLoading && "..."}</span>
+                {product.sold} sold
+              </div>
+            )}
+          </div>
+          <div className="my-10">
+            {product.inStock <= 0 ? (
+              <div className="text-red-500">Sold Out</div>
+            ) : (
+              <Button
+                className="animate-none"
+                cta
+                isDisabled={prodSWR?.product?.inStock === 0 ? true : false}
+                onClick={() => addToCart(product, cart)}
+              >
+                <MdOutlineAddShoppingCart className="inline text-2xl -mt-2" />{" "}
+                Add Item
+              </Button>
+            )}
+          </div>
+          {/* Description */}
+          <div className="my-10 p-5 bg-gradient-to-b from-transparent to-blue-200 rounded">
+            <div className="my-2 uppercase text-sky-700 text-xl">
+              {product.description}
             </div>
-          </Link>
+            <div className="my-2 max-w-sm first-letter:uppercase text-slate-700">
+              {product.content}
+            </div>
+          </div>
+          <div className="my-5">
+            <span>Check out other </span>
+            <Link href={`/products?category=${product.category}`}>
+              <Button hipster>{nameCategory}</Button>
+            </Link>
+          </div>
+          <p>or</p>
+          <div className="my-10">
+            <Link href="/cart">Go to Cart</Link>
+          </div>
         </div>
-        <div className="mb-5 _callout rounded">
-          <h5 className="my-2 text-capitalize">{product.description}</h5>
-          <div className="my-2 text-muted ">{product.content}</div>
-        </div>
-        {product.inStock <= 0 ? (
-          <button
-            type="button"
-            className="btn btn-secondary d-block my-3 px-5"
-            disabled={true}
-            style={{ cursor: "not-allowed" }}
-          >
-            Sold Out
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="btn btn-info d-block my-3 px-5"
-            disabled={prodSWR?.product.inStock === 0 ? true : false}
-            onClick={() => addToCart(product, cart)}
-          >
-            {/* <AddButton /> */}add to cart
-          </button>
-        )}
+      </section>
+      <div className="w-full max-w-md">
         <GoBack />
-        <Link href="/cart">
-          <button type="button" className="btn btn-warning d-block my-3 px-5">
-            Go to Cart
-          </button>
-        </Link>
       </div>
-    </div>
+    </>
   );
 };
 

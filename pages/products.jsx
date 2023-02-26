@@ -77,14 +77,16 @@ const Products = (props) => {
           url: "https://miu-shop.vercel.app/",
         }}
       />
-      <section className="relative w-full container flex flex-col md:flex-row items-start justify-center md:space-x-10">
+      <section className="relative w-full container flex flex-col items-center justify-center gap-5 px-1 md:flex-row md:items-start md:space-x-10">
         <aside className="w-full top-1 md:sticky">
-          <Link href="/create">
-            <Button>
-              <MdOutlineNewLabel className="mx-auto my-1 text-3xl" />
-              Create New Product
-            </Button>
-          </Link>
+          {auth.user && auth.user.role === "admin" && (
+            <Link href="/create">
+              <Button>
+                <MdOutlineNewLabel className="mx-auto my-1 text-3xl" />
+                Create New Product
+              </Button>
+            </Link>
+          )}
           <Filter />
         </aside>
         <div className="grow">

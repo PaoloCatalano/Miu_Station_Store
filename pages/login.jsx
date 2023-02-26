@@ -14,6 +14,7 @@ import Banner from "components/Banner";
 import ShowPassword from "../components/ShowPassword";
 import CheckBox from "../components/CheckBox";
 import { emailSchema, passwordSchema } from "validators/valid";
+import AnimatedBg from "components/AnimatedBg";
 
 const FormSchema = z.object({
   email: emailSchema,
@@ -81,7 +82,9 @@ export default function Login() {
           url: "https://miustationstore.netlify.app/login",
         }}
       />
-      <h1 className="text-6xl font-bold mb-10 text-slate-600">Login</h1>
+      <AnimatedBg></AnimatedBg>
+
+      <h1 className="text-6xl font-bold mb-10 text-blue-400">Login</h1>
 
       <form ref={zo.ref}>
         <Fieldset legend="Enter to your account">
