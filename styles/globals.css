@@ -301,26 +301,29 @@
     position: absolute;
     top: 3%;
     left: 10%;
-    background: #0af;
     width: 1500px;
     height: 1300px;
     margin-left: -150px;
     margin-top: -250px;
     transform-origin: 50% 48%;
     border-radius: 43%;
+  }
+
+  .wave.-one {
     animation: drift 70000ms infinite linear;
+    /* background: #0af; */
   }
 
   .wave.-three {
     animation: drift 75000ms infinite linear;
     position: fixed;
-    background-color: #77daff;
+    /* background-color: #77daff; */
   }
 
   .wave.-two {
     animation: drift 30000ms infinite linear;
     opacity: 0.1;
-    background: black;
+    /* background: black; */
     position: fixed;
   }
 

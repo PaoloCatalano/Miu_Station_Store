@@ -21,7 +21,7 @@ module.exports = {
       colors: {
         "miu-50": "#d1ecf1",
         "miu-100": "#a2dae3",
-        "miu-200": "8ad0db",
+        "miu-200": "#8ad0db",
         "miu-300": "#74c7d4",
         "miu-400": "#45b5c6",
         "miu-500": "#17a2b8",

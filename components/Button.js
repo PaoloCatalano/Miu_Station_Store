@@ -16,9 +16,9 @@ export default function Button(props) {
       ${isDisabled && !cta && "animate-boeing-once"}  
       ${
         hipster &&
-        "bg-blue-200 text-sky-700 hover:ring-blue-200 focus:ring-blue-200"
+        "bg-blue-200 !text-sky-700 hover:ring-blue-200 focus:ring-blue-200"
       }
-      ${cta && "bg-blue-500  hover:ring-blue-400 focus:ring-blue-400"}
+      ${cta && "!bg-miu-500  hover:ring-miu-400 focus:ring-miu-400"}
       ${className ? className : ""}`}
       /* shadow-out */
     >

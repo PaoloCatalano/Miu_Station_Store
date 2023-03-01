@@ -69,7 +69,7 @@ const ProductItem = ({ product, handleCheck }) => {
   };
   /*  w-[247.2px] */
   return (
-    <div className=" relative flex flex-col max-w-md min-w-[247.2px]  rounded  my-5 p-2 overflow-hidden bg-gradient-to-b from-blue-200 via-slate-100 to-slate-200 ">
+    <div className=" relative flex flex-col max-w-md min-w-[247.2px]  rounded  my-5 p-2 overflow-hidden bg-gradient-to-b from-blue-200 via-slate-200 to-slate-100 ">
       <div className="uppercase text-md mb-2 font-bold text-slate-600">
         {product.title}
       </div>
@@ -82,6 +82,7 @@ const ProductItem = ({ product, handleCheck }) => {
         />
       )}
       <Link href={`/product/${product._id}`} className="grow overflow-hidden">
+        17a2b8
         <div className="relative h-full">
           {product.onSale && (
             <div className="triangle z-[1] absolute -top-[7px] -right-[7px] float-left w-12 h-12 bg-rose-500/80 text-white rotate-45 text-center">

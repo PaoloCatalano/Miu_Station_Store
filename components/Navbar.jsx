@@ -8,6 +8,7 @@ import { CgProfile } from "react-icons/cg";
 import Links from "./Links";
 import { useCtx } from "store/globalState";
 import Hamburger from "./Hamburger";
+import logo from "public/images/logos/icon.png";
 
 export default function Navbar() {
   const { open, isMenuOpen, auth } = useCtx();
@@ -27,7 +28,15 @@ export default function Navbar() {
         } w-screen  z-0 bg-gradient-to-b from-blue-100 to-slate-50 md:hidden`}
       >
         <div className="absolute top-2 left-0 text-center w-full  md:static md:grow md:w-fit md:text-start">
-          <Link href="/">LOGO</Link>
+          <Link href="/">
+            <Image
+              src={logo}
+              alt="miu"
+              placeholder="blur"
+              className="w-14 absolute top-0 left-4 rounded-full"
+              sizes="50vw"
+            />
+          </Link>
         </div>
       </div>
       <div onClick={() => isMenuOpen(!open)}>
@@ -43,7 +52,15 @@ export default function Navbar() {
             className="absolute top-2 left-0 text-center w-full  md:static md:grow md:w-fit md:text-start"
           >
             <div>
-              <Link href="/">LOGO</Link>
+              <Link href="/">
+                <Image
+                  src={logo}
+                  alt="miu"
+                  placeholder="blur"
+                  className="w-14 absolute top-2 left-4 rounded-full"
+                  sizes="50vw"
+                />
+              </Link>
               {auth.user && (
                 <div className="inline capitalize text-slate-500">
                   Hi, {auth.user.name}

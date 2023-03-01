@@ -35,7 +35,7 @@ export default function Links({ icon, url, title }) {
           {title}
         </div>
         {title === "cart" && cart.length > 0 && (
-          <span className="bg-blue-600/80 text-sky-50 rounded-full text-xs text-center h-[19px] w-[19px] pt-[1px] absolute -top-3 left-1">
+          <span className="bg-miu-500/80 text-sky-50 rounded-full text-xs text-center h-[19px] w-[19px] pt-[1px] absolute -top-3 left-1">
             {calcTotItems}
           </span>
         )}
