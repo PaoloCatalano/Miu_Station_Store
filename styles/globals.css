@@ -32,7 +32,9 @@
     overflow-x: hidden;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     @apply text-slate-800 bg-slate-50;
-    /* background-image: url("/images/bg/h.png"); */
+    background-image: url("/images/bg/lines.png");
+
+    /*  bg-[url('/images/bg/bglg.jpeg')] */
   }
   legend {
     font-variant: small-caps;

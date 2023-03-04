@@ -88,8 +88,8 @@ const SingleProduct = (props) => {
               blurDataURL={rgbDataURL()}
               sizes="50vw"
               quality={100}
-              width={300}
-              height={300}
+              width={600}
+              height={600}
             />
           </div>
 
@@ -109,88 +109,98 @@ const SingleProduct = (props) => {
             ))}
           </div>
         </aside>
-        <div className="mt-10">
-          <div className="uppercase text-center my-5 text-2xl text-sky-700">
-            {product.title}
-          </div>
-          <div className="text-xl my-5 text-slate-500">
-            Price:{" "}
-            <span className="text-slate-700 font-bold">€ {product.price}</span>
-            <p>
-              {product.onSale && <i className="text-rose-500"> On Sale!</i>}
-            </p>
-          </div>
-          <div className="text-slate-500">
-            {prodSWR ? (
-              prodSWR.product.inStock > 0 ? (
+        <div className="mt-10 md:mt-4 ">
+          <article className=" border-2 border-blue-300 bg-slate-50 rounded w-full min-w-[247.2px] md:max-w-md">
+            <div className="uppercase text-center my-5 text-2xl text-sky-700">
+              {product.title}
+            </div>
+            <div className="text-xl my-5 text-slate-500">
+              Price:{" "}
+              <span className="text-slate-700 font-bold">
+                € {product.price}
+              </span>
+              <p>
+                {product.onSale && <i className="text-rose-500"> On Sale!</i>}
+              </p>
+            </div>
+            <div className="text-slate-500">
+              {prodSWR ? (
+                prodSWR.product.inStock > 0 ? (
+                  <div>
+                    <span className="text-slate-700">
+                      {prodSWR.product.inStock}
+                    </span>{" "}
+                    in stock
+                  </div>
+                ) : (
+                  <div className="text-red-500">Out of Stock</div>
+                )
+              ) : (
+                <div className="text-slate-500">
+                  {isLoading && <p>...</p>}
+                  {isError && <p>{product.inStock} in stock (may vary)</p>}
+                </div>
+              )}
+
+              {prodSWR ? (
                 <div>
+                  {" "}
                   <span className="text-slate-700">
-                    {prodSWR.product.inStock}
+                    {prodSWR.product.sold}
                   </span>{" "}
-                  in stock
+                  sold
                 </div>
               ) : (
-                <div className="text-red-500">Out Stock</div>
-              )
-            ) : (
-              <div>
-                <span>{isLoading && "..."}</span>
-                {isError && <p>{product.inStock} in stock (may vary)</p>}
-              </div>
-            )}
-
-            {prodSWR ? (
-              <div>
-                {" "}
-                <span className="text-slate-700">
-                  {prodSWR.product.sold}
-                </span>{" "}
-                sold
-              </div>
-            ) : (
-              <div>
-                <span>{isLoading && "..."}</span>
-                {product.sold} sold
-              </div>
-            )}
-          </div>
-          <div className="my-10">
-            {product.inStock <= 0 ? (
-              <div className="text-red-500">Sold Out</div>
-            ) : (
-              <Button
-                className="animate-none"
-                cta
-                isDisabled={prodSWR?.product?.inStock === 0 ? true : false}
-                onClick={() => addToCart(product, cart)}
-              >
-                <MdOutlineAddShoppingCart className="inline text-2xl -mt-2" />{" "}
-                Add Item
-              </Button>
-            )}
-          </div>
-          {/* Description */}
-          <div className="my-10 p-5 bg-gradient-to-b from-transparent to-blue-200 rounded">
-            <div className="my-2 uppercase text-sky-700 text-xl">
-              {product.description}
+                <div className="text-slate-500">
+                  {isLoading && <p>...</p>}
+                  {product.sold} sold
+                </div>
+              )}
             </div>
-            <div className="my-2 max-w-sm first-letter:uppercase text-slate-700">
-              {product.content}
+            <div className="my-10">
+              {product.inStock > 0 && (
+                <Button
+                  className="animate-none"
+                  cta
+                  isDisabled={prodSWR?.product?.inStock === 0 ? true : false}
+                  onClick={() => addToCart(product, cart)}
+                >
+                  <MdOutlineAddShoppingCart className="inline text-2xl -mt-2" />{" "}
+                  Add Item
+                </Button>
+              )}
+              <div className="mt-6">
+                <Link
+                  href="/cart"
+                  className="underline transition text-miu-500 hover:text-miu-600"
+                >
+                  Go to Cart
+                </Link>
+              </div>
             </div>
-          </div>
-          <div className="my-5">
-            <span>Check out other </span>
-            <Link href={`/products?category=${product.category}`}>
-              <Button hipster>{nameCategory}</Button>
-            </Link>
-          </div>
-          <p>or</p>
-          <div className="my-10">
-            <Link href="/cart">Go to Cart</Link>
-          </div>
+            {/* Description */}
+            <div className="mt-10 p-5 bg-gradient-to-b from-transparent to-blue-200 rounded">
+              <div className="my-2 uppercase text-sky-700 text-xl">
+                {product.description}
+              </div>
+              <div className="my-2  first-letter:uppercase text-slate-700">
+                {product.content}
+              </div>
+            </div>
+          </article>
+          <article>
+            <div className="my-10 ">
+              <span>Category: </span>
+              <Link href={`/products?category=${product.category}`}>
+                <Button hipster className="capitalize">
+                  {nameCategory}
+                </Button>
+              </Link>
+            </div>
+          </article>
         </div>
       </section>
-      <div className="w-full max-w-md">
+      <div className="w-full px-6">
         <GoBack />
       </div>
     </>

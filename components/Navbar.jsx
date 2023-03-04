@@ -62,7 +62,7 @@ export default function Navbar() {
                 />
               </Link>
               {auth.user && (
-                <div className="inline capitalize text-slate-500">
+                <div className="inline capitalize text-slate-500 pl-4 md:pl-14">
                   Hi, {auth.user.name}
                   <Image
                     src={auth.user.avatar}

@@ -78,7 +78,7 @@ const Products = (props) => {
         }}
       />
       <section className="relative w-full container flex flex-col items-center justify-center gap-5 px-1 md:flex-row md:items-start md:space-x-10">
-        <aside className="w-full top-1 md:sticky">
+        <aside className="top-1 md:pl-4 md:sticky">
           {auth.user && auth.user.role === "admin" && (
             <Link href="/create">
               <Button>
@@ -90,7 +90,7 @@ const Products = (props) => {
           <Filter />
         </aside>
         <div className="grow">
-          <div className="flex flex-wrap justify-center gap-8">
+          <div className="flex flex-wrap justify-center md:justify-evenly gap-8">
             {products.length === 0 ? (
               <h2>No Products</h2>
             ) : (
@@ -116,7 +116,7 @@ const Products = (props) => {
         </Button>
       </section>
       {auth.user && auth.user.role === "admin" && (
-        <section className="bg-red-200 w-full py-10 px-6 rounded space-y-5">
+        <section className="bg-red-200 w-11/12 max-w-screen-lg py-10 px-6 rounded space-y-5">
           <h1 className="text-center text-2xl">Danger Zone</h1>
           <div className="w-100 flex-col space-y-4">
             <CheckBox isSelected={isCheck} onChange={handleCheckALL}>

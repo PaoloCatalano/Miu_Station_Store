@@ -69,11 +69,11 @@ const ProductItem = ({ product, handleCheck }) => {
   };
   /*  w-[247.2px] */
   return (
-    <div className=" relative flex flex-col max-w-md min-w-[247.2px]  rounded  my-5 p-2 overflow-hidden bg-gradient-to-b from-blue-200 via-slate-200 to-slate-100 ">
-      <div className="uppercase text-md mb-2 font-bold text-slate-600">
-        {product.title}
-      </div>
-
+    <div
+      className=" relative flex flex-col max-w-md min-w-[247.2px]  rounded  my-2 p-2 overflow-hidden shadow-sm bg-slate-50 border-2 border-blue-300 transition 
+    md:w-80
+    hover:bg-blue-200 hover:shadow-md"
+    >
       {noSalePage && auth.user && auth.user.role === "admin" && (
         <CheckBox
           isSelected={product.checked}
@@ -82,15 +82,14 @@ const ProductItem = ({ product, handleCheck }) => {
         />
       )}
       <Link href={`/product/${product._id}`} className="grow overflow-hidden">
-        17a2b8
         <div className="relative h-full">
           {product.onSale && (
-            <div className="triangle z-[1] absolute -top-[7px] -right-[7px] float-left w-12 h-12 bg-rose-500/80 text-white rotate-45 text-center">
+            <div className="triangle z-[1] absolute -top-[8px] -right-[7px] float-left w-12 h-12 bg-rose-500/80 text-white rotate-45 text-center ">
               <p className="mt-[5px]">sale</p>
             </div>
           )}
           <Image
-            className="w-full h-full object-cover transition"
+            className="w-full h-full object-cover transition rounded"
             src={product.images[0].url}
             alt={product.images[0].url}
             placeholder="blur"
@@ -102,28 +101,56 @@ const ProductItem = ({ product, handleCheck }) => {
           />
         </div>
       </Link>
-      <div>
-        <div className="text-blue-400 text-right capitalize">
-          {nameCategory}
-        </div>
 
-        <div className="flex flex-col items-center justify-start mt-3 mb-6">
-          <div className="text-slate-600 font-bold text-4xl">
-            €{product.price}
-          </div>
+      <div className="uppercase text-lg text-left pl-2 mt-2 font-bold text-slate-600">
+        {product.title}
+      </div>
+      <div className="text-xs text-left pl-2 capitalize text-slate-500">
+        <span className="font-bold capitalize ">{nameCategory}</span> &#xB7;{" "}
+        {product.description}
+      </div>
+
+      <div>
+        <div className="flex flex-col items-center justify-start my-8">
           {prodSWR ? (
             prodSWR.product?.inStock > 0 ? (
-              <div className="text-slate-500 text-xs">
-                {prodSWR.product.inStock} in stock
-              </div>
+              <>
+                <div
+                  className={`${
+                    product.onSale
+                      ? "text-rose-500 after:content-['_Sale!'] after:text-sm"
+                      : "text-slate-600"
+                  } font-bold text-4xl`}
+                >
+                  €{product.price}
+                </div>
+                <div
+                  className={`${
+                    prodSWR.product?.inStock === 1
+                      ? "text-red-500 after:content-['_only!']"
+                      : "text-slate-500"
+                  } text-xs`}
+                >
+                  {prodSWR.product.inStock} in stock
+                </div>
+              </>
             ) : (
-              <div className="text-red-500">Out Stock</div>
+              <div className="text-red-500 text-2xl py-3">Out of Stock</div>
             )
           ) : (
-            <div className="text-slate-400 text-xs">
-              <span>{isLoading && "..."}</span>
-              {!isError && `${product.inStock} in stock (may vary)`}
-            </div>
+            <>
+              <div
+                className={`${
+                  product.onSale ? "text-rose-500" : "text-slate-600"
+                } font-bold text-4xl`}
+              >
+                €{product.price}
+              </div>
+              {isLoading && <span>...</span>}
+              <div className="text-slate-400 text-xs">
+                {isError && `${product.inStock} in stock (may vary)`}
+              </div>
+            </>
           )}
         </div>
 
