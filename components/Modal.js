@@ -1,6 +1,7 @@
 import { useCtx } from "store/globalState";
 import { useRouter } from "next/router";
 import { ACTIONS } from "store/actions";
+import Button from "components/Button";
 
 const Modal = () => {
   const {
@@ -39,10 +40,8 @@ const Modal = () => {
       className={`${
         modal.length !== 0 ? "grid" : "hidden"
       } fixed inset-0  place-items-center z-30 overflow-x-hidden w-full h-full bg-slate-500/80 outline-none transition`}
-      id="exampleModal"
       tabIndex="-1"
       role="dialog"
-      aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
       <div
@@ -51,15 +50,10 @@ const Modal = () => {
         }  relative  w-auto -translate-y-3/4 pointer-events-none transition-all`}
         role="document"
       >
-        <div className="relative flex flex-col w-100 pointer-events-auto bg-white bg-clip-padding rounded border border-sky-500 shadow-md outline-0">
-          <div className="flex items-start justify-between p-1 border-b border-b-sky-200 rounded">
-            <h5 className="mb-0 capitalize" id="exampleModalLabel">
-              {modal.length !== 0 && modal[0].title}
-            </h5>
+        <div className="relative flex flex-col w-100 pointer-events-auto bg-white bg-clip-padding rounded border-2 border-slate-200 shadow-md outline-0">
+          <div className="flex justify-end pt-1 pr-2">
             <button
               type="button"
-              className="close"
-              data-dismiss="modal"
               aria-label="Close"
               onClick={() => closeModal()}
             >
@@ -70,23 +64,18 @@ const Modal = () => {
             Are you sure to{" "}
             <span className="text-red-500 font-bold">Delete</span>?
           </div>
-          <div className="flex flex-wrap items-center justify-end p-3 space-x-4 border-t border-t-sky-200 rounded">
+          <div className="p-2 text-center capitalize">
+            {modal.length !== 0 && modal[0].title}
+          </div>
+          <div className="flex flex-wrap items-center justify-end p-3 space-x-4 border-t border-t-slate-200">
             <button
               type="button"
-              className="btn btn-outline-danger"
-              data-dismiss="modal"
-              onClick={handleSubmit}
-            >
-              Yes
-            </button>
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-dismiss="modal"
+              className="underline hover:text-slate-400"
               onClick={() => closeModal()}
             >
               Cancel
             </button>
+            <Button onClick={handleSubmit}>Yes</Button>
           </div>
         </div>
       </div>

@@ -67,13 +67,9 @@ const ProductItem = ({ product, handleCheck }) => {
       </div>
     );
   };
-  /*  w-[247.2px] */
+
   return (
-    <div
-      className=" relative flex flex-col max-w-md min-w-[247.2px]  rounded  my-2 p-2 overflow-hidden shadow-sm bg-slate-50 border-2 border-blue-300 transition 
-    md:w-80
-    hover:bg-blue-200 hover:shadow-md"
-    >
+    <div className=" relative flex flex-col w-[247.2px] md:max-w-md md:min-w-[247.2px]  rounded  my-2 p-2 overflow-hidden shadow-sm bg-slate-50 border-2 border-blue-300 transition md:w-80 hover:bg-blue-200 hover:shadow-md">
       {noSalePage && auth.user && auth.user.role === "admin" && (
         <CheckBox
           isSelected={product.checked}
@@ -102,12 +98,11 @@ const ProductItem = ({ product, handleCheck }) => {
         </div>
       </Link>
 
-      <div className="uppercase text-lg text-left pl-2 mt-2 font-bold text-slate-600">
+      <div className="uppercase text-left pl-2 mt-2 font-bold text-slate-600">
         {product.title}
       </div>
-      <div className="text-xs text-left pl-2 capitalize text-slate-500">
-        <span className="font-bold capitalize ">{nameCategory}</span> &#xB7;{" "}
-        {product.description}
+      <div className="text-xs text-left pl-2 text-slate-500 font-bold capitalize">
+        {nameCategory}
       </div>
 
       <div>

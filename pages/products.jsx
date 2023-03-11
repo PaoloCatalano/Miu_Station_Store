@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { NextSeo } from "next-seo";
-import Image from "next/image";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { MdOutlineNewLabel } from "react-icons/md";
@@ -10,9 +10,10 @@ import ProductItem from "components/ProductItem";
 import filterSearch from "utils/filterSearch";
 import Filter from "components/Filter";
 import CheckBox from "components/CheckBox";
-import { rgbDataURL } from "utils/blurData";
-// import product_pic from "public/products.png";
+import pic from "public/images/logos/products.png";
 import Button from "components/Button";
+import BgStatic from "components/BgStatic";
+import TitleImage from "components/TitleImage";
 
 const Products = (props) => {
   const [products, setProducts] = useState(props.products);
@@ -77,6 +78,9 @@ const Products = (props) => {
           url: "https://miu-shop.vercel.app/",
         }}
       />
+      <BgStatic />
+
+      <TitleImage image={pic} alt="products" />
       <section className="relative w-full container flex flex-col items-center justify-center gap-5 px-1 md:flex-row md:items-start md:space-x-10">
         <aside className="top-1 md:pl-4 md:sticky">
           {auth.user && auth.user.role === "admin" && (

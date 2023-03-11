@@ -12,7 +12,7 @@
     /* --rotate: 90deg; */
   }
   ::selection {
-    @apply bg-sky-700 text-rose-200 rounded;
+    @apply bg-sky-700/80 text-rose-200 rounded;
   }
   ::-webkit-scrollbar {
     @apply w-2;
@@ -32,9 +32,6 @@
     overflow-x: hidden;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     @apply text-slate-800 bg-slate-50;
-    background-image: url("/images/bg/lines.png");
-
-    /*  bg-[url('/images/bg/bglg.jpeg')] */
   }
   legend {
     font-variant: small-caps;
@@ -70,62 +67,6 @@
   @keyframes dash {
     to {
       stroke-dashoffset: 234;
-    }
-  }
-}
-
-@layer utilities {
-  .errorField {
-    @apply border-2 border-blue-500;
-  }
-
-  .cssAnimationJumping {
-    animation: jumping 3s ease-in-out 1 forwards;
-  }
-
-  @keyframes jumping {
-    0% {
-      transform: translateY(-10rem);
-    }
-    5% {
-      transform: translateY(1rem);
-    }
-    10% {
-      transform: translateY(0);
-    }
-
-    85% {
-      transform: translateY(0);
-    }
-
-    90% {
-      transform: translateY(1rem);
-    }
-    95% {
-      transform: translateY(-100rem);
-    }
-    100% {
-      transform: translateY(-100rem);
-    }
-  }
-
-  .cssAnimationFalling {
-    animation: Falling 0.3s cubic-bezier(0.48, 0.54, 0.46, 1.46) 1;
-  }
-
-  @keyframes Falling {
-    from {
-      transform: translateY(-20rem);
-    }
-  }
-
-  .progress {
-    animation: trackProgress 2.6s linear forwards;
-  }
-
-  @keyframes trackProgress {
-    to {
-      width: 0%;
     }
   }
 
@@ -286,13 +227,18 @@
   }
 
   /* ANIMATED BG */
-  .box {
+  /* .wallpaper {
+
+    background-image: url("/images/bg/lines.png");
+
+  } */
+  .jelly {
     position: fixed;
     top: 0;
     transform: rotate(80deg);
     left: 0;
     width: 100rem;
-    height: 100rem;
+    height: 90rem;
   }
 
   .wave {
@@ -329,7 +275,7 @@
     position: fixed;
   }
 
-  .box:after {
+  .jelly:after {
     content: "";
     display: block;
     left: 0;
@@ -447,5 +393,80 @@
       transform: scale(0, 0) rotateZ(90deg);
       opacity: 0;
     }
+  }
+
+  .cssAnimationJumping {
+    animation: jumping 3s ease-in-out 1 forwards;
+  }
+
+  @keyframes jumping {
+    0% {
+      transform: translateY(-10rem);
+    }
+    5% {
+      transform: translateY(1rem);
+    }
+    10% {
+      transform: translateY(0);
+    }
+
+    85% {
+      transform: translateY(0);
+    }
+
+    90% {
+      transform: translateY(1rem);
+    }
+    95% {
+      transform: translateY(-100rem);
+    }
+    100% {
+      transform: translateY(-100rem);
+    }
+  }
+
+  .cssAnimationFalling {
+    animation: Falling 0.3s cubic-bezier(0.48, 0.54, 0.46, 1.46) 1;
+  }
+
+  @keyframes Falling {
+    from {
+      transform: translateY(-20rem);
+    }
+  }
+
+  .progress {
+    animation: trackProgress 2.6s linear forwards;
+  }
+
+  @keyframes trackProgress {
+    to {
+      width: 0%;
+    }
+  }
+}
+
+@layer utilities {
+  .errorField {
+    @apply border-2 border-blue-500;
+  }
+
+  .fading-bg {
+    background: linear-gradient(
+        #f8fafc 10%,
+        transparent 15%,
+        transparent 90%,
+        #f8fafc 95%
+      ),
+      radial-gradient(
+        ellipse closest-corner at 40% 15%,
+        #f8fafc 70%,
+        transparent 80%
+      ),
+      radial-gradient(
+        ellipse farthest-corner at 90% 100%,
+        #f8fafc 20%,
+        transparent 30%
+      );
   }
 }

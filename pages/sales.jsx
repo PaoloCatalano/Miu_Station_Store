@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { NextSeo } from "next-seo";
-// import Image from "next/image";
 import { getData } from "utils/fetchData";
 import ProductItem from "components/ProductItem";
-import { rgbDataURL } from "utils/blurData";
-// import product_pic from "public/onSale.png";
-import GoBack from "components/GoBack";
+import BgStatic from "components/BgStatic";
+import Title from "components/Title";
+import TitleImage from "components/TitleImage";
+import pic from "public/images/logos/onSale.png";
 
 const OnSale = (props) => {
   const [products, setProducts] = useState(props.products);
@@ -34,24 +34,12 @@ const OnSale = (props) => {
         }}
       />
 
-      <div className="_image-container">
-        {/* <Image
-          className="rounded"
-          alt="logo miu shop"
-          src={product_pic}
-          layout="intrinsic"
-          placeholder="blur"
-          width={510}
-          height={382.5}
-          blurDataURL={rgbDataURL()}
-          quality={100}
-        /> */}
-      </div>
-      <div className="_division mb-5"></div>
+      <BgStatic />
+      <TitleImage image={pic} alt="products on sale" />
 
-      <div className="products">
+      <div className="my-10">
         {products.length === 0 ? (
-          <h2>No Products</h2>
+          <Title>No Products</Title>
         ) : (
           products.map((product) => (
             <ProductItem
@@ -62,7 +50,6 @@ const OnSale = (props) => {
           ))
         )}
       </div>
-      <GoBack />
     </>
   );
 };

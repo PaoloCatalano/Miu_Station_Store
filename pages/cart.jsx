@@ -18,6 +18,8 @@ import {
 import { fromZodError } from "zod-validation-error";
 import { z } from "zod";
 import { useZorm } from "react-zorm";
+import BgAnimated from "components/BgAnimated";
+import Title from "components/Title";
 
 const FormSchema = z.object({
   address: addressSchema,
@@ -76,6 +78,7 @@ const Cart = () => {
 
   useEffect(() => {
     const cartLocal = JSON.parse(localStorage.getItem("_cart_"));
+
     if (cartLocal && cartLocal.length > 0) {
       let newArr = [];
 
@@ -84,39 +87,39 @@ const Cart = () => {
           const res = await getData(`product/${item._id}`);
 
           if (res.err) {
-            return notify({ error: res.err });
+            notify({ error: res.err });
           }
+          if (!res.err) {
+            const { _id, title, images, price, inStock, sold } = res.product;
 
-          const { _id, title, images, price, inStock, sold } = res.product;
-
-          const validCart = cartSchema.safeParse({
-            _id,
-            inStock,
-            sold,
-            quantity: item.quantity,
-          });
-
-          if (validCart.error) {
-            setErrorMsg(
-              Object.values(fromZodError(validCart.error))[0][0].message
-            );
-          } else {
-            setErrorMsg(null);
-          }
-
-          if (res.product && inStock > 0) {
-            newArr.push({
+            const validCart = cartSchema.safeParse({
               _id,
-              title,
-              images,
-              price,
               inStock,
               sold,
-              quantity: item.quantity > inStock ? 1 : item.quantity,
+              quantity: item.quantity,
             });
+
+            if (validCart.error) {
+              setErrorMsg(
+                Object.values(fromZodError(validCart.error))[0][0].message
+              );
+            } else {
+              setErrorMsg(null);
+            }
+
+            if (res.product && inStock > 0) {
+              newArr.push({
+                _id,
+                title,
+                images,
+                price,
+                inStock,
+                sold,
+                quantity: item.quantity > inStock ? 1 : item.quantity,
+              });
+            }
           }
         }
-
         addCart(newArr);
       };
 
@@ -164,23 +167,19 @@ const Cart = () => {
 
   if (cart.length === 0)
     return (
-      <div className="row mx-auto">
-        <div className="col-md-8 text-secondary table-responsive my-5">
-          <h2 className="text-uppercase">The Cart is empty</h2>
+      <>
+        <BgAnimated />
+        <div className="my-6">
+          <Title>The Cart is empty</Title>
         </div>
-        <Link href="/">
-          <button
-            type="button"
-            className="btn btn-warning w-100 text-uppercase"
-          >
-            enjoy shopping
-          </button>
+        <Link href="/products">
+          <Button>Enjoy shopping</Button>
         </Link>
-      </div>
+      </>
     );
   /**@TODO change vercel */
   return (
-    <div className="row mx-auto">
+    <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Cart`}
         canonical="https://miu-shop.vercel.app/cart"
@@ -189,22 +188,18 @@ const Cart = () => {
           url: "https://miu-shop.vercel.app/cart",
         }}
       />
+      <BgAnimated />
+      <div className="w-full max-w-md">
+        <Title>Cart</Title>
 
-      <div className="col-md-8 text-secondary table-responsive my-3">
-        <h2 className="text-uppercase">Shopping Cart</h2>
-
-        <table className="table my-3">
-          <tbody>
-            {cart.map((item) => (
-              <CartItem key={item._id} item={item} cart={cart} />
-            ))}
-          </tbody>
-        </table>
+        <div className="w-full max-w-md my-2 divide-y-2 space-y-5">
+          {cart.map((item) => (
+            <CartItem key={item._id} item={item} cart={cart} />
+          ))}
+        </div>
         <hr />
         <button
-          className="btn btn-outline-danger ml-2 mb-4"
-          data-toggle="modal"
-          data-target="#exampleModal"
+          className="my-2 underline uppercase text-rose-400 hover:text-rose-500 transition "
           onClick={() =>
             addModal([
               {
@@ -216,10 +211,10 @@ const Cart = () => {
             ])
           }
         >
-          DELETE ALL
+          empty cart
         </button>
       </div>
-      <div className="col-md-4 my-3 text-right text-uppercase text-secondary">
+      <div className="my-3">
         <form ref={zo.ref}>
           <Fieldset legend="Shipping Details">
             {auth.user && (
@@ -243,9 +238,9 @@ const Cart = () => {
                 defaultValue={auth?.user?.mobile}
               />
             )}
-            <h2>
-              Total: <span className="text-danger">${total}</span>
-            </h2>
+            <div className="text-right">
+              Total: <span className="text-danger">€{total}</span>
+            </div>
             {errorMsg && <p className="text-red-400">{errorMsg}</p>}
             {auth?.user ? (
               <Button
@@ -264,8 +259,10 @@ const Cart = () => {
           </Fieldset>
         </form>
       </div>
-      <GoBack />
-    </div>
+      <div className="w-11/12">
+        <GoBack />
+      </div>
+    </>
   );
 };
 

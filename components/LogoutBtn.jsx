@@ -17,7 +17,7 @@ export default function LogoutBtn() {
     return router.push("/login");
   };
   return (
-    <div className="w-full mx-auto my-1 mt-20 flex justify-end ">
+    <div className="w-full md:w-fit flex justify-end ">
       <button
         className="text-slate-500 relative mr-5 hover:text-slate-700 text-sm"
         onClick={handleLogout}

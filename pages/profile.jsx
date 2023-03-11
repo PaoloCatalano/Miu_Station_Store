@@ -331,7 +331,7 @@ const Profile = () => {
         </article>
       </section>
       {auth.user.role === "admin" && (
-        <section className="mt-10">
+        <section className="my-10">
           <Link href="/users" className="w-100 flex hover:underline">
             <TbUsers className="text-xl text-slate-600 mr-2" /> View all Users
           </Link>

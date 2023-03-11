@@ -2,17 +2,19 @@ import { useEffect, useState } from "react";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import GoBack from "components/GoBack";
-import { rgbDataURL } from "utils/blurData";
-// import categories_pic from "public/categories.png";
 import { useCtx } from "store/globalState";
 import { ACTIONS } from "store/actions";
 import { postData, putData } from "utils/fetchData";
 import { nameSchema } from "validators/valid";
+import BgStatic from "components/BgStatic";
+import Button from "components/Button";
+import Input from "components/Input";
+import TitleImage from "components/TitleImage";
+import pic from "public/images/logos/categories.png";
+import ErrorMessage from "components/ErrorMessage";
 
 const Categories = () => {
   const [name, setName] = useState("");
@@ -55,16 +57,14 @@ const Categories = () => {
   };
 
   function handleSetName(e) {
-    const validName = nameSchema.safeParse(e.target.value);
-
+    const validName = nameSchema.safeParse(e);
     if (!validName.success) {
       const validationError = fromZodError(validName.error);
       setErrorMsg(Object.values(validationError)[0][0].message);
     } else {
       setErrorMsg(null);
     }
-
-    setName(e.target.value);
+    setName(e);
   }
 
   const AllCategories =
@@ -77,7 +77,7 @@ const Categories = () => {
 
   return (
     // <div className="col-md-6 mx-auto my-3">
-    <div className="col-sm mx-auto my-3">
+    <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Categories`}
         description={`In this e-commerce website you will find categories like: ${AllCategories} and many more!`}
@@ -88,61 +88,46 @@ const Categories = () => {
           url: "https://miu-shop.vercel.app/categories",
         }}
       />
-
+      <BgStatic />
+      <TitleImage image={pic} alt="categories" />
       {auth.user?.role === "admin" && (
-        <div className="input-group mb-3">
-          <input
+        <div className="mt-10">
+          <Input
             type="text"
-            className="form-control"
-            placeholder="Add a new category"
+            label="Add a new category"
             value={name}
             onChange={(e) => handleSetName(e)}
           />
-          {errorMsg && <p className="text-red-500 text-sm">{errorMsg}</p>}
-          <button
-            className="btn btn-secondary ml-1"
-            disabled={errorMsg ? true : false}
+          {errorMsg && <ErrorMessage message={errorMsg} />}
+          <Button
+            className="mt-1"
+            isDisabled={errorMsg ? true : false}
             onClick={createCategory}
           >
             {id ? "Update" : "Create"}
-          </button>
+          </Button>
         </div>
       )}
-      <div className="_image-container">
-        {/* <Image
-          className="rounded"
-          alt="logo miu shop"
-          src={categories_pic}
-          layout="intrinsic"
-          placeholder="blur"
-          width={510}
-          height={382.5}
-          blurDataURL={rgbDataURL()}
-          quality={100}
-        /> */}
-      </div>
-      <div className="_division"></div>
-      <ul className="categories products">
+
+      <ul className="my-10">
         {categories.map((category) => (
-          <li key={category._id} className="my-4 text-capitalize rounded">
+          <li key={category._id} className="my-4">
             <Link href={`/?category=${category._id}#products`}>
-              {category.name}
+              <Button hipster className="capitalize">
+                {category.name}
+              </Button>
             </Link>
             {auth.user?.role === "admin" && (
-              <div className="d-flex justify-content-around">
-                <span
-                  style={{ cursor: "pointer" }}
-                  className="mr-2 text-info"
+              <div className="flex justify-between mx-auto mb-10 mt-2 w-20">
+                <div
+                  className="cursor-pointer text-miu-600 p-1 border-2 border-miu-200 bg-slate-50 rounded transition hover:ring-2 hover:ring-miu-200"
                   onClick={() => handleEditCategory(category)}
                 >
-                  <FaEdit />
-                </span>
+                  <FaEdit className="text-2xl" />
+                </div>
 
-                <span
-                  style={{ cursor: "pointer" }}
-                  className="text-danger"
-                  data-toggle="modal"
-                  data-target="#exampleModal"
+                <div
+                  className="cursor-pointer text-red-500 p-1 border-2 border-red-200 bg-slate-50 rounded transition hover:ring-2 hover:ring-red-200"
                   onClick={() =>
                     addModal([
                       {
@@ -154,15 +139,14 @@ const Categories = () => {
                     ])
                   }
                 >
-                  <FaTrashAlt />
-                </span>
+                  <FaTrashAlt className="text-2xl" />
+                </div>
               </div>
             )}
           </li>
         ))}
       </ul>
-      <GoBack />
-    </div>
+    </>
   );
 };
 

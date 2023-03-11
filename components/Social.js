@@ -10,7 +10,7 @@ export default function Socials() {
         href="https://www.facebook.com/profile.php?id=100080154698164"
       >
         <div>
-          <FaFacebookSquare className="text-4xl text-blue-600" />
+          <FaFacebookSquare className="text-4xl bg-slate-50 rounded text-blue-600 hover:text-blue-700 transition" />
         </div>
       </Link>
       <Link
@@ -20,7 +20,7 @@ export default function Socials() {
         className="ml-4"
       >
         <div>
-          <FaInstagramSquare className="text-4xl text-rose-500" />
+          <FaInstagramSquare className="text-4xl bg-slate-50 rounded text-rose-500 hover:text-rose-600 transition" />
         </div>
       </Link>
     </div>

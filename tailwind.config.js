@@ -31,6 +31,14 @@ module.exports = {
         "miu-900": "#052025",
       },
       keyframes: {
+        appearUp: {
+          "0%": {
+            transform: "translateY(100%)",
+          },
+          "100%": {
+            transform: "translateY(0%)",
+          },
+        },
         fadeIn: {
           "0%": {
             opacity: 0,
@@ -64,6 +72,7 @@ module.exports = {
         },
       },
       animation: {
+        up: "appearUp 1s ease-in-out 1",
         "fade-in": "fadeIn 1s ease-in 1",
         boeing: "boeing 3s linear infinite",
         "boeing-once": "boeing 3s linear 1",

@@ -10,8 +10,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Notify />
       <Navbar />
       <Modal />
-      <main className=" flex w-screen flex-1 flex-col items-center justify-start px-1 text-center grow pt-24 md:pt-[10vh]">
+      <main className="flex w-screen flex-1 flex-col items-center justify-start px-1 text-center grow pt-24 md:pt-[10vh]">
         {/* px-16 */}
+
         {children}
       </main>
       <Footer />

@@ -46,7 +46,7 @@ const Filter = () => {
 
   return (
     <>
-      <Fieldset legend="filter">
+      <Fieldset legend="filters">
         <form
           autoComplete="off"
           className=""

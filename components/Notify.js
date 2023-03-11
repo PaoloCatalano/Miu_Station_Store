@@ -58,7 +58,7 @@ const Notify = () => {
         <Toast
           msg={{ msg: notifyStatus.success, title: "Success" }}
           handleShow={() => notify({})}
-          bgColor="bg-green-300"
+          bgColor="bg-miu-300"
         />
       )}
     </>
