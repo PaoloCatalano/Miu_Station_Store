@@ -113,7 +113,7 @@ const ProductItem = ({ product, handleCheck }) => {
                 <div
                   className={`${
                     product.onSale
-                      ? "text-rose-500 after:content-['_Sale!'] after:text-sm"
+                      ? "text-rose-500 after:content-['_Sale!'] z-10 after:text-sm before:block before:absolute before:-inset-1 before:-z-10 before:-skew-y-3 before:bg-rose-200 before:animate-boeing-once relative inline-block"
                       : "text-slate-600"
                   } font-bold text-4xl`}
                 >
@@ -124,7 +124,7 @@ const ProductItem = ({ product, handleCheck }) => {
                     prodSWR.product?.inStock === 1
                       ? "text-red-500 after:content-['_only!']"
                       : "text-slate-500"
-                  } text-xs`}
+                  } text-xs z-10`}
                 >
                   {prodSWR.product.inStock} in stock
                 </div>

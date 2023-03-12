@@ -114,10 +114,10 @@ export default function Register() {
           </Button>
         </Fieldset>
       </form>
-      <section className="mt-10 mb-14">
-        <p className="my-2">Already an account?</p>
+      <section className="mb-14">
+        <p className="my-2 text-slate-600">Already an account?</p>
         <Link href="/login">
-          <Button hipster>Login Now</Button>
+          <Button cta>Login Now</Button>
         </Link>
       </section>
     </>

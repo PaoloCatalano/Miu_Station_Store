@@ -17,7 +17,7 @@ export default function Footer() {
         ) : (
           <Link
             href="/login"
-            className="underline hover:text-slate-600 transition"
+            className="ring-2 ring-slate-600 rounded p-2 text-slate-600 transition hover:ring-4"
           >
             Login
           </Link>

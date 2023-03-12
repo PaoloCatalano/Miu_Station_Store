@@ -14,7 +14,7 @@ export default function Navbar() {
   const { open, isMenuOpen, auth } = useCtx();
 
   return (
-    <nav className="relative w-screen flex justify-center z-10 bg-gradient-to-t from-blue-100  via-white to-slate-50   border-b-2 border-slate-200">
+    <nav className="relative w-screen flex justify-center z-20 bg-gradient-to-t from-blue-100  via-white to-slate-50   border-b-2 border-slate-200">
       {/* <button
         aria-pressed={open}
         className="rotate-[var(--rotate,_0)] fixed z-20 top-0 right-0 bg-slate-500/30 backdrop-blur rounded-lg m-2 outline-0 transition h-min md:hidden py-2 px-3 select-none"

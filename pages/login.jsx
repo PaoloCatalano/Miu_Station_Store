@@ -128,11 +128,10 @@ export default function Login() {
       {Object.keys(auth).length !== 0 && (
         <Banner text="Login Successful! Redirect" />
       )}
-      <section className="mb-10"></section>
       <section className="mb-14">
-        <p className="my-2">Don't you have an account yet?</p>
+        <p className="my-2 text-slate-600">Don't you have an account yet?</p>
         <Link href="/register">
-          <Button hipster>Register Now</Button>
+          <Button cta>Register Now</Button>
         </Link>
       </section>
     </>

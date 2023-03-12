@@ -172,7 +172,8 @@ const SingleProduct = (props) => {
               <div className="mt-6">
                 <Link
                   href="/cart"
-                  className="underline transition text-miu-500 hover:text-miu-600"
+                  className="
+                  ring-2 ring-miu-500 rounded p-2 text-miu-500 transition hover:ring-4 hover:text-miu-600"
                 >
                   Go to Cart
                 </Link>
