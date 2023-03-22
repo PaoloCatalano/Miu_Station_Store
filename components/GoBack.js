@@ -6,7 +6,10 @@ export default function GoBack() {
 
   return (
     <div className="w-full my-4 flex flex-start">
-      <button className="text-3xl text-slate-700" onClick={() => router.back()}>
+      <button
+        className="text-3xl text-slate-700 hover:text-slate-600 transition"
+        onClick={() => router.back()}
+      >
         <BsFillArrowLeftSquareFill />{" "}
       </button>
     </div>

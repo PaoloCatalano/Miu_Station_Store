@@ -10,7 +10,7 @@ export default function Button(props) {
     <button
       {...buttonProps}
       ref={ref}
-      className={` group
+      className={`my-3 px-5 group
        bg-blue-400 p-2 text-white rounded max-w-xs transition-all  hover:ring-4 hover:ring-blue-200 active:shadow-in focus:outline-none focus:ring-4 focus:ring-blue-200
       ${isDisabled && "brightness-75 pointer-events-none"}  
       ${isDisabled && !cta && "animate-boeing-once"}  

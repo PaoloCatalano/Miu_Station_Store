@@ -48,18 +48,20 @@ const Filter = () => {
     <>
       <Fieldset legend="filters">
         <form
-          autoComplete="off"
-          className=""
+          // autoComplete="off"
           onSubmit={(e) => e.preventDefault()}
         >
-          <div className="">
+          <div>
             <select
-              className="capitalize bg-slate-50 w-full mb-2 p-2 appearance-none "
+              className="capitalize bg-slate-50 w-full mb-2 p-2 text-slate-700 cursor-pointer focus:outline-none focus:text-miu-600 transition"
               value={sort}
               placeholder="Order"
               onChange={handleSort}
             >
-              <optgroup label="Order" className="bg-slate-400 text-xl">
+              <optgroup
+                label="Order"
+                className="bg-slate-100 text-xl text-miu-600 "
+              >
                 <option value="-createdAt">Newest</option>
                 <option value="oldest">Oldest</option>
                 <option value="-sold">Best sales</option>
@@ -71,11 +73,14 @@ const Filter = () => {
 
           <div className="">
             <select
-              className="capitalize bg-slate-50 w-full mb-2 p-2 appearance-none"
+              className="capitalize bg-slate-50 w-full mb-2 p-2 text-slate-700 cursor-pointer focus:outline-none focus:text-miu-600 transition"
               value={category}
               onChange={handleCategory}
             >
-              <optgroup label="Category" className="bg-slate-400 text-xl">
+              <optgroup
+                label="Category"
+                className="bg-slate-100 text-xl text-miu-600 "
+              >
                 <option value="all">All Category</option>
                 {categories.sort(AZsort).map((item) => (
                   <option key={item._id} value={item._id}>

@@ -4,6 +4,7 @@ import { NextSeo } from "next-seo";
 import GoBack from "./GoBack";
 import Loading from "./Loading";
 import Button from "./Button";
+import Title from "./Title";
 
 export default function PleaseSign() {
   const [show, setShow] = useState(true);
@@ -26,17 +27,10 @@ export default function PleaseSign() {
             title={`${process.env.WEBSITE_NAME} | Unauthorized Access`}
           />
 
-          <h1 style={{ textAlign: "center", marginTop: "1rem" }}>
-            Unauthorized Access
-          </h1>
-          <div style={{ display: "grid", placeItems: "center" }}>
+          <Title>Unauthorized Access</Title>
+          <div>
             <Link href="/login">
-              <Button
-                type="button"
-                className="btn btn-outline-info d-block my-3 px-5"
-              >
-                Please Login!
-              </Button>
+              <Button>Please Login</Button>
             </Link>
           </div>
           <GoBack />

@@ -7,6 +7,8 @@ import Input from "components/Input";
 import Button from "components/Button";
 import Banner from "components/Banner";
 import Fieldset from "components/Fieldset";
+import Title from "components/Title";
+import BgAnimated from "components/BgAnimated";
 import { useZorm } from "react-zorm";
 import { z, ZodSchema } from "zod";
 import { emailSchema } from "validators/valid";
@@ -45,7 +47,10 @@ const ForgotPassword = () => {
   return (
     <>
       <NextSeo title={`${process.env.WEBSITE_NAME} | Forgot Password`} />
-      <h1 className="my-5">Password Forgotten?</h1>
+
+      <BgAnimated />
+
+      <Title>Reset Password</Title>
       {message && <Banner text={message} />}
       <form ref={zo.ref}>
         <Fieldset legend="Insert your Email">
@@ -58,19 +63,13 @@ const ForgotPassword = () => {
             />
           </div>
 
-          <Button
-            isDisabled={disabled}
-            type="submit"
-            className="btn btn-dark w-100"
-          >
-            Get Reset Password Link
-          </Button>
+          <Button isDisabled={disabled}>Get Reset Password Link</Button>
         </Fieldset>
       </form>
       <section className="mb-14">
         <p className="my-2">Don't you have an account yet?</p>
         <Link href="/register">
-          <Button hipster>Register Now</Button>
+          <Button cta>Register Now</Button>
         </Link>
       </section>
     </>

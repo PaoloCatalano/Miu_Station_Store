@@ -9,7 +9,7 @@ export default function TitleImage({ image, alt = "" }) {
         alt={`miu station store ${alt}`}
         src={image}
         placeholder="blur"
-        blurDataURL={rgbDataURL()}
+        blurDataURL={`data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7`}
         sizes="50vw"
       />
     </div>

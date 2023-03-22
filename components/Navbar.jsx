@@ -62,15 +62,17 @@ export default function Navbar() {
                 />
               </Link>
               {auth.user && (
-                <div className="inline capitalize text-slate-500 pl-4 md:pl-14">
+                <div className="inline capitalize text-sm text-sky-500 pl-4 md:pl-14">
                   Hi, {auth.user.name}
-                  <Image
-                    src={auth.user.avatar}
-                    alt={auth.user.avatar}
-                    width={30}
-                    height={30}
-                    className="overflow-hidden aspect-square object-cover rounded-full shadow inline"
-                  />
+                  <Link href="/profile">
+                    <Image
+                      src={auth.user.avatar}
+                      alt={auth.user.avatar}
+                      width={30}
+                      height={30}
+                      className="ml-1 overflow-hidden aspect-square object-cover rounded-full shadow inline"
+                    />
+                  </Link>
                 </div>
               )}
             </div>

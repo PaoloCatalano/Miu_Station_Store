@@ -22,7 +22,8 @@ import {
   mobileSchema,
   confirmPasswordSchema,
 } from "validators/valid";
-import ShowPassword from "../components/ShowPassword";
+import ShowPassword from "components/ShowPassword";
+import SkeletonProfile from "components/SkeletonProfile";
 
 /**@TODO reset password functionality */
 
@@ -125,9 +126,7 @@ const Profile = () => {
     return () => clearTimeout(timer);
   }, [auth]);
 
-  /** @TODO Skeleton  */
-
-  if (!auth.user) return <>Skeleton Profile</>;
+  if (!auth.user) return <SkeletonProfile />;
 
   return (
     <>
@@ -143,7 +142,7 @@ const Profile = () => {
             {auth.user.role === "user" ? "User Profile" : "Admin Profile"}
           </div>
 
-          <div className="group relative w-[150px] h-[150px] overflow-hidden my-4 mx-auto ring-2 ring-offset-2 ring-sky-400 rounded-full">
+          <div className="group relative w-[150px] h-[150px] overflow-hidden my-4 mx-auto ring-2 ring-offset-2 ring-blue-300 rounded-full hover:ring-blue-400 transition">
             <Image
               className="w-full h-full block object-cover"
               src={data ? URL.createObjectURL(data) : auth.user.avatar}

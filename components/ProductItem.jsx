@@ -31,7 +31,6 @@ const ProductItem = ({ product, handleCheck }) => {
           onClick={() => addToCart(product, cart)}
         >
           <MdOutlineAddShoppingCart className="inline text-2xl -mt-2" /> Add
-          Item
         </Button>
         <Link href={`/product/${product._id}`}>
           <Button hipster>Info</Button>
@@ -69,23 +68,23 @@ const ProductItem = ({ product, handleCheck }) => {
   };
 
   return (
-    <div className=" relative flex flex-col w-[247.2px] md:max-w-md md:min-w-[247.2px]  rounded  my-2 p-2 overflow-hidden shadow-sm bg-slate-50 border-2 border-blue-300 transition md:w-80 hover:bg-blue-200 hover:shadow-md">
+    <div className=" relative flex flex-col w-[247.2px] md:max-w-md md:min-w-[247.2px]  rounded my-2 overflow-hidden shadow-sm bg-slate-50 border-2 border-blue-300 transition md:w-80 hover:bg-blue-200 hover:shadow-md">
       {noSalePage && auth.user && auth.user.role === "admin" && (
         <CheckBox
           isSelected={product.checked}
-          className="absolute z-[1] top-2 "
+          className="absolute z-[1] top-2 left-2"
           onChange={() => handleCheck(product._id)}
         />
       )}
       <Link href={`/product/${product._id}`} className="grow overflow-hidden">
         <div className="relative h-full">
           {product.onSale && (
-            <div className="triangle z-[1] absolute -top-[8px] -right-[7px] float-left w-12 h-12 bg-rose-500/80 text-white rotate-45 text-center ">
-              <p className="mt-[5px]">sale</p>
+            <div className="triangle z-[1] absolute -top-[8px] -right-[8px] float-left w-12 h-12 bg-rose-500/80 text-white rotate-45 text-center">
+              <p className="mt-[7px] text-sm">sale</p>
             </div>
           )}
           <Image
-            className="w-full h-full object-cover transition rounded"
+            className="w-full h-full object-cover transition rounded-md-t"
             src={product.images[0].url}
             alt={product.images[0].url}
             placeholder="blur"
@@ -98,14 +97,14 @@ const ProductItem = ({ product, handleCheck }) => {
         </div>
       </Link>
 
-      <div className="uppercase text-left pl-2 mt-2 font-bold text-slate-600">
+      <div className="uppercase text-left pl-4 mt-2 font-bold text-slate-600">
         {product.title}
       </div>
-      <div className="text-xs text-left pl-2 text-slate-500 font-bold capitalize">
+      <div className="text-xs text-left pl-4 text-slate-500 font-bold capitalize">
         {nameCategory}
       </div>
 
-      <div>
+      <div className="p-2">
         <div className="flex flex-col items-center justify-start my-8">
           {prodSWR ? (
             prodSWR.product?.inStock > 0 ? (

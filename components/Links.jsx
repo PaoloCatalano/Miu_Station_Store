@@ -14,14 +14,14 @@ export default function Links({ icon, url, title }) {
   return (
     <li className="my-0 mx-4 text-2xl md:text-base">
       <Link
-        className="group flex relative items-baseline space-x-2 "
+        className="group flex relative items-baseline space-x-2"
         href={url}
         onClick={() => isMenuOpen(false)}
       >
         <span
           className={` ${
             url === router.pathname ? "text-sky-700" : "text-sky-500"
-          } group-hover:text-sky-700`}
+          } group-hover:text-sky-700 transition`}
         >
           {icon}
         </span>
@@ -30,7 +30,7 @@ export default function Links({ icon, url, title }) {
             url === router.pathname
               ? "before:block before:absolute before:-inset-1 before:-z-10 before:-skew-y-3 before:bg-blue-200 text-sky-700 before:animate-boeing-once relative inline-block"
               : "text-sky-500  group-hover:text-sky-700 "
-          } capitalize `}
+          } capitalize transition`}
         >
           {title}
         </div>

@@ -31,7 +31,7 @@ export const rgbDataURL = (r = theme.r, g = theme.r, b = theme.r) =>
     triplet(0, r, g) + triplet(b, 255, 255)
   }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
 
-const theme = { r: 248, g: 249, b: 250 };
+const theme = { r: 248, g: 250, b: 252 };
 /* 
   <Image 
       blurDataURL={`data:image/svg+xml;base64,${toBase64(
@@ -46,3 +46,6 @@ const theme = { r: 248, g: 249, b: 250 };
 
 
   */
+
+// TOTALLY TRANSPARENT
+/* data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 */

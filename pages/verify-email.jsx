@@ -47,7 +47,7 @@ export default function VerifyEmail() {
         )}
       </div>
       <Link href="/products">
-        <Button cta>enjoy shopping</Button>
+        <Button cta>Enjoy Shopping</Button>
       </Link>
     </>
   );

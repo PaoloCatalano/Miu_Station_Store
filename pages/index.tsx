@@ -17,11 +17,12 @@ const Home: NextPage = () => {
         Welcome to Miu Station Store
       </h1>
 
-      <p className="mt-3 font-bold text-rose-600 text-2xl">
+      <p className="mt-3 font-bold text-rose-700 text-2xl">
         Get started with your purchase!
       </p>
       <Link href="/products" className="cursor-pointer p-4 m-5">
         <Image
+          placeholder="blur"
           src={pic}
           alt="miu station store"
           className="rounded w-[50vw] h-[50wh] md:max-w-[400px] hover:brightness-110 transition-all"

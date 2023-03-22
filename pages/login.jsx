@@ -68,7 +68,7 @@ export default function Login() {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (Object.keys(auth).length !== 0) {
-        return router.push("/");
+        return router.push("/products");
       }
     }, 3000);
     return () => clearTimeout(timer);

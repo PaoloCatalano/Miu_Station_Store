@@ -9,7 +9,9 @@ import Fieldset from "components/Fieldset";
 import { useZorm } from "react-zorm";
 import { z, ZodSchema } from "zod";
 import { confirmPasswordSchema } from "validators/valid";
-import ShowPassword from "../components/ShowPassword";
+import ShowPassword from "components/ShowPassword";
+import Title from "components/Title";
+import BgAnimated from "components/BgAnimated";
 
 const FormPassSchema = confirmPasswordSchema;
 
@@ -62,7 +64,8 @@ const ResetPassword = () => {
   return (
     <>
       <NextSeo title={`${process.env.WEBSITE_NAME} | Reset Password`} />
-      <h1 className="my-5">Reset Password</h1>
+      <BgAnimated />
+      <Title>Reset Password</Title>{" "}
       <form ref={zoPass.ref}>
         <Fieldset legend="Insert new Password">
           <Input

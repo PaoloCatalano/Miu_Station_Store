@@ -112,7 +112,7 @@ const Categories = () => {
       <ul className="my-10">
         {categories.map((category) => (
           <li key={category._id} className="my-4">
-            <Link href={`/?category=${category._id}#products`}>
+            <Link href={`/products?category=${category._id}#products`}>
               <Button hipster className="capitalize">
                 {category.name}
               </Button>
