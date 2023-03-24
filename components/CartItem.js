@@ -22,7 +22,7 @@ const CartItem = ({ item, cart }) => {
         />
       </Link>
 
-      <div className="w-full ">
+      <div className="w-full">
         <div className="capitalize font-bold text-slate-700">{item.title}</div>
 
         <div className="text-slate-600">€{item.quantity * item.price}</div>

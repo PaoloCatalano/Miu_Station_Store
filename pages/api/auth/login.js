@@ -28,10 +28,11 @@ const login = async (req, res) => {
 
     const user = await Users.findOne({ email });
     if (!user)
-      return res.status(404).json({ err: "This user does not exist." });
+      return res.status(404).json({ err: "Incorrect email or password." });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(401).json({ err: "Incorrect password." });
+    if (!isMatch)
+      return res.status(401).json({ err: "Incorrect password or email." });
 
     const access_token = createAccessToken({ id: user._id });
     const refresh_token = createRefreshToken({ id: user._id });

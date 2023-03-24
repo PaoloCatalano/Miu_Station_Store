@@ -27,7 +27,7 @@ export default function TextField(props) {
 
   return (
     <div className=" mb-2">
-      <div className="relative max-w-min mx-auto ">
+      <div className="relative max-w-min mx-auto">
         <textarea
           {...inputProps}
           onChange={(e) => {
@@ -42,8 +42,8 @@ export default function TextField(props) {
           className={`peer ${
             props.errorMessage
               ? "border-red-300 focus:border-red-500"
-              : "border-sky-200 focus:border-2 focus:border-sky-500"
-          } form-control max-w-xs outline-none border-2 rounded-md py-[0.32rem] px-3 transition text-slate-700  ${
+              : "border-slate-200 focus:border-2 focus:border-slate-500"
+          } form-control max-w-xs w-[243.2px] outline-none border-2 rounded-md py-[0.32rem] px-3 transition text-slate-700  ${
             valueState ? "active" : ""
           }`}
         />
@@ -51,7 +51,7 @@ export default function TextField(props) {
           className={`form-label absolute top-[0.4rem] left-3 max-w-[90%] whitespace-nowrap overflow-hidden text-ellipsis mb-0 ml-0 px-1 align-bottom  pointer-events-none origin-top-left transition-all ease-out text-slate-500 ${
             props.errorMessage
               ? "text-red-300 peer-focus:text-red-500 animate..."
-              : "peer-focus:text-sky-600"
+              : "peer-focus:text-slate-600"
           }`}
           {...labelProps}
         >

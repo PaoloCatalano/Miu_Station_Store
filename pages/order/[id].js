@@ -6,6 +6,7 @@ import GoBack from "components/GoBack";
 import OrderDetail from "components/OrderDetail";
 import PleaseSign from "components/PleaseSign";
 import NoProduct from "components/NoProduct";
+import Title from "components/Title";
 
 const DetailOrder = () => {
   const { orders, auth } = useCtx();
@@ -24,13 +25,13 @@ const DetailOrder = () => {
   if (orderDetail.length === 0) return <NoProduct />;
 
   return (
-    <div className="my-3">
+    <>
       <NextSeo title={`${process.env.WEBSITE_NAME} | Order Detail`} />
-
+      <Title>Order Detail</Title>
       <OrderDetail orderDetail={orderDetail} />
 
       <GoBack />
-    </div>
+    </>
   );
 };
 

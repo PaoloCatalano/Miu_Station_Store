@@ -25,7 +25,7 @@ export default function Checkbox(props: AriaCheckboxPropsWithClassName) {
     
     ${
       props.isDisabled
-        ? "border-gray-300"
+        ? "border-gray-300 hover:border-gray-300"
         : isFocusVisible || state.isSelected
         ? "border-blue-200 group-active:border-blue-200"
         : "border-slate-300 group-active:border-blue-200"

@@ -24,20 +24,34 @@ const Users = () => {
       />
       <Title>All Users</Title>
       <section className="container flex flex-col items-center">
-        <div className="my-8 pl-4 text-slate-500 self-start">
+        <div className="mb-10 pl-4 text-slate-500 self-start space-y-1">
+          <p>Legend</p>
           <p className="bg-rose-200 px-2">ADMIN ROOT</p>
           <p className="bg-sky-200 px-2">ADMIN</p>
           <p>
             {" "}
             <span className="flex items-center">
               <FaCheck
-                aria-label="paid"
-                title="paid"
+                aria-label="verified"
+                title="verified"
                 className="text-xl mr-2 text-green-500"
               />{" "}
               Verified
             </span>
           </p>
+          {auth.user.root && (
+            <p>
+              {" "}
+              <span className="flex items-center smallcaps">
+                <FaTrashAlt
+                  aria-label="delete"
+                  title="delete"
+                  className="text-lg mr-3 text-red-500 "
+                />{" "}
+                delete user
+              </span>
+            </p>
+          )}
         </div>
 
         <table className="table w-100">
@@ -77,24 +91,15 @@ const Users = () => {
                   />
                 </td>
                 <td className="p-0 hidden md:table-cell">{user.name}</td>
-                <td className="p-0 text-xs md:p-2 md:text-base">
+                <td className="p-0 pl-px text-xs md:p-2 md:text-base">
                   {user.email}
                 </td>
                 <td className="p-2 ">
                   <div className="flex justify-between">
-                    <span>
-                      {user.isVerified && (
-                        <FaCheck
-                          aria-label="verified"
-                          title="verified"
-                          className="text-green-500 m-0"
-                        />
-                      )}
-                    </span>
-                    <div className="flex items-center">
-                      {auth.user.root && auth.user.email !== user.email && (
+                    {auth.user.root && auth.user.email !== user.email && (
+                      <div className="flex items-center">
                         <span
-                          className="text-red-500 ml-2 cursor-pointer"
+                          className="text-red-500 mr-2 cursor-pointer transition hover:text-red-600"
                           onClick={() =>
                             addModal([
                               {
@@ -108,8 +113,17 @@ const Users = () => {
                         >
                           <FaTrashAlt aria-label="delete" title="delete" />
                         </span>
+                      </div>
+                    )}
+                    <span>
+                      {user.isVerified && (
+                        <FaCheck
+                          aria-label="verified"
+                          title="verified"
+                          className="text-green-500 m-0"
+                        />
                       )}
-                    </div>
+                    </span>
                   </div>
                 </td>
                 <td className="p-2 cursor-pointer">
@@ -119,7 +133,7 @@ const Users = () => {
                         ? `/user/${user._id}`
                         : "#!"
                     }
-                    className="underline"
+                    className="underline hover:text-slate-500 transition"
                   >
                     more
                   </Link>

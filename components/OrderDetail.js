@@ -1,7 +1,10 @@
 import Link from "next/link";
-// import PaypalBtn from "./paypalBtn";
+import Image from "next/Image";
+// import StripeBtn from "./StripeBtn";
 import { patchData } from "utils/fetchData";
 import { useCtx } from "store/globalState";
+import Button from "./Button";
+import Fieldset from "./Fieldset";
 
 const OrderDetail = ({ orderDetail }) => {
   const { auth, orders, notify, updateItem } = useCtx();
@@ -35,126 +38,174 @@ const OrderDetail = ({ orderDetail }) => {
   return (
     <>
       {orderDetail.map((order) => (
-        <div
-          key={order._id}
-          style={{ margin: "20px auto" }}
-          className="row justify-content-around"
-        >
-          <div className="uppercase my-3" style={{ maxWidth: "600px" }}>
-            <h2 className="text-break">Order ID:</h2>
-            <h3 className="text-primary">{order._id}</h3>
+        <section key={order._id} className="flex flex-col break-all mx-4">
+          <article className="text-left">
+            <div className="font-bold">ID </div>
+            <div className="text-slate-600">{order._id}</div>
 
-            <div className="mt-4 text-secondary">
-              <h3>Shipping</h3>
-              <p>Name: {order.user.name}</p>
-              <p>Email: {order.user.email}</p>
-              <p>Address: {order.address}</p>
-              <p>Mobile: {order.mobile}</p>
+            <div className="mt-4">
+              <div className="font-bold">Shipping Details</div>
+              <div className="text-slate-600">
+                <span className="text-slate-400 smallcaps text-sm mr-1">
+                  Name:
+                </span>
+                {order.user.name}
+              </div>
+              <div className="text-slate-600">
+                <span className="text-slate-400 smallcaps text-sm mr-1">
+                  Email:
+                </span>
+                {order.user.email}
+              </div>
+              <div className="text-slate-600">
+                <span className="text-slate-400 smallcaps text-sm mr-1">
+                  Address:
+                </span>
+                {order.address}
+              </div>
+              <div className="text-slate-600">
+                <span className="text-slate-400 smallcaps text-sm mr-1">
+                  Mobile:
+                </span>
+                {order.mobile}
+              </div>
 
-              <div
-                className={`alert ${
-                  order.delivered ? "alert-success" : "alert-danger"
-                }
-                        d-flex justify-content-between align-items-center`}
-                role="alert"
-              >
-                {order.delivered
-                  ? `Deliverd on ${order.updatedAt}`
-                  : "Not Delivered"}
+              <div className="mt-4">
+                <div className="font-bold">Status</div>
+
+                {order.delivered ? (
+                  <div className="text-slate-600">
+                    <span className="text-slate-400 smallcaps text-sm mr-1">
+                      Delivered on:
+                    </span>
+                    {order.updatedAt}
+                  </div>
+                ) : (
+                  <div>
+                    <span className="text-red-400 smallcaps text-sm mr-1">
+                      Not Delivered
+                    </span>
+                  </div>
+                )}
                 {auth.user.role === "admin" && !order.delivered && (
-                  <button
-                    className="btn btn-dark text-uppercase"
-                    onClick={() => handleDelivered(order)}
-                  >
+                  <Button onClick={() => handleDelivered(order)}>
                     Mark as delivered
-                  </button>
+                  </Button>
                 )}
               </div>
-              <div className="mb-5"></div>
-              <h3>Payment</h3>
-              {order.method && (
-                <h6>
-                  Method: <em>{order.method}</em>
-                </h6>
-              )}
 
-              {order.paymentId && (
-                <p>
-                  PaymentId: <em>{order.paymentId}</em>
-                </p>
-              )}
+              <div className="mt-4">
+                <div className="font-bold">Payment</div>
 
-              <div
-                className={`alert ${
-                  order.paid ? "alert-success" : "alert-danger"
-                }
-                        d-flex justify-content-between align-items-center`}
-                role="alert"
-              >
-                {order.paid ? `Paid on ${order.dateOfPayment}` : "Not Paid"}
+                {order.method && (
+                  <div className="text-slate-600">
+                    <span className="text-slate-400 smallcaps text-sm mr-1">
+                      Method:
+                    </span>
+                    {order.method}
+                  </div>
+                )}
+
+                {order.paymentId && (
+                  <div className="text-slate-600">
+                    <span className="text-slate-400 smallcaps text-sm mr-1">
+                      Payment Id:
+                    </span>
+                    {order.paymentId}
+                  </div>
+                )}
+
+                {order.paid ? (
+                  <div className="text-slate-600">
+                    <span className="text-slate-400 smallcaps text-sm mr-1">
+                      Paid on:
+                    </span>
+                    {order.updatedAt}
+                  </div>
+                ) : (
+                  <div>
+                    <span className="text-red-400 smallcaps text-sm mr-1">
+                      Not Paid
+                    </span>
+                  </div>
+                )}
               </div>
-              <div className="mb-5"></div>
 
-              <div>
-                <h3>Order Items</h3>
+              <div className="mt-10">
+                <div className="font-bold">Products you ordered</div>
                 {order.cart.map((item) => (
                   <div
-                    className="row border-bottom mx-0 p-2 justify-content-betwenn
-                                    align-items-center"
+                    className="flex flex-nowrap items-center justify-between gap-4 mb-4"
                     key={item._id}
-                    style={{ maxWidth: "550px" }}
                   >
-                    <img
-                      src={item.images[0].url}
-                      alt={item.images[0].url}
-                      style={{
-                        width: "50px",
-                        height: "45px",
-                        objectFit: "cover",
-                      }}
-                    />
+                    <Link
+                      href={`/product/${item._id}`}
+                      className="overflow-hidden"
+                    >
+                      <Image
+                        src={item.images[0].url}
+                        alt={item.images[0].url}
+                        width={100}
+                        height={100}
+                        className="rounded mt-3"
+                      />
+                    </Link>
 
-                    <h5 className="flex-fill text-secondary px-3 m-0">
-                      <Link href={`/product/${item._id}`}>{item.title}</Link>
-                    </h5>
+                    <div className="w-full">
+                      <div className="capitalize font-bold text-slate-700">
+                        {item.title}
+                      </div>
 
-                    <span className="text-info m-0">
-                      {item.quantity} x ${item.price} = $
-                      {item.price * item.quantity}
-                    </span>
+                      <div className="text-slate-600">
+                        <span className="text-slate-400 smallcaps text-sm mr-1">
+                          {item.quantity} x €{item.price} =
+                        </span>
+                        €{item.price * item.quantity}
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
+          </article>
 
           {!order.paid && auth.user.role !== "admin" && (
-            <div className="p-4">
-              <h2 className="mb-4 text-uppercase">Total: ${order.total}</h2>
-              {/* <PaypalBtn order={order} /> */}
-              <p>To Finalize your purchase:</p>
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                className="btn btn-warning"
-                href={`mailto:${process.env.ADMIN_EMAIL}?subject=Shop bag of ${
-                  auth.user.name
-                } &body=Hello,%0D%0A%0D%0AI would like to buy the following items:%0D%0A%0D%0A ${order.cart
-                  .map(
-                    (item) =>
-                      `x${item.quantity} - ${item.title.toUpperCase()} - ${
-                        item.price
-                      }€ - ID:${item._id}%0D%0A%0D%0A`
-                  )
-                  .join("")} . %0D%0A%0D%0AThanks! %0D%0A%0D%0A Order ID: ${
-                  order._id
-                }`}
-              >
-                Contact us per email
-              </a>
-            </div>
+            <article className="my-10">
+              <Fieldset legend="Finalize my purchase">
+                <div className="mb-4 smallcaps text-slate-400 ">
+                  Total:
+                  <span className="ml-1 text-xl font-bold text-slate-600">
+                    €{order.total}
+                  </span>
+                </div>
+                {/* <StripeBtn order={order} /> */}
+                <Button hipster>
+                  {" "}
+                  <a
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    href={`mailto:${
+                      process.env.ADMIN_EMAIL
+                    }?subject=Shop bag of ${
+                      auth.user.name
+                    } &body=Hello,%0D%0A%0D%0AI would like to buy the following items:%0D%0A%0D%0A ${order.cart
+                      .map(
+                        (item) =>
+                          `x${item.quantity} - ${item.title.toUpperCase()} - ${
+                            item.price
+                          }€ - ID:${item._id}%0D%0A%0D%0A`
+                      )
+                      .join("")} . %0D%0A%0D%0AThanks! %0D%0A%0D%0A Order ID: ${
+                      order._id
+                    }`}
+                  >
+                    Contact us per email
+                  </a>
+                </Button>
+              </Fieldset>
+            </article>
           )}
-        </div>
+        </section>
       ))}
     </>
   );

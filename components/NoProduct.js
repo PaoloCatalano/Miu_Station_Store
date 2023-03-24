@@ -1,54 +1,35 @@
 import Link from "next/link";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
-// import pic from "../public/oops.jpeg";
+import pic from "public/images/logos/oops.jpeg";
 import { rgbDataURL } from "utils/blurData";
 import GoBack from "./GoBack";
+import Button from "./Button";
 
 export default function NoProduct() {
   return (
-    <div className="home_page animate-fade-in">
-      <style jsx>{`
-        ._center {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        ._h1style {
-          text-align: center;
-          margin-top: 5rem;
-        }
-      `}</style>
+    <>
       <NextSeo title={`${process.env.WEBSITE_NAME} | Page Not Available`} />
-      <div className="_center">
-        <h1 className="_center _h1style">
-          <span>
-            {/* <Image
-              className="rounded"
-              alt="O"
-              src={pic}
-              layout="fixed"
-              placeholder="blur"
-              width={120}
-              height={175}
-              blurDataURL={rgbDataURL()}
-              quality={100}
-            /> */}
-          </span>
+      <div className="flex items-center mx-auto animate-fade-in">
+        <Image
+          alt="Oops, page not available"
+          src={pic}
+          placeholder="blur"
+          width={120}
+          height={175}
+          blurDataURL={rgbDataURL()}
+          sizes="50vw"
+        />
+        <span className="text-2xl text-miu-600">
           Oops!, this page is no longer available
-        </h1>
+        </span>
       </div>
-      <div className="_center">
-        <Link href="/">
-          <button
-            type="button"
-            className="btn btn-warning w-full uppercase m-5"
-          >
-            enjoy shopping
-          </button>
+      <div className="animate-fade-in my-10 grow flex">
+        <Link href="/products" className="self-center">
+          <Button cta>Enjoy Shopping</Button>
         </Link>
       </div>
       <GoBack />
-    </div>
+    </>
   );
 }

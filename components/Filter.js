@@ -71,7 +71,7 @@ const Filter = () => {
             </select>
           </div>
 
-          <div className="">
+          <div>
             <select
               className="capitalize bg-slate-50 w-full mb-2 p-2 text-slate-700 cursor-pointer focus:outline-none focus:text-miu-600 transition"
               value={category}

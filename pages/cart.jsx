@@ -173,7 +173,7 @@ const Cart = () => {
           <Title>The Cart is empty</Title>
         </div>
         <Link href="/products">
-          <Button>Enjoy shopping</Button>
+          <Button>Enjoy Shopping</Button>
         </Link>
       </>
     );
@@ -259,9 +259,7 @@ const Cart = () => {
           </Fieldset>
         </form>
       </div>
-      <div className="w-11/12">
-        <GoBack />
-      </div>
+      <GoBack />
     </>
   );
 };

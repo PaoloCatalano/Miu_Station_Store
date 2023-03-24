@@ -473,4 +473,8 @@
         transparent 30%
       );
   }
+
+  .smallcaps {
+    font-variant: small-caps;
+  }
 }

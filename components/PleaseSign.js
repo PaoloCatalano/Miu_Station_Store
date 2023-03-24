@@ -15,10 +15,10 @@ export default function PleaseSign() {
   }, []);
 
   return (
-    <div className="home_page">
+    <>
       {show ? (
         <>
-          <NextSeo title="Miu Landing..." />
+          <NextSeo title="Miu Loading..." />
           <Loading />
         </>
       ) : (
@@ -36,6 +36,6 @@ export default function PleaseSign() {
           <GoBack />
         </>
       )}
-    </div>
+    </>
   );
 }

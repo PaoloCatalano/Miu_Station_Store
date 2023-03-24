@@ -153,7 +153,7 @@ export async function getServerSideProps({ query }) {
     props: {
       products: res.products,
       result: res.result,
-    }, // will be passed to the page component as props
+    },
   };
 }
 

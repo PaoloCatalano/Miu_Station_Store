@@ -263,7 +263,7 @@ const Profile = () => {
             <table className="text-sm  mx-auto">
               <thead className="bg-slate-300 ">
                 <tr>
-                  {auth.user.root && (
+                  {auth.user.role === "admin" && (
                     <th className="p-2 hidden md:table-cell">user email</th>
                   )}
                   <th className="p-2">date</th>
@@ -279,7 +279,7 @@ const Profile = () => {
                     key={order._id}
                     className="[&:nth-child(even)]:bg-slate-200"
                   >
-                    {auth.user.root && (
+                    {auth.user.role === "admin" && (
                       <td className="p-2 hidden md:table-cell">
                         {order?.user?._id ? (
                           <Link href={`/user/${order.user._id}`}>

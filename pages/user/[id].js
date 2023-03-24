@@ -11,6 +11,8 @@ import { patchData } from "utils/fetchData";
 import PleaseSign from "components/PleaseSign";
 import NoProduct from "components/NoProduct";
 import Loading from "components/Loading";
+import Fieldset from "components/Fieldset";
+import { FaCheck, FaTimes } from "react-icons/fa";
 
 const EditUser = () => {
   const router = useRouter();
@@ -73,22 +75,20 @@ const EditUser = () => {
   if (!checkLoad) return <Loading />;
 
   return (
-    <div className="edit_user my-3">
-      <NextSeo title={`${process.env.WEBSITE_NAME} | Edit User`} />
-
-      <div className="col-md-4 mx-auto my-4">
-        <h2 className="text-uppercase text-secondary">Edit User</h2>
-
-        <div className="form-group">
+    <>
+      <NextSeo
+        title={`${process.env.WEBSITE_NAME} | Edit User ${editUser.name}`}
+      />
+      <form>
+        <Fieldset legend="Edit User">
           <Input
             type="text"
             label="Name"
             defaultValue={editUser.name}
             isDisabled
+            isReadOnly
           />
-        </div>
 
-        <div className="form-group">
           <Input
             type="text"
             label="Email"
@@ -96,28 +96,38 @@ const EditUser = () => {
             isDisabled
             isReadOnly
           />
-        </div>
 
-        <div className="form-group">
           <Input
             type="text"
             label="ID"
             defaultValue={editUser._id}
+            isDisabled
             isReadOnly
           />
-        </div>
+          <div className="ml-1 flex items-start justify-start gap-2">
+            {editUser.isVerified ? (
+              <FaCheck
+                aria-label="verified"
+                title="verified"
+                className="text-green-500 translate-y-1"
+              />
+            ) : (
+              <FaTimes
+                aria-label="not verified"
+                title="not verified"
+                className="text-slate-400 translate-y-1"
+              />
+            )}
 
-        <div className="form-group">
-          <CheckBox
-            isSelected={editUser.isVerified}
-            isDisabled
-            className={editUser.isVerified ? "text-success" : "text-danger"}
-          >
-            Verified
-          </CheckBox>
-        </div>
+            <span
+              className={
+                editUser.isVerified ? "text-miu-500" : "text-slate-400"
+              }
+            >
+              Verified
+            </span>
+          </div>
 
-        <div className="form-group">
           <CheckBox
             isSelected={checkAdmin}
             style={{ width: "20px", height: "20px" }}
@@ -125,15 +135,14 @@ const EditUser = () => {
           >
             Admin
           </CheckBox>
-        </div>
 
-        <Button className="btn btn-dark" onClick={handleSubmit}>
-          Update
-        </Button>
-      </div>
-
+          <Button className="btn btn-dark" onClick={handleSubmit}>
+            Update
+          </Button>
+        </Fieldset>
+      </form>
       <GoBack />
-    </div>
+    </>
   );
 };
 

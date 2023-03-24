@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Image from "next/Image";
 import { NextSeo } from "next-seo";
 import { ZodSchema } from "zod";
 import { useZorm } from "react-zorm";
@@ -15,7 +16,9 @@ import Loading from "components/Loading";
 import NoProduct from "components/NoProduct";
 import ErrorMessage from "components/ErrorMessage";
 import TextArea from "components/TextArea";
+import Fieldset from "components/Fieldset";
 import { ProductSchema } from "validators/productSchema";
+import { FaTrashAlt } from "react-icons/fa";
 
 const EditProductSchema = ProductSchema.omit({ images: true });
 
@@ -199,108 +202,99 @@ const CreateProduct = () => {
   if (!checkLoad) return <Loading />;
 
   return (
-    <div className="products_manager">
+    <>
       <NextSeo title={`${process.env.WEBSITE_NAME} | Create Product`} />
 
-      <form className="row" ref={onEdit ? zoEdit.ref : zo.ref}>
-        <div className="col-md-6">
-          <Input
-            type="text"
-            name={zo.fields.title()}
-            errorMessage={zo.errors.title((e) => e.message)}
-            label="Title"
-            defaultValue={title ? title : null}
-          />
+      <form
+        className="relative w-min container flex flex-col items-center justify-center gap-5 md:flex-row md:items-start"
+        ref={onEdit ? zoEdit.ref : zo.ref}
+      >
+        <aside className="max-h-min top-1 md:pl-4 md:sticky">
+          <Fieldset legend={`${onEdit ? "Update" : "Create"} Product`}>
+            <Input
+              type="text"
+              name={zo.fields.title()}
+              errorMessage={zo.errors.title((e) => e.message)}
+              label="Title"
+              defaultValue={title ? title : null}
+            />
 
-          <div className="row">
-            <div className="col-sm-6">
-              <Input
-                type="number"
-                name={zo.fields.price()}
-                errorMessage={zo.errors.price((e) => e.message)}
-                min={0}
-                label="Price"
-                defaultValue={price ? price : null}
-              />
-            </div>
+            <Input
+              type="number"
+              name={zo.fields.price()}
+              errorMessage={zo.errors.price((e) => e.message)}
+              label="Price"
+              defaultValue={price ? price : null}
+            />
 
-            <div className="col-sm-6">
-              <Input
-                type="number"
-                name={zo.fields.inStock()}
-                errorMessage={zo.errors.inStock((e) => e.message)}
-                min={0}
-                label="inStock"
-                defaultValue={inStock ? inStock : null}
-              />
-            </div>
-          </div>
+            <Input
+              type="number"
+              name={zo.fields.inStock()}
+              errorMessage={zo.errors.inStock((e) => e.message)}
+              label="inStock"
+              defaultValue={inStock ? inStock : null}
+            />
 
-          <Input
-            name={zo.fields.description()}
-            errorMessage={zo.errors.description((e) => e.message)}
-            cols="30"
-            rows="3"
-            label="Description"
-            defaultValue={description ? description : null}
-          />
+            <Input
+              name={zo.fields.description()}
+              errorMessage={zo.errors.description((e) => e.message)}
+              cols="30"
+              rows="3"
+              label="Description"
+              defaultValue={description ? description : null}
+            />
 
-          <TextArea
-            name={zo.fields.content()}
-            errorMessage={zo.errors.content((e) => e.message)}
-            cols="30"
-            rows="4"
-            label="Content"
-            defaultValue={content ? content : null}
-          />
+            <TextArea
+              name={zo.fields.content()}
+              errorMessage={zo.errors.content((e) => e.message)}
+              cols="30"
+              rows="4"
+              label="Content"
+              defaultValue={content ? content : null}
+            />
 
-          <div className="input-group mb-3">
-            <div className="input-group-prepend">
-              <div className="input-group-text">
-                <CheckBox
-                  label="on sale"
-                  onChange={handleCheck}
-                  name={zo.fields.onSale()}
-                  errorMessage={zo.errors.onSale((e) => e.message)}
-                  isSelected={checkOnSale}
+            <div className="text-left ml-2 -mt-4 mb-2">
+              {checkLoad && (
+                <select
+                  className="capitalize bg-slate-50 w-full mb-2 text-slate-500 cursor-pointer focus:outline-none focus:text-slate-600 transition"
+                  name={zo.fields.category()}
+                  defaultValue={category ? category : "all"}
                 >
-                  Product on Sale?
-                </CheckBox>
-              </div>
-            </div>
-          </div>
-
-          <div className="input-group-prepend px-0 my-2">
-            {checkLoad && (
-              <select
-                name={zo.fields.category()}
-                defaultValue={category ? category : "all"}
-              >
-                <option value="all">All Products</option>
-                {categories.map((item) => (
-                  <option key={item._id} value={item._id}>
-                    {item.name}
+                  <option value="all" className="text-slate-700 font-bold">
+                    Category
                   </option>
-                ))}
-              </select>
-            )}
-            {zo.errors.category((e) => (
-              <ErrorMessage message={e.message} />
-            ))}
-          </div>
-
-          <Button isDisabled={disabled} type="submit">
-            {onEdit ? "Update" : "Create"}
-          </Button>
-        </div>
-
-        <div className="col-md-6 my-4">
-          <div className="input-group mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text">Upload</span>
+                  {categories.map((item) => (
+                    <option key={item._id} value={item._id}>
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+              )}
+              {zo.errors.category((e) => (
+                <ErrorMessage message={e.message} />
+              ))}
             </div>
-            <div className="custom-file border rounded">
+
+            <CheckBox
+              label="on sale"
+              onChange={handleCheck}
+              name={zo.fields.onSale()}
+              errorMessage={zo.errors.onSale((e) => e.message)}
+              isSelected={checkOnSale}
+            >
+              Product on Sale?
+            </CheckBox>
+
+            <Button isDisabled={disabled} type="submit">
+              {onEdit ? "Update" : "Create"}
+            </Button>
+          </Fieldset>
+        </aside>
+        <div className="max-h-min ">
+          <Fieldset legend="Upload Images">
+            <div className=" my-4 ">
               <input
+                className="cursor-pointer w-[240px] md:w-auto"
                 type="file"
                 name={zo.fields.images()}
                 onChange={handleUploadInput}
@@ -312,26 +306,32 @@ const CreateProduct = () => {
                 <ErrorMessage message={e.message} />
               ))}
             </div>
-          </div>
 
-          <div className="row img-up mx-0">
-            {images.map((img, index) => (
-              <div key={index} className="file_img my-1">
-                <img
-                  src={img.url ? img.url : URL.createObjectURL(img)}
-                  alt=""
-                  className="img-thumbnail rounded"
-                />
+            <div className="flex flex-col items-center">
+              {images.map((img, index) => (
+                <div
+                  key={index}
+                  className="my-1 relative w-[243.2px] h-[243.2px] md:h-[50vh] md:w-[346.4px] bg-slate-100 rounded"
+                >
+                  <Image
+                    src={img.url ? img.url : URL.createObjectURL(img)}
+                    alt={img.name}
+                    fill
+                    className="object-contain rounded"
+                  />
 
-                <span onClick={() => deleteImage(index)}>X</span>
-              </div>
-            ))}
-          </div>
+                  <div onClick={() => deleteImage(index)}>
+                    <FaTrashAlt className="absolute top-3 left-2 text-3xl cursor-pointer text-red-500 p-1 border-2 border-red-200 bg-slate-50 rounded transition hover:ring-2 hover:ring-red-200" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Fieldset>
         </div>
       </form>
 
       <GoBack />
-    </div>
+    </>
   );
 };
 
