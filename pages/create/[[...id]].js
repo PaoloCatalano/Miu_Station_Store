@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import Image from "next/Image";
+import Image from "next/image";
 import { NextSeo } from "next-seo";
 import { ZodSchema } from "zod";
 import { useZorm } from "react-zorm";
