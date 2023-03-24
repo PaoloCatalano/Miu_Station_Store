@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/Image";
+import Image from "next/image";
 // import StripeBtn from "./StripeBtn";
 import { patchData } from "utils/fetchData";
 import { useCtx } from "store/globalState";
