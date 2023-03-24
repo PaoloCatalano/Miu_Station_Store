@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useCtx } from "store/globalState";
 import Loading from "./Loading";
 import Toast from "./Toast";
@@ -15,7 +15,9 @@ const Notify = () => {
     setNewMessage(false);
 
     const hideToast = setTimeout(() => {
-      notify({});
+      if (Object.keys(notifyStatus).length !== 0) {
+        notify({});
+      }
     }, 3000);
 
     if (

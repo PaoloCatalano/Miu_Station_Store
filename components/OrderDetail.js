@@ -78,7 +78,8 @@ const OrderDetail = ({ orderDetail }) => {
                     <span className="text-slate-400 smallcaps text-sm mr-1">
                       Delivered on:
                     </span>
-                    {order.updatedAt}
+
+                    {new Date(order.updatedAt).toLocaleString()}
                   </div>
                 ) : (
                   <div>
@@ -120,7 +121,7 @@ const OrderDetail = ({ orderDetail }) => {
                     <span className="text-slate-400 smallcaps text-sm mr-1">
                       Paid on:
                     </span>
-                    {order.updatedAt}
+                    {new Date(order.dateOfPayment).toLocaleString()}
                   </div>
                 ) : (
                   <div>

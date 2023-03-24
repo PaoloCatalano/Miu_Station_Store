@@ -53,7 +53,7 @@ export default function Checkbox(props: AriaCheckboxPropsWithClassName) {
   `;
 
   return (
-    <label className="flex items-center group ">
+    <label className="flex items-center group">
       <VisuallyHidden>
         <input {...mergeProps(inputProps, focusProps)} ref={ref} />
       </VisuallyHidden>

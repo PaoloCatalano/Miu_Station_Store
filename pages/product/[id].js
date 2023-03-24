@@ -33,6 +33,7 @@ const SingleProduct = (props) => {
     return "";
   };
   /**@TODO change vercel */
+
   return (
     <>
       <NextSeo

@@ -8,7 +8,6 @@ import { postData } from "utils/fetchData";
 import Button from "components/Button";
 import Input from "components/Input";
 import Fieldset from "components/Fieldset";
-import CheckBox from "components/CheckBox";
 import userSchema from "validators/userSchema";
 import { passwordSchema } from "validators/valid";
 import ShowPassword from "../components/ShowPassword";

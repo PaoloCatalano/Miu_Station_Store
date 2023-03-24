@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { NextSeo } from "next-seo";
@@ -308,23 +308,26 @@ const CreateProduct = () => {
             </div>
 
             <div className="flex flex-col items-center">
-              {images.map((img, index) => (
-                <div
-                  key={index}
-                  className="my-1 relative w-[243.2px] h-[243.2px] md:h-[50vh] md:w-[346.4px] bg-slate-100 rounded"
-                >
-                  <Image
-                    src={img.url ? img.url : URL.createObjectURL(img)}
-                    alt={img.name}
-                    fill
-                    className="object-contain rounded"
-                  />
+              {images.map((img, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="my-1 relative w-[243.2px] h-[243.2px] md:h-[50vh] md:w-[346.4px] bg-slate-100 rounded"
+                  >
+                    <Image
+                      id="newPic"
+                      src={img.url ? img.url : URL.createObjectURL(img)}
+                      alt={img.name ? img.name : "product"}
+                      fill
+                      className="object-contain rounded"
+                    />
 
-                  <div onClick={() => deleteImage(index)}>
-                    <FaTrashAlt className="absolute top-3 left-2 text-3xl cursor-pointer text-red-500 p-1 border-2 border-red-200 bg-slate-50 rounded transition hover:ring-2 hover:ring-red-200" />
+                    <div onClick={() => deleteImage(index)}>
+                      <FaTrashAlt className="absolute top-3 left-3 text-3xl cursor-pointer text-red-500 p-1 border-2 border-red-200 bg-slate-50 rounded transition hover:ring-2 hover:ring-red-200" />
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </Fieldset>
         </div>

@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { useCtx } from "store/globalState";

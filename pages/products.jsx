@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { NextSeo } from "next-seo";
-
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { MdOutlineNewLabel } from "react-icons/md";

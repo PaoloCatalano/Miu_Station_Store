@@ -28,7 +28,7 @@ export default function PleaseSign() {
           />
 
           <Title>Unauthorized Access</Title>
-          <div>
+          <div className="grow">
             <Link href="/login">
               <Button>Please Login</Button>
             </Link>

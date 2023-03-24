@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         value={{
           fetcher: (url) => fetch(url).then((r) => r.json()),
           refreshInterval: 5000,
-          dedupingInterval: 4000,
+          dedupingInterval: 5000,
         }}
       >
         <AppProvider>

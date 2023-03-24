@@ -71,6 +71,7 @@ const ProductItem = ({ product, handleCheck }) => {
     <div className=" relative flex flex-col w-[247.2px] md:max-w-md md:min-w-[247.2px]  rounded my-2 overflow-hidden shadow-sm bg-slate-50 border-2 border-blue-300 transition md:w-80 hover:bg-blue-200 hover:shadow-md">
       {noSalePage && auth.user && auth.user.role === "admin" && (
         <CheckBox
+          aria-label="checkbox"
           isSelected={product.checked}
           className="absolute z-[1] top-2 left-2"
           onChange={() => handleCheck(product._id)}
