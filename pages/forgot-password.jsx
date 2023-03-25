@@ -46,7 +46,11 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <NextSeo title={`${process.env.WEBSITE_NAME} | Forgot Password`} />
+      <NextSeo
+        title={`${process.env.WEBSITE_NAME} | Forgot Password`}
+        canonical="https://miustationstore.netlify.app/forgot-password"
+        description="Forgot password page for Miu Station Store"
+      />
 
       <BgAnimated />
 

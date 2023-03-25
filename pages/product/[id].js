@@ -32,17 +32,20 @@ const SingleProduct = (props) => {
     if (tab === index) return " border-2 border-blue-200";
     return "";
   };
-  /**@TODO change vercel */
 
   return (
     <>
       <NextSeo
-        title={`${process.env.WEBSITE_NAME} | ${product.title.toUpperCase()}`}
-        description={product.description + ", " + product.content}
-        canonical={`https://miu-shop.vercel.app/product/${product._id}`}
+        title={`${
+          process.env.WEBSITE_NAME
+        } | ${product.title.toUpperCase()} | ${nameCategory}`}
+        description={
+          nameCategory + ", " + product.description + ", " + product.content
+        }
+        canonical={`https://miustationstore.netlify.app/product/${product._id}`}
         openGraph={{
           title: `${process.env.WEBSITE_NAME} | ${product.title.toUpperCase()}`,
-          url: `https://miu-shop.vercel.app/product/${product._id}`,
+          url: `https://miustationstore.netlify.app/product/${product._id}`,
           images: [
             {
               url: `${process.env.BASE_URL}/_next/image?url=${product.images[0].url}&w=3840&q=100`,
@@ -53,13 +56,12 @@ const SingleProduct = (props) => {
           ],
         }}
       />
-      {/**@TODO change vercel  */}
       <ProductJsonLd
         productName={product.title}
         images={product.images.map((i) => i.url)}
         description={product.description}
-        manufacturerName="Miu Shop"
-        manufacturerLogo="https://miu-shop.vercel.app/icon.png"
+        manufacturerName="Miu Station Store"
+        manufacturerLogo="https://miustationstore.netlify.app/images/logos/icon.png"
         disambiguatingDescription={product.content}
         releaseDate={product.updatedAt}
         productionDate={product.createdAt}
@@ -67,12 +69,12 @@ const SingleProduct = (props) => {
           {
             price: product.price,
             priceCurrency: "EUR",
-            priceValidUntil: "2030-12-05",
+            priceValidUntil: "2050-12-05",
             itemCondition: "https://schema.org/NewCondition",
             availability: "https://schema.org/InStock",
-            url: `https://miu-shop.vercel.app/product/${product._id}`,
+            url: `https://miustationstore.netlify.app/product/${product._id}`,
             seller: {
-              name: "Miu Shop",
+              name: "Miu Station Store",
             },
           },
         ]}

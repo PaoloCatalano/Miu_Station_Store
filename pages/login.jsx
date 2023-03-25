@@ -79,8 +79,11 @@ export default function Login() {
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Login`}
         canonical="https://miustationstore.netlify.app/login"
+        description="Login page for Miu Station Store"
         openGraph={{
           url: "https://miustationstore.netlify.app/login",
+          description: "Login page for Miu Station Store",
+          title:`${process.env.WEBSITE_NAME} | Login}`
         }}
       />
       <BgAnimated />

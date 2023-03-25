@@ -40,8 +40,12 @@ export default function VerifyEmail() {
 
   return (
     <>
-      <NextSeo title={`${process.env.WEBSITE_NAME} | Verify Email`} />
-      <div className="mb-10 ">
+      <NextSeo
+        title={`${process.env.WEBSITE_NAME} | Verify Email`}
+        canonical="https://miustationstore.netlify.app/verify-email"
+        description="Verify email for Miu Station Store"
+      />
+      <div className="mb-10">
         {Object.keys(router.query).length > 0 && !error && (
           <Banner text="Thank you! Your account has been verified correctly." />
         )}

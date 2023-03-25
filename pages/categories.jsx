@@ -72,19 +72,17 @@ const Categories = () => {
       .join(", ")
       .toString() || "";
 
-  /**@TODO vercel changes */
 
   return (
-    // <div className="col-md-6 mx-auto my-3">
     <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Categories`}
-        description={`In this e-commerce website you will find categories like: ${AllCategories} and many more!`}
-        canonical="https://miu-shop.vercel.app/categories"
+        description={`Miu Station Store is an e-commerce website where you will find categories like: ${AllCategories} and many more!`}
+        canonical="https://miustationstore.netlify.app/categories"
         openGraph={{
           title: `${process.env.WEBSITE_NAME} | Categories`,
           description: `All the categories of our products`,
-          url: "https://miu-shop.vercel.app/categories",
+          url: "https://miustationstore.netlify.app/categories",
         }}
       />
       <BgStatic />

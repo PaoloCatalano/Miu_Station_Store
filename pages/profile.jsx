@@ -132,6 +132,13 @@ const Profile = () => {
     <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | ${auth?.user.name} Profile`}
+        canonical="https://miustationstore.netlify.app/profile"
+        description="My profile page for Miu Station Store"
+        openGraph={{
+          url: "https://miustationstore.netlify.app/profile",
+          description: "My profile page for Miu Station Store",
+          title: `${process.env.WEBSITE_NAME} | ${auth?.user.name} Profile`,
+        }}
       />
       {!auth.user.isVerified && (
         <Banner role="alert" text="Check your email to verify account" />

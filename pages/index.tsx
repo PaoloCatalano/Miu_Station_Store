@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import Head from "next/head";
+import { NextSeo } from "next-seo";
 import Image from "next/image";
 import Link from "next/link";
 import BgBlue from "components/BgBlue";
@@ -8,10 +8,17 @@ import pic from "public/images/logos/logo.png";
 const Home: NextPage = () => {
   return (
     <>
-      <Head>
-        <title>Miu Station Store 🚉</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <NextSeo
+        title={`${process.env.WEBSITE_NAME} 🚉`}
+        description={`Miu Station Store is an online shop selling various handmade items. Navigating through the product page, you will find stickers, dolls, clothes, kimonos, paintings, handcrafts, and much more.
+`}
+        canonical="https://miustationstore.netlify.app"
+        openGraph={{
+          title: `${process.env.WEBSITE_NAME} 🚉`,
+          description: `Miu Station Store is an online shop selling various handmade items. Navigating through the product page, you will find stickers, dolls, clothes, kimonos, paintings, handcrafts, and much more.`,
+          url: "https://miustationstore.netlify.app",
+        }}
+      />
       <BgBlue />
       <h1 className="text-5xl font-bold md:text-6xl">
         Welcome to Miu Station Store

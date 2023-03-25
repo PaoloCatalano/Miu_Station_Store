@@ -9,7 +9,10 @@ import Button from "./Button";
 export default function NoProduct() {
   return (
     <>
-      <NextSeo title={`${process.env.WEBSITE_NAME} | Page Not Available`} />
+      <NextSeo
+        title={`${process.env.WEBSITE_NAME} | Page Not Available`}
+        description="This page is currently not available"
+      />
       <div className="flex items-center mx-auto animate-fade-in">
         <Image
           alt="Oops, page not available"

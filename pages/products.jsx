@@ -72,9 +72,9 @@ const Products = (props) => {
   return (
     <>
       <NextSeo
-        canonical="https://miu-shop.vercel.app/"
+        canonical="https://miustationstore.netlify.app/products"
         openGraph={{
-          url: "https://miu-shop.vercel.app/",
+          url: "https://miustationstore.netlify.app/products",
         }}
       />
       <BgStatic />

@@ -20,17 +20,17 @@ const OnSale = (props) => {
     });
     setProducts([...products]);
   };
-  /**@TODO change vercel */
   return (
     <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | On Sale`}
-        canonical="https://miu-shop.vercel.app/sales"
+        canonical="https://miustationstore.netlify.app/sales"
+        description="Here you can find all the Special Offers and product On Sale!"
         openGraph={{
           title: `${process.env.WEBSITE_NAME} | On Sale`,
           description:
             "Here you can find all the Special Offers and product On Sale!",
-          url: "https://miu-shop.vercel.app/sales",
+          url: "https://miustationstore.netlify.app/sales",
         }}
       />
 

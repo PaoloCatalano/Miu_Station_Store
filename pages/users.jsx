@@ -11,15 +11,13 @@ import { ACTIONS } from "store/actions";
 const Users = () => {
   const { users, auth, addModal } = useCtx();
 
-  /**@TODO change vercel*/
-
   if (!auth.user || auth.user.role !== "admin") return <PleaseSign />;
   return (
     <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Users`}
         openGraph={{
-          url: "https://miu-shop.vercel.app/users",
+          url: "https://miustationstore.netlify.app/users",
         }}
       />
       <Title>All Users</Title>

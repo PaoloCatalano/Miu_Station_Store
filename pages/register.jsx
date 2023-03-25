@@ -57,8 +57,11 @@ export default function Register() {
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Register`}
         canonical="https://miustationstore.netlify.app/register"
+        description="Sign up page for Miu Station Store"
         openGraph={{
           url: "https://miustationstore.netlify.app/register",
+          description: "Sign up page for Miu Station Store",
+          title: `${process.env.WEBSITE_NAME} | Register}`,
         }}
       />
       <BgAnimated />

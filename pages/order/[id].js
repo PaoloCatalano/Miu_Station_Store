@@ -23,10 +23,21 @@ const DetailOrder = () => {
   if (!auth.user) return <PleaseSign />;
 
   if (orderDetail.length === 0) return <NoProduct />;
-
+  console.log(orderDetail);
   return (
     <>
-      <NextSeo title={`${process.env.WEBSITE_NAME} | Order Detail`} />
+      <NextSeo
+        title={`${process.env.WEBSITE_NAME} | Order Detail`}
+        description={`Summary of my order in Miu Station Store`}
+        canonical={`https://miustationstore.netlify.app/order/${orderDetail[0]._id}`}
+        openGraph={{
+          title: `${process.env.WEBSITE_NAME} | Order Detail`,
+          description: `Summary of my order in Miu Station Store`,
+          url: `${
+            "https://miustationstore.netlify.app/order/" + orderDetail[0]._id
+          }`,
+        }}
+      />
       <Title>Order Detail</Title>
       <OrderDetail orderDetail={orderDetail} />
 

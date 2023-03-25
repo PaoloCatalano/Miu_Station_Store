@@ -63,7 +63,11 @@ const ResetPassword = () => {
 
   return (
     <>
-      <NextSeo title={`${process.env.WEBSITE_NAME} | Reset Password`} />
+      <NextSeo
+        title={`${process.env.WEBSITE_NAME} | Reset Password`}
+        canonical="https://miustationstore.netlify.app/reset-password"
+        description="Reset password page for Miu Station Store"
+      />
       <BgAnimated />
       <Title>Reset Password</Title>{" "}
       <form ref={zoPass.ref}>

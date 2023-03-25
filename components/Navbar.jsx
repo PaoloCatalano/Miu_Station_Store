@@ -57,12 +57,12 @@ export default function Navbar() {
                   src={logo}
                   alt="miu"
                   placeholder="blur"
-                  className="w-14 absolute top-2 left-4 rounded-full"
+                  className="w-14 absolute top-0 left-3 rounded-full md:top-3"
                   sizes="50vw"
                 />
               </Link>
               {auth.user && (
-                <div className="inline capitalize text-sm text-sky-500 pl-4 md:pl-14">
+                <div className="block capitalize text-sm text-sky-500 pl-4 translate-y-4 md:inline md:pl-14 md:translate-y-0">
                   Hi, {auth.user.name}
                   <Link href="/profile">
                     <Image

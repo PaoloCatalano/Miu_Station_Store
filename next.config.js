@@ -31,7 +31,7 @@ module.exports = {
       },
       {
         source: "/order",
-        destination: "/",
+        destination: "/profile",
         permanent: true,
       },
     ];

@@ -9,7 +9,10 @@ import fallbackPic from "public/images/logos/500.png";
 export default function ErrorPage({ pic = fallbackPic }) {
   return (
     <>
-      <NextSeo title={`${process.env.WEBSITE_NAME} | Page Not Found`} />
+      <NextSeo
+        title={`${process.env.WEBSITE_NAME} | Page Not Found`}
+        description="This page is currently not available"
+      />
       <Image
         className="min-w-[243.2px] w-[30vw]"
         alt="error page miu station store"
