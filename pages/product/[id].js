@@ -96,6 +96,7 @@ const SingleProduct = (props) => {
               quality={100}
               width={600}
               height={600}
+              priority
             />
           </div>
 
@@ -105,22 +106,22 @@ const SingleProduct = (props) => {
                 key={index}
                 src={img.url}
                 alt={img.url}
-                className={`cursor-pointer rounded mr-1 mt-1 ${isActive(
+                className={`cursor-pointer rounded mr-1 mt-1  ${isActive(
                   index
                 )}`}
                 width={60}
-                height={65}
+                height={60}
                 onClick={() => setTab(index)}
               />
             ))}
           </div>
         </aside>
         <div className="mt-10 md:mt-4 ">
-          <article className=" border-2 border-blue-300 bg-slate-50 rounded w-full min-w-[247.2px] md:max-w-md">
+          <article className=" border-2 border-blue-300 bg-slate-100 rounded w-full min-w-[247.2px] md:max-w-md">
             <div className="uppercase text-center my-5 text-2xl text-sky-700">
               {product.title}
             </div>
-            <div className="text-xl my-5 text-slate-500">
+            <div className="text-xl my-5 text-slate-600">
               Price:{" "}
               <span className="text-slate-700 font-bold">
                 € {product.price}
@@ -129,7 +130,7 @@ const SingleProduct = (props) => {
                 {product.onSale && <i className="text-rose-500"> On Sale!</i>}
               </p>
             </div>
-            <div className="text-slate-500">
+            <div className="text-slate-600">
               {prodSWR ? (
                 prodSWR.product.inStock > 0 ? (
                   <div>
@@ -142,7 +143,7 @@ const SingleProduct = (props) => {
                   <div className="text-red-600">Out of Stock</div>
                 )
               ) : (
-                <div className="text-slate-500">
+                <div className="text-slate-600">
                   {isLoading && <p>...</p>}
                   {isError && <p>{product.inStock} in stock (may vary)</p>}
                 </div>
@@ -157,7 +158,7 @@ const SingleProduct = (props) => {
                   sold
                 </div>
               ) : (
-                <div className="text-slate-500">
+                <div className="text-slate-600">
                   {isLoading && <p>...</p>}
                   {product.sold} sold
                 </div>
