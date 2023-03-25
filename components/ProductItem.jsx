@@ -123,7 +123,7 @@ const ProductItem = ({ product, handleCheck }) => {
                 <div
                   className={`${
                     prodSWR.product?.inStock === 1
-                      ? "text-red-500 after:content-['_only!']"
+                      ? "text-red-600 after:content-['_only!']"
                       : "text-slate-500"
                   } text-xs z-10`}
                 >
@@ -131,7 +131,7 @@ const ProductItem = ({ product, handleCheck }) => {
                 </div>
               </>
             ) : (
-              <div className="text-red-500 text-2xl py-3">Out of Stock</div>
+              <div className="text-red-600 text-2xl py-3">Out of Stock</div>
             )
           ) : (
             <>

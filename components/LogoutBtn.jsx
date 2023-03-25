@@ -21,6 +21,7 @@ export default function LogoutBtn() {
       <button
         className="text-slate-500 relative mr-5 hover:text-slate-700 text-sm"
         onClick={handleLogout}
+        aria-label="Logout"
       >
         <span className="absolute pointer-events-none text-slate-500 text-xl -left-6">
           <TbLogout />

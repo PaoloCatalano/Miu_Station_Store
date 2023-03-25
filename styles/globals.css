@@ -7,7 +7,7 @@
     --nav-height: 100vh;
   }
 
-  :root:has(nav > div[aria-expanded="true"]) {
+  :root:has(nav > div[aria-haspopup="true"]) {
     --open: 1;
     /* --rotate: 90deg; */
   }

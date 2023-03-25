@@ -9,6 +9,7 @@ import { rgbDataURL } from "utils/blurData";
 import { useProduct } from "utils/swr";
 import GoBack from "components/GoBack";
 import Button from "components/Button";
+import BgStatic from "components/BgStatic";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 
 const SingleProduct = (props) => {
@@ -79,6 +80,9 @@ const SingleProduct = (props) => {
           },
         ]}
       />
+
+      <BgStatic />
+
       <section className="relative w-full container px-1 flex flex-col items-center justify-center gap-5 md:flex-row md:items-start md:space-x-10">
         <aside className="top-1 md:sticky ">
           <div className="relative">
@@ -86,7 +90,6 @@ const SingleProduct = (props) => {
               className="mx-auto rounded mt-4 w-100"
               src={product.images[tab].url}
               alt={product.images[tab].url}
-              // objectFit="contain"
               placeholder="blur"
               blurDataURL={rgbDataURL()}
               sizes="50vw"
@@ -136,7 +139,7 @@ const SingleProduct = (props) => {
                     in stock
                   </div>
                 ) : (
-                  <div className="text-red-500">Out of Stock</div>
+                  <div className="text-red-600">Out of Stock</div>
                 )
               ) : (
                 <div className="text-slate-500">

@@ -10,6 +10,7 @@ export default function GoBack() {
         <button
           className="text-3xl text-slate-700 hover:text-slate-600 transition"
           onClick={() => router.back()}
+          aria-label="go back to previous page"
         >
           <BsFillArrowLeftSquareFill />{" "}
         </button>

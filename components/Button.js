@@ -12,13 +12,13 @@ export default function Button(props) {
       ref={ref}
       className={`my-3 px-5 group
        bg-blue-400 p-2 text-white rounded max-w-xs transition-all  hover:ring-4 hover:ring-blue-200 active:shadow-in focus:outline-none focus:ring-4 focus:ring-blue-200
-      ${isDisabled && "brightness-75 pointer-events-none"}  
+      ${isDisabled && "brightness-50 pointer-events-none"}  
       ${isDisabled && !cta && "animate-boeing-once"}  
       ${
         hipster &&
-        "bg-blue-200 !text-sky-700 hover:ring-blue-200 focus:ring-blue-200"
+        "bg-blue-200 !text-sky-900 hover:ring-blue-200 focus:ring-blue-200"
       }
-      ${cta && "!bg-miu-500  hover:ring-miu-400 focus:ring-miu-400"}
+      ${cta && "!bg-miu-600  hover:ring-miu-500 focus:ring-miu-500"}
       ${className ? className : ""}`}
       /* shadow-out */
     >
