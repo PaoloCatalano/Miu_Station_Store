@@ -94,6 +94,7 @@ const ProductItem = ({ product, handleCheck }) => {
             quality={100}
             width={200}
             height={200}
+            priority
           />
         </div>
       </Link>

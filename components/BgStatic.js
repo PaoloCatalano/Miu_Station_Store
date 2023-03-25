@@ -1,8 +1,25 @@
+import Image from "next/image";
+import pic from "public/images/bg/lines.png";
+import { rgbDataURL } from "utils/blurData";
+
 export default function BgStatic() {
   return (
     <>
       <div className="fading-bg fixed inset-0 h-screen -z-40 "></div>
-      <div className="fixed inset-0 bg-fixed -z-50  bg-[url('/images/bg/lines.png')] bg-cover animate-fade-in"></div>
+
+      <div className="fixed inset-0 -z-50  bg-fixed bg-cover animate-fade-in">
+        <Image
+          className="w-full h-full object-cover transition"
+          src={pic}
+          alt="Miu Station Store Products background"
+          placeholder="blur"
+          blurDataURL={rgbDataURL()}
+          sizes="100vw"
+          quality={100}
+          fill
+          priority
+        />
+      </div>
     </>
   );
 }

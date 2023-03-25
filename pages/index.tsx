@@ -9,12 +9,12 @@ const Home: NextPage = () => {
   return (
     <>
       <NextSeo
-        title={`${process.env.WEBSITE_NAME} 🚉`}
+        title={`${process.env.WEBSITE_NAME} 🚉🛍️`}
         description={`Miu Station Store is an online shop selling various handmade items. Navigating through the product page, you will find stickers, dolls, clothes, kimonos, paintings, handcrafts, and much more.
 `}
         canonical="https://miustationstore.netlify.app"
         openGraph={{
-          title: `${process.env.WEBSITE_NAME} 🚉`,
+          title: `${process.env.WEBSITE_NAME} 🚉🛍️`,
           description: `Miu Station Store is an online shop selling various handmade items. Navigating through the product page, you will find stickers, dolls, clothes, kimonos, paintings, handcrafts, and much more.`,
           url: "https://miustationstore.netlify.app",
         }}

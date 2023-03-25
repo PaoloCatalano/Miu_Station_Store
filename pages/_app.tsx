@@ -11,8 +11,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       <SWRConfig
         value={{
           fetcher: (url) => fetch(url).then((r) => r.json()),
-          refreshInterval: 5000,
-          dedupingInterval: 5000,
+          refreshInterval: 10000,
+          dedupingInterval: 10000,
         }}
       >
         <AppProvider>
