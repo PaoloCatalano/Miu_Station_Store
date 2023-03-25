@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -14,6 +14,7 @@ import Input from "components/Input";
 import TitleImage from "components/TitleImage";
 import pic from "public/images/logos/categories.png";
 import ErrorMessage from "components/ErrorMessage";
+import Title from "components/Title";
 
 const Categories = () => {
   const [name, setName] = useState("");
@@ -66,12 +67,12 @@ const Categories = () => {
     setName(e);
   }
 
-  const AllCategories =
+  const AllCategories = useCallback(
     categories
       ?.map((c) => c.name)
       .join(", ")
-      .toString() || "";
-
+      .toString() || ""
+  );
 
   return (
     <>
@@ -88,7 +89,7 @@ const Categories = () => {
       <BgStatic />
       <TitleImage image={pic} alt="categories" />
       {auth.user?.role === "admin" && (
-        <div className="mt-10">
+        <div className="mt-10 md:my-10">
           <Input
             type="text"
             label="Add a new category"
@@ -105,44 +106,48 @@ const Categories = () => {
           </Button>
         </div>
       )}
+      <section className="md:bg-slate-50 md:border-2 border-slate-100 rounded">
+        <header className="hidden md:block">
+          <Title>All Categories</Title>
+        </header>
+        <ul className="my-10 flex flex-col  md:grid md:grid-cols-3 max-w-lg ">
+          {categories.map((category) => (
+            <li key={category._id} className="m-4 place-self-center">
+              <Link href={`/products?category=${category._id}#products`}>
+                <Button hipster className="capitalize">
+                  {category.name}
+                </Button>
+              </Link>
+              {auth.user?.role === "admin" && (
+                <div className="flex justify-between mx-auto mb-10 mt-2 w-20">
+                  <div
+                    className="cursor-pointer text-miu-600 p-1 border-2 border-miu-200 bg-slate-50 rounded transition hover:ring-2 hover:ring-miu-200"
+                    onClick={() => handleEditCategory(category)}
+                  >
+                    <FaEdit className="text-2xl" />
+                  </div>
 
-      <ul className="my-10">
-        {categories.map((category) => (
-          <li key={category._id} className="my-4">
-            <Link href={`/products?category=${category._id}#products`}>
-              <Button hipster className="capitalize">
-                {category.name}
-              </Button>
-            </Link>
-            {auth.user?.role === "admin" && (
-              <div className="flex justify-between mx-auto mb-10 mt-2 w-20">
-                <div
-                  className="cursor-pointer text-miu-600 p-1 border-2 border-miu-200 bg-slate-50 rounded transition hover:ring-2 hover:ring-miu-200"
-                  onClick={() => handleEditCategory(category)}
-                >
-                  <FaEdit className="text-2xl" />
+                  <div
+                    className="cursor-pointer text-red-500 p-1 border-2 border-red-200 bg-slate-50 rounded transition hover:ring-2 hover:ring-red-200"
+                    onClick={() =>
+                      addModal([
+                        {
+                          data: categories,
+                          id: category._id,
+                          title: category.name,
+                          type: ACTIONS.ADD_CATEGORY, //deleteCategories()
+                        },
+                      ])
+                    }
+                  >
+                    <FaTrashAlt className="text-2xl" />
+                  </div>
                 </div>
-
-                <div
-                  className="cursor-pointer text-red-500 p-1 border-2 border-red-200 bg-slate-50 rounded transition hover:ring-2 hover:ring-red-200"
-                  onClick={() =>
-                    addModal([
-                      {
-                        data: categories,
-                        id: category._id,
-                        title: category.name,
-                        type: ACTIONS.ADD_CATEGORY, //deleteCategories()
-                      },
-                    ])
-                  }
-                >
-                  <FaTrashAlt className="text-2xl" />
-                </div>
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
     </>
   );
 };

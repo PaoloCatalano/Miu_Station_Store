@@ -1,9 +1,9 @@
-import "../styles/globals.css";
-import { SWRConfig } from "swr";
 import type { AppProps } from "next/app";
+import { SWRConfig } from "swr";
 import { AppProvider } from "store/globalState";
 import { SSRProvider } from "react-aria";
 import Layout from "components/Layout";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

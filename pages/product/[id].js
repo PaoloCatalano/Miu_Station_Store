@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { NextSeo, ProductJsonLd } from "next-seo";
 import Link from "next/link";
 import Image from "next/image";
@@ -23,14 +23,18 @@ const SingleProduct = (props) => {
   const [product] = useState(props.product);
   const [tab, setTab] = useState(0);
 
-  const nameCategory = categories
-    .filter((category) => category._id === product.category)
-    .map((item) => item.name);
+  const nameCategory = useCallback(
+    categories
+      .filter((category) => category._id === product.category)
+      .map((item) => item.name)
+  );
+
   //SWR
   const { prodSWR, isLoading, isError } = useProduct(prodID);
 
   const isActive = (index) => {
-    if (tab === index) return " border-2 border-blue-200";
+    if (tab === index)
+      return "!rounded !brightness-100 !cursor-default border-2 border-blue-300";
     return "";
   };
 
@@ -102,17 +106,21 @@ const SingleProduct = (props) => {
 
           <div className="flex flex-wrap mx-0 ">
             {product.images.map((img, index) => (
-              <Image
-                key={index}
-                src={img.url}
-                alt={img.url}
-                className={`cursor-pointer rounded mr-1 mt-1  ${isActive(
+              <div
+                onClick={() => setTab(index)}
+                className={`relative cursor-pointer mt-1 rounded-sm mr-1 w-[60px] h-16 brightness-75 hover:ring-2 hover:ring-blue-200 hover:brightness-100 transition  ${isActive(
                   index
                 )}`}
-                width={60}
-                height={60}
-                onClick={() => setTab(index)}
-              />
+                key={index}
+              >
+                <Image
+                  src={img.url}
+                  alt={img.url}
+                  className="object-cover rounded-sm"
+                  fill
+                  sizes="10vw"
+                />
+              </div>
             ))}
           </div>
         </aside>
@@ -196,8 +204,8 @@ const SingleProduct = (props) => {
             </div>
           </article>
           <article>
-            <div className="my-10 ">
-              <span>Category: </span>
+            <div className="my-10 bg-slate-50 rounded border-2 border-slate-100">
+              <span className="text-slate-700">Category: </span>
               <Link href={`/products?category=${product.category}`}>
                 <Button hipster className="capitalize">
                   {nameCategory}

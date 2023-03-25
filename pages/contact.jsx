@@ -1,5 +1,9 @@
-import React from "react";
+import Loading from "components/Loading";
 
 export default function contact() {
-  return <div>contact</div>;
+  return (
+    <>
+      <Loading simple />
+    </>
+  );
 }

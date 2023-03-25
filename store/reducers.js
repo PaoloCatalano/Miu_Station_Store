@@ -7,6 +7,11 @@ const reducers = (state, action) => {
         ...state,
         open: action.payload,
       };
+    case ACTIONS.LOADING:
+      return {
+        ...state,
+        loading: action.payload,
+      };
     case ACTIONS.NOTIFY:
       return {
         ...state,

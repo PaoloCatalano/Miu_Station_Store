@@ -178,92 +178,92 @@ const Cart = () => {
       </>
     );
 
-    return (
-      <>
-        <NextSeo
-          title={`${process.env.WEBSITE_NAME} | Cart`}
-          canonical="https://miustationstore.netlify.app/cart"
-          description={`My shopping bag in Miu Station Store`}
-          openGraph={{
-            title: `${process.env.WEBSITE_NAME} | Cart`,
-            url: "https://miustationstore.netlify.app/cart",
-            description: `My shopping bag in Miu Station Store`,
-          }}
-        />
-        <BgAnimated />
-        <div className="w-full max-w-md">
-          <Title>Cart</Title>
+  return (
+    <>
+      <NextSeo
+        title={`${process.env.WEBSITE_NAME} | Cart`}
+        canonical="https://miustationstore.netlify.app/cart"
+        description={`My shopping bag in Miu Station Store`}
+        openGraph={{
+          title: `${process.env.WEBSITE_NAME} | Cart`,
+          url: "https://miustationstore.netlify.app/cart",
+          description: `My shopping bag in Miu Station Store`,
+        }}
+      />
+      <BgAnimated />
+      <div className="w-full max-w-md">
+        <Title>Cart</Title>
 
-          <div className="w-full max-w-md my-2 divide-y-2 space-y-5">
-            {cart.map((item) => (
-              <CartItem key={item._id} item={item} cart={cart} />
-            ))}
-          </div>
-          <hr />
-          <button
-            className="my-2 underline uppercase text-rose-400 hover:text-rose-500 transition "
-            onClick={() =>
-              addModal([
-                {
-                  data: "",
-                  id: "",
-                  title: "Empty the Cart?",
-                  type: "emptyCart",
-                },
-              ])
-            }
-          >
-            empty cart
-          </button>
+        <div className="w-full max-w-md my-2 divide-y-2 space-y-5">
+          {cart.map((item) => (
+            <CartItem key={item._id} item={item} cart={cart} />
+          ))}
         </div>
-        <div className="my-3">
-          <form ref={zo.ref}>
-            <Fieldset legend="Shipping Details">
-              {auth.user && (
-                <Input
-                  label="Address"
-                  type="text"
-                  name={zo.fields.address()}
-                  id={zo.fields.address("id")}
-                  errorMessage={zo.errors.address((e) => e.message)}
-                  defaultValue={auth?.user?.address}
-                />
-              )}
-              {auth.user && (
-                <Input
-                  label="Mobile"
-                  type="text"
-                  id={zo.fields.mobile("id")}
-                  maxLength={15}
-                  name={zo.fields.mobile()}
-                  errorMessage={zo.errors.mobile((e) => e.message)}
-                  defaultValue={auth?.user?.mobile}
-                />
-              )}
-              <div className="text-right">
-                Total: <span className="text-danger">€{total}</span>
-              </div>
-              {errorMsg && <p className="text-red-400">{errorMsg}</p>}
-              {auth?.user ? (
-                <Button
-                  isDisabled={disabled || errorMsg ? true : false}
-                  type="submit"
-                  className="btn btn-dark my-2"
-                  onClick={handlePayment}
-                >
-                  Proceed with payment
-                </Button>
-              ) : (
-                <Link href={auth.user ? "#!" : "/login"}>
-                  <Button>Login to proceed with the payment</Button>
-                </Link>
-              )}
-            </Fieldset>
-          </form>
-        </div>
-        <GoBack />
-      </>
-    );
+        <hr />
+        <button
+          className="my-2 underline uppercase text-rose-400 hover:text-rose-500 transition "
+          onClick={() =>
+            addModal([
+              {
+                data: "",
+                id: "",
+                title: "Empty the Cart?",
+                type: "emptyCart",
+              },
+            ])
+          }
+        >
+          empty cart
+        </button>
+      </div>
+      <div className="my-3">
+        <form ref={zo.ref}>
+          <Fieldset legend="Shipping Details">
+            {auth.user && (
+              <Input
+                label="Address"
+                type="text"
+                name={zo.fields.address()}
+                id={zo.fields.address("id")}
+                errorMessage={zo.errors.address((e) => e.message)}
+                defaultValue={auth?.user?.address}
+              />
+            )}
+            {auth.user && (
+              <Input
+                label="Mobile"
+                type="text"
+                id={zo.fields.mobile("id")}
+                maxLength={15}
+                name={zo.fields.mobile()}
+                errorMessage={zo.errors.mobile((e) => e.message)}
+                defaultValue={auth?.user?.mobile}
+              />
+            )}
+            <div className="text-right">
+              Total: <span className="text-danger">€{total}</span>
+            </div>
+            {errorMsg && <p className="text-red-400">{errorMsg}</p>}
+            {auth?.user ? (
+              <Button
+                isDisabled={disabled || errorMsg ? true : false}
+                type="submit"
+                className="btn btn-dark my-2"
+                onClick={handlePayment}
+              >
+                Proceed with payment
+              </Button>
+            ) : (
+              <Link href={auth.user ? "#!" : "/login"}>
+                <Button>Login to proceed with the payment</Button>
+              </Link>
+            )}
+          </Fieldset>
+        </form>
+      </div>
+      <GoBack />
+    </>
+  );
 };
 
 export default Cart;

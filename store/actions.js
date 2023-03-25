@@ -1,5 +1,6 @@
 export const ACTIONS = {
   OPEN_MENU: "open_menu",
+  LOADING: "loading",
   NOTIFY: "notify",
   AUTH: "auth",
   ADD_CART: "add_cart",

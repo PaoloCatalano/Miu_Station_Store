@@ -265,10 +265,12 @@ const Profile = () => {
                 Delivered
               </span>
             </p>
+            <p className="text-rose-600 text-left">Email not verified</p>
+            <p className="text-red-800 text-left line-through">User deleted</p>
           </div>
-          <div className="my-3 ">
-            <table className="text-sm  mx-auto">
-              <thead className="bg-slate-300 ">
+          <div className="my-3">
+            <table className="text-sm mx-auto">
+              <thead className="bg-slate-300">
                 <tr>
                   {auth.user.role === "admin" && (
                     <th className="p-2 hidden md:table-cell">user email</th>
@@ -280,26 +282,26 @@ const Profile = () => {
                 </tr>
               </thead>
 
-              <tbody className="text-slate-500">
+              <tbody className="text-slate-700 ">
                 {orders?.map((order) => (
                   <tr
                     key={order._id}
                     className="[&:nth-child(even)]:bg-slate-200"
                   >
                     {auth.user.role === "admin" && (
-                      <td className="p-2 hidden md:table-cell">
+                      <td className="p-2 hidden md:table-cell ">
                         {order?.user?._id ? (
                           <Link href={`/user/${order.user._id}`}>
                             <div
-                              className={`lowercase underline ${
-                                order.user.isVerified ? "" : "text-danger"
+                              className={`lowercase underline hover:text-slate-800 transition ${
+                                order.user.isVerified ? "" : "text-rose-600"
                               }`}
                             >
                               {order.user.email}
                             </div>
                           </Link>
                         ) : (
-                          <div className="text-danger">USER DELETED</div>
+                          <div className="text-red-800">USER DELETED</div>
                         )}
                       </td>
                     )}
@@ -325,7 +327,10 @@ const Profile = () => {
                       </span>
                     </td>
                     <td className="p-2 cursor-pointer">
-                      <Link href={`/order/${order._id}`} className="underline">
+                      <Link
+                        href={`/order/${order._id}`}
+                        className="underline hover:text-slate-800 transition "
+                      >
                         more
                       </Link>
                     </td>

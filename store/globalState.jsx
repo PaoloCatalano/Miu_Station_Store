@@ -1,4 +1,5 @@
 import { useReducer, useContext, createContext, useEffect } from "react";
+import Router from "next/router";
 import reducers from "./reducers";
 import { ACTIONS } from "./actions";
 import { getData, deleteData } from "utils/fetchData";
@@ -15,6 +16,7 @@ const initialState = {
   orders: [],
   users: [],
   categories: [],
+  loading: false,
 };
 
 const AppProvider = ({ children }) => {
@@ -26,6 +28,13 @@ const AppProvider = ({ children }) => {
     dispatch({
       type: ACTIONS.OPEN_MENU,
       payload: isOpen,
+    });
+  }
+
+  function isLoading(isLoading) {
+    dispatch({
+      type: ACTIONS.LOADING,
+      payload: isLoading,
     });
   }
 
@@ -186,6 +195,7 @@ const AppProvider = ({ children }) => {
   };
 
   //useEffects at first render
+
   useEffect(() => {
     const firstLogin = localStorage.getItem("firstLogin");
     if (firstLogin) {
@@ -236,6 +246,24 @@ const AppProvider = ({ children }) => {
     }
   }, [auth.token]);
 
+  useEffect(() => {
+    Router.events.on("routeChangeStart", (url) => {
+      //console.log(url);
+      isLoading(true);
+      //console.log("start changing");
+    });
+
+    Router.events.on("routeChangeComplete", (url) => {
+      isLoading(false);
+      //console.log("route changing finished");
+    });
+
+    Router.events.on("routeChangeError", (url) => {
+      isLoading(false);
+      //console.log("route error");
+    });
+  }, [Router]);
+
   return (
     <AppContext.Provider
       value={{
@@ -259,6 +287,7 @@ const AppProvider = ({ children }) => {
         deleteCategories,
         deleteUser,
         deleteCart,
+        isLoading,
       }}
     >
       {children}

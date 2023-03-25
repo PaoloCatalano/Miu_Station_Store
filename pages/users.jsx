@@ -60,7 +60,7 @@ const Users = () => {
               <th className="hidden md:table-cell">Name</th>
               <th>Email</th>
               <th>Status</th>
-              <th>Info</th>
+              {auth.user.root && <th>Info</th>}
             </tr>
           </thead>
 
@@ -93,7 +93,7 @@ const Users = () => {
                   {user.email}
                 </td>
                 <td className="p-2 ">
-                  <div className="flex justify-between">
+                  <div className="flex justify-between-or-center">
                     {auth.user.root && auth.user.email !== user.email && (
                       <div className="flex items-center">
                         <span
@@ -124,18 +124,20 @@ const Users = () => {
                     </span>
                   </div>
                 </td>
-                <td className="p-2 cursor-pointer">
-                  <Link
-                    href={
-                      auth.user.root && auth.user.email !== user.email
-                        ? `/user/${user._id}`
-                        : "#!"
-                    }
-                    className="underline hover:text-slate-500 transition"
-                  >
-                    more
-                  </Link>
-                </td>
+                {auth.user.root && (
+                  <td className="p-2 cursor-pointer">
+                    <Link
+                      href={
+                        auth.user.root && auth.user.email !== user.email
+                          ? `/user/${user._id}`
+                          : "#!"
+                      }
+                      className="underline hover:text-slate-500 transition"
+                    >
+                      more
+                    </Link>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

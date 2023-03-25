@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -15,9 +16,11 @@ const ProductItem = ({ product, handleCheck }) => {
 
   const noSalePage = router.pathname !== "/sales";
 
-  const nameCategory = categories
-    .filter((category) => category._id === product.category)
-    .map((item) => item.name);
+  const nameCategory = useCallback(
+    categories
+      .filter((category) => category._id === product.category)
+      .map((item) => item.name)
+  );
 
   const { prodSWR, isLoading, isError } = useProduct(product._id);
 
@@ -78,7 +81,7 @@ const ProductItem = ({ product, handleCheck }) => {
         />
       )}
       <Link href={`/product/${product._id}`} className="grow overflow-hidden">
-        <div className="relative h-full">
+        <div className="relative h-full max-h-96">
           {product.onSale && (
             <div className="triangle z-[1] absolute -top-[8px] -right-[8px] float-left w-12 h-12 bg-rose-500/80 text-white rotate-45 text-center">
               <p className="mt-[7px] text-sm">sale</p>
