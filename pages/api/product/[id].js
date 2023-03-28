@@ -113,7 +113,7 @@ const deleteProduct = async (req, res) => {
     const { id } = req.query;
 
     await Products.findByIdAndDelete(id);
-    res.json({ msg: "Product deleted" });
+    res.json({ msg: "Product deleted. Refreshing page." });
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }

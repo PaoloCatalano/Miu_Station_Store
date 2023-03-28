@@ -54,7 +54,7 @@
       rgb(244 63 94) 0
     );
     opacity: 0.7;
-    animation: s2 3s infinite ease-in-out;
+    animation: s2 4s infinite ease-in-out;
   }
   .spinner::before,
   .spinner::after {
@@ -68,7 +68,7 @@
   }
   .spinner::after {
     margin: 25%;
-    animation-duration: 4s;
+    animation-duration: 5s;
     filter: brightness(1.4);
   }
 

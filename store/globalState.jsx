@@ -39,13 +39,6 @@ const AppProvider = ({ children }) => {
   }
 
   function authUser(objUser) {
-    /* dispatch({
-          type: "AUTH",
-          payload: {
-            token: res.access_token,
-            user: res.user,
-          },
-        }); */
     dispatch({
       type: ACTIONS.AUTH,
       payload: objUser,
@@ -53,15 +46,10 @@ const AppProvider = ({ children }) => {
   }
 
   function notify(objMsg /* OBJECT {error, success or info} */) {
-    /* dispatch({ type: "NOTIFY", payload: { error: res.err } }); */
     dispatch({ type: ACTIONS.NOTIFY, payload: objMsg });
   }
 
   function addCategory(arrCategory) {
-    /* dispatch({
-        type: "ADD_CATEGORIES",
-        payload: res.categories,
-      }); */
     dispatch({
       type: ACTIONS.ADD_CATEGORY,
       payload: arrCategory,
@@ -69,36 +57,16 @@ const AppProvider = ({ children }) => {
   }
 
   function addCart(arrCart) {
-    /* dispatch({ type: "ADD_CART", payload: __next__cart }); */
     dispatch({ type: ACTIONS.ADD_CART, payload: arrCart });
   }
 
   function addOrder(arrOrders) {
-    /* 
-        dispatch({ type: "ADD_ORDERS", payload: res.orders }); */
-
     dispatch({ type: ACTIONS.ADD_ORDER, payload: arrOrders });
   }
   function addUser(arrUsers) {
-    /* dispatch({ type: "ADD_USERS", payload: res.users }); */
     dispatch({ type: ACTIONS.ADD_USER, payload: arrUsers });
   }
   function addModal(arrOfObj) {
-    /* dispatch({
-   type: "ADD_MODAL",
-   payload: [
-     {
-       data: "",
-       id: product._id,
-       title: `${
-         isAll
-           ? "___WARNING___ Delete ALL products?"
-           : "Delete selected products?"
-       }`,
-       type: "DELETE_PRODUCT",
-     },
-   ],
- }); */
     dispatch({ type: ACTIONS.ADD_MODAL, payload: arrOfObj });
   }
 
@@ -162,16 +130,13 @@ const AppProvider = ({ children }) => {
 
   function deleteCart(item) {
     deleteItem(item.data, item.id, item.type);
-    //testare...
   }
 
   function deleteProduct(item) {
     notify({ loading: true });
-    console.log("check @TODO");
     deleteData(`product/${item.id}`, auth.token).then((res) => {
       if (res.err) return notify({ error: res.err });
-      /**@TODO decide: refresh page or getData("products")?? */
-      return notify({ success: res.msg });
+      return notify({ info: res.msg });
     });
   }
 

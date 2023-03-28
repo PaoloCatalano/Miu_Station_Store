@@ -33,7 +33,7 @@ const CreateProduct = () => {
 
   const [images, setImages] = useState([]);
 
-  const { categories, auth, notify } = useCtx();
+  const { categories, auth, notify, isLoading } = useCtx();
 
   const { title, price, inStock, description, content, category } = product;
 
@@ -56,6 +56,7 @@ const CreateProduct = () => {
       //useEffect trigger handleSubmit()
     },
   });
+
   const zoEdit = useZorm("editProduct", EditProductSchema, {
     onValidSubmit(e) {
       e.preventDefault();
@@ -75,7 +76,7 @@ const CreateProduct = () => {
       readyToCreate
     ) {
       handleSubmit();
-      setReadyToEdit(false);
+      setReadyToCreate(false);
     }
   }, [readyToCreate]);
 
@@ -169,6 +170,7 @@ const CreateProduct = () => {
       return notify({ error: "Please add all the fields." });
 
     notify({ loading: true });
+    isLoading(true);
     let media = [];
     const imgNewURL = images.filter((img) => !img.url);
     const imgOldURL = images.filter((img) => img.url);
@@ -190,6 +192,10 @@ const CreateProduct = () => {
         auth.token
       );
       if (res.err) return notify({ error: res.err });
+    }
+
+    if (!res.err) {
+      isLoading(false);
     }
 
     return notify({ success: res.msg });

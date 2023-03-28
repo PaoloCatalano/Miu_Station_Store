@@ -6,7 +6,7 @@ import Toast from "./Toast";
 const Notify = () => {
   const { notify, notifyStatus } = useCtx();
 
-  /** @TODO real Loading status (dura solo 3 secondi cosi...)  */
+  /** @TODO real Loading status (dura solo 3 secondi cosi...ma non per Create product, da testare tuttavia!....)  */
   const [message, setMessage] = useState(notifyStatus);
   const [newMessage, setNewMessage] = useState(false);
 

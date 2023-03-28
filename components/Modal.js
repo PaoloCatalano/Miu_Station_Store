@@ -30,7 +30,12 @@ const Modal = () => {
         if (item.type === "emptyCart") emptyCart();
 
         closeModal();
-        // router.reload();
+
+        if (router.pathname === "/products") {
+          setTimeout(() => {
+            router.reload();
+          }, 3000);
+        }
       }
     }
   };

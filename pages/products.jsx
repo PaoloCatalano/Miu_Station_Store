@@ -60,12 +60,9 @@ const Products = (props) => {
     });
 
     addModal(deleteArr);
-    /**@TODO refresh the page after deleting */
-    // return router.reload();
   };
 
   const handleLoadMore = () => {
-    // setPage((page) => page + 1);
     filterSearch({ router, page: page + 1 });
   };
 
