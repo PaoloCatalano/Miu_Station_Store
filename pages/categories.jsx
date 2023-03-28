@@ -100,7 +100,7 @@ const Categories = () => {
           <Button
             className="mt-1"
             isDisabled={errorMsg ? true : false}
-            onClick={createCategory}
+            onPress={createCategory}
           >
             {id ? "Update" : "Create"}
           </Button>

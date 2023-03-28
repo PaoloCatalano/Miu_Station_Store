@@ -117,10 +117,15 @@ export default function Register() {
         </Fieldset>
       </form>
       <section className="mb-14">
-        <p className="my-2 text-slate-600">Already an account?</p>
-        <Link href="/login">
-          <Button cta>Login Now</Button>
-        </Link>
+        <div className="my-2 text-slate-600">
+          Already an account?{" "}
+          <Link
+            href="/login"
+            className="text-rose-500 underline hover:text-rose-600 transition"
+          >
+            Login Now
+          </Link>
+        </div>
       </section>
     </>
   );

@@ -6,8 +6,14 @@ import { confirmPasswordSchema } from "validators/valid";
 import userSchema from "validators/userSchema";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
+import rateLimit from "utils/rate-limit";
 
 connectDB();
+
+const limiter = rateLimit({
+  interval: 60 * 1000, // 60 seconds
+  uniqueTokenPerInterval: 500, // Max 500 users per second
+});
 
 export default async (req, res) => {
   switch (req.method) {
@@ -43,24 +49,31 @@ const register = async (req, res) => {
     const passwordHash = await bcrypt.hash(password, 12);
     const verificationToken = bcrypt.genSaltSync(20);
 
-    const newUser = new Users({
-      name,
-      email,
-      password: passwordHash,
-      address,
-      mobile,
-      verificationToken,
-    });
+    //rate limit
+    try {
+      const newUser = new Users({
+        name,
+        email,
+        password: passwordHash,
+        address,
+        mobile,
+        verificationToken,
+      });
 
-    await sendVerificationEmail({
-      name,
-      email,
-      verificationToken,
-      origin: process.env.BASE_URL,
-    });
+      await limiter.check(res, 10, "CACHE_TOKEN"); // 10 requests per minute
 
-    await newUser.save();
-    res.json({ msg: "Success! Please check your email", newUser });
+      await sendVerificationEmail({
+        name,
+        email,
+        verificationToken,
+        origin: process.env.BASE_URL,
+      });
+
+      await newUser.save();
+      res.json({ msg: "Success! Please check your email", newUser });
+    } catch {
+      res.status(429).json({ err: "Rate limit exceeded" });
+    }
   } catch (err) {
     if (err instanceof ZodError) {
       const validationError = fromZodError(err);

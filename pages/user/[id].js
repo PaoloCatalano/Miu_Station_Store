@@ -128,17 +128,11 @@ const EditUser = () => {
             </span>
           </div>
 
-          <CheckBox
-            isSelected={checkAdmin}
-            style={{ width: "20px", height: "20px" }}
-            onChange={handleCheck}
-          >
+          <CheckBox isSelected={checkAdmin} onChange={handleCheck}>
             Admin
           </CheckBox>
 
-          <Button className="btn btn-dark" onClick={handleSubmit}>
-            Update
-          </Button>
+          <Button onPress={handleSubmit}>Update</Button>
         </Fieldset>
       </form>
       <GoBack />

@@ -83,7 +83,7 @@ export default function Login() {
         openGraph={{
           url: "https://miustationstore.netlify.app/login",
           description: "Login page for Miu Station Store",
-          title:`${process.env.WEBSITE_NAME} | Login}`
+          title: `${process.env.WEBSITE_NAME} | Login}`,
         }}
       />
       <BgAnimated />
@@ -132,10 +132,15 @@ export default function Login() {
         <Banner text="Login Successful! Redirect" />
       )}
       <section className="mb-14">
-        <p className="my-2 text-slate-600">Don't you have an account yet?</p>
-        <Link href="/register">
-          <Button cta>Register Now</Button>
-        </Link>
+        <div className="my-2 text-slate-600">
+          No account yet?{" "}
+          <Link
+            href="/register"
+            className="text-rose-500 underline hover:text-rose-600 transition"
+          >
+            Register Now
+          </Link>
+        </div>
       </section>
     </>
   );

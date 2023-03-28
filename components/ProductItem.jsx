@@ -31,7 +31,7 @@ const ProductItem = ({ product, handleCheck }) => {
           className="grow animate-none"
           cta
           isDisabled={prodSWR?.product?.inStock === 0 ? true : false}
-          onClick={() => addToCart(product, cart)}
+          onPress={() => addToCart(product, cart)}
         >
           <MdOutlineAddShoppingCart className="inline text-2xl -mt-2" /> Add
         </Button>
@@ -53,7 +53,7 @@ const ProductItem = ({ product, handleCheck }) => {
         <Button
           hipster
           className="!text-red-500 "
-          onClick={() =>
+          onPress={() =>
             addModal([
               {
                 data: "",

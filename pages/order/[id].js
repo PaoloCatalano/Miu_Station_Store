@@ -23,7 +23,6 @@ const DetailOrder = () => {
   if (!auth.user) return <PleaseSign />;
 
   if (orderDetail.length === 0) return <NoProduct />;
-  console.log(orderDetail);
   return (
     <>
       <NextSeo

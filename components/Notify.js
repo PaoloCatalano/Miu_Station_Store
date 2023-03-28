@@ -10,6 +10,8 @@ const Notify = () => {
   const [message, setMessage] = useState(notifyStatus);
   const [newMessage, setNewMessage] = useState(false);
 
+  const clearNotification = () => notify({});
+
   useEffect(() => {
     setMessage(notifyStatus);
     setNewMessage(false);
@@ -43,7 +45,7 @@ const Notify = () => {
       {notifyStatus.error && (
         <Toast
           msg={{ msg: notifyStatus.error, title: "Error" }}
-          handleShow={() => notify({})}
+          handleShow={clearNotification}
           bgColor="bg-red-400"
         />
       )}
@@ -51,7 +53,7 @@ const Notify = () => {
       {notifyStatus.info && (
         <Toast
           msg={{ msg: notifyStatus.info, title: "Info" }}
-          handleShow={() => notify({})}
+          handleShow={clearNotification}
           bgColor="bg-yellow-400"
         />
       )}
@@ -59,7 +61,7 @@ const Notify = () => {
       {notifyStatus.success && (
         <Toast
           msg={{ msg: notifyStatus.success, title: "Success" }}
-          handleShow={() => notify({})}
+          handleShow={clearNotification}
           bgColor="bg-miu-300"
         />
       )}

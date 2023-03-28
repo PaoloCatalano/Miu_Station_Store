@@ -49,13 +49,13 @@ const OrderDetail = ({ orderDetail }) => {
                 <span className="text-slate-400 smallcaps text-sm mr-1">
                   Name:
                 </span>
-                {order.user.name}
+                {order.user ? order.user.name : "USER DELETED"}
               </div>
               <div className="text-slate-600">
                 <span className="text-slate-400 smallcaps text-sm mr-1">
                   Email:
                 </span>
-                {order.user.email}
+                {order.user ? order.user.email : "USER DELETED"}
               </div>
               <div className="text-slate-600">
                 <span className="text-slate-400 smallcaps text-sm mr-1">
@@ -89,7 +89,7 @@ const OrderDetail = ({ orderDetail }) => {
                   </div>
                 )}
                 {auth.user.role === "admin" && !order.delivered && (
-                  <Button onClick={() => handleDelivered(order)}>
+                  <Button onPress={() => handleDelivered(order)}>
                     Mark as delivered
                   </Button>
                 )}

@@ -157,6 +157,7 @@ const Profile = () => {
               fill
               placeholder="blur"
               blurDataURL={rgbDataURL()}
+              sizes="20wv"
             />
 
             <span className="absolute flex flex-col items-center justify-start translate-y-40 left-0 pt-3 w-full h-2/4 bg-slate-500/70 text-center text-rose-300 font-bold transition group-hover:translate-y-20">
@@ -265,8 +266,9 @@ const Profile = () => {
                 Delivered
               </span>
             </p>
-            <p className="text-rose-600 text-left">Email not verified</p>
-            <p className="text-red-800 text-left line-through">User deleted</p>
+            {auth.user.role === "admin" && (
+              <p className="text-rose-600 text-left">Email not verified</p>
+            )}
           </div>
           <div className="my-3">
             <table className="text-sm mx-auto">

@@ -115,7 +115,7 @@ const Products = (props) => {
         <Button
           isDisabled={props.result < page * 6}
           className="animate-none"
-          onClick={handleLoadMore}
+          onPress={handleLoadMore}
         >
           Load more
         </Button>
@@ -128,7 +128,7 @@ const Products = (props) => {
               Delete All Products
             </CheckBox>
 
-            <Button hipster onClick={handleDeleteAll} className="!bg-red-400">
+            <Button hipster onPress={handleDeleteAll} className="!bg-red-400">
               DELETE
             </Button>
           </div>

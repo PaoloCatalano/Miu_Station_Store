@@ -80,7 +80,7 @@ const Modal = () => {
             >
               Yes
             </button>
-            <Button onClick={() => closeModal()}>Cancel</Button>
+            <Button onPress={() => closeModal()}>Cancel</Button>
           </div>
         </div>
       </div>

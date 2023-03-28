@@ -86,7 +86,7 @@ const AppProvider = ({ children }) => {
     });
 
     if (!check) {
-      notify({ error: "The product is already in your cart." });
+      notify({ info: "The product is already in your cart." });
       return;
     }
 
@@ -265,3 +265,6 @@ const useCtx = () => {
 };
 
 export { AppProvider, initialState, useCtx };
+
+/** @TODO wishlist functionality  */
+/** @TODO out of stock filter functionality  */

@@ -14,15 +14,17 @@ export default function NoProduct() {
         description="This page is currently not available"
       />
       <div className="flex items-center mx-auto animate-fade-in">
-        <Image
-          alt="Oops, page not available"
-          src={pic}
-          placeholder="blur"
-          width={120}
-          height={175}
-          blurDataURL={rgbDataURL()}
-          sizes="50vw"
-        />
+        <div className="relative w-32 h-44 ml-px">
+          <Image
+            alt="Oops, page not available"
+            src={pic}
+            placeholder="blur"
+            fill
+            blurDataURL={rgbDataURL()}
+            sizes="50vw"
+            className="object-contain rounded"
+          />
+        </div>
         <span className="text-2xl text-miu-600">
           Oops!, this page is no longer available
         </span>

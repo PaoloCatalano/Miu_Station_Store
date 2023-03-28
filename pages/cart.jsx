@@ -240,16 +240,14 @@ const Cart = () => {
                 defaultValue={auth?.user?.mobile}
               />
             )}
-            <div className="text-right">
-              Total: <span className="text-danger">€{total}</span>
+            <div className="text-right text-slate-600">
+              Total: <span className="font-bold text-slate-700">€{total}</span>
             </div>
             {errorMsg && <p className="text-red-400">{errorMsg}</p>}
             {auth?.user ? (
               <Button
                 isDisabled={disabled || errorMsg ? true : false}
-                type="submit"
-                className="btn btn-dark my-2"
-                onClick={handlePayment}
+                onPress={handlePayment}
               >
                 Proceed with payment
               </Button>

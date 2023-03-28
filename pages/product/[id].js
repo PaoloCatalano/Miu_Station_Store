@@ -96,7 +96,6 @@ const SingleProduct = (props) => {
               alt={product.images[tab].url}
               placeholder="blur"
               blurDataURL={rgbDataURL()}
-              sizes="50vw"
               quality={100}
               width={600}
               height={600}
@@ -178,7 +177,7 @@ const SingleProduct = (props) => {
                   className="animate-none"
                   cta
                   isDisabled={prodSWR?.product?.inStock === 0 ? true : false}
-                  onClick={() => addToCart(product, cart)}
+                  onPress={() => addToCart(product, cart)}
                 >
                   <MdOutlineAddShoppingCart className="inline text-2xl -mt-2" />{" "}
                   Add Item
