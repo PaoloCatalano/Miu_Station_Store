@@ -6,16 +6,16 @@ connectDB();
 export default async (req, res) => {
   switch (req.method) {
     case "GET":
-      await getProductsOnSale(req, res);
+      await getBestSeller(req, res);
       break;
     default:
       return res.status(405).json({ err: `${req.method} method not allowed.` });
   }
 };
 
-const getProductsOnSale = async (req, res) => {
+const getBestSeller = async (req, res) => {
   try {
-    const products = await Products.find({ onSale: true }).sort({ price: 1 });
+    const products = await Products.find({}).sort({ sold: -1 }).limit(3);
 
     res.status(200).json({
       status: "success",

@@ -113,7 +113,6 @@ const AppProvider = ({ children }) => {
   }
 
   function deleteItem(data, id, type) {
-    /**@TODO check if only admin is allowed to delete */
     const newData = data.filter((item) => item._id !== id);
     dispatch({ type, payload: newData });
   }
@@ -267,4 +266,4 @@ const useCtx = () => {
 export { AppProvider, initialState, useCtx };
 
 /** @TODO wishlist functionality  */
-/** @TODO out of stock filter functionality  */
+/** @TODO check if Button inside a form misses type="submit"  */

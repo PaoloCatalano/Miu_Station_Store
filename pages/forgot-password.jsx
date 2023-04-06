@@ -67,14 +67,21 @@ const ForgotPassword = () => {
             />
           </div>
 
-          <Button isDisabled={disabled}>Get Reset Password Link</Button>
+          <Button isDisabled={disabled} type="submit">
+            Get Reset Password Link
+          </Button>
         </Fieldset>
       </form>
       <section className="mb-14">
-        <p className="my-2">Don't you have an account yet?</p>
-        <Link href="/register">
-          <Button cta>Register Now</Button>
-        </Link>
+        <div className="my-2 text-slate-600">
+          No account yet?{" "}
+          <Link
+            href="/register"
+            className="text-rose-500 underline hover:text-rose-600 transition"
+          >
+            Register Now
+          </Link>
+        </div>
       </section>
     </>
   );

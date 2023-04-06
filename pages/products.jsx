@@ -21,8 +21,8 @@ const Products = (props) => {
 
   const router = useRouter();
 
-  const { auth, addModal } = useCtx();
-
+  const { auth, addModal, loading } = useCtx();
+  console.log(products);
   useEffect(() => {
     setProducts(props.products);
   }, [props.products]);
@@ -112,13 +112,28 @@ const Products = (props) => {
       </section>
 
       <section className="my-10">
-        <Button
-          isDisabled={props.result < page * 6}
-          className="animate-none"
-          onPress={handleLoadMore}
-        >
-          Load more
-        </Button>
+        {!loading ? (
+          <Button
+            isDisabled={loading || props.result < page * 6}
+            onPress={handleLoadMore}
+          >
+            Load more
+          </Button>
+        ) : (
+          <Button className="pointer-events-none">
+            <div className="flex gap-2 px-[11px] py-1">
+              <span className="rounded-full px-2 w-4 h-4 bg-white animate-bounce"></span>
+              <span
+                className="rounded-full px-2 w-4 h-4 bg-white animate-bounce"
+                style={{ animationDelay: "75ms" }}
+              ></span>
+              <span
+                className="rounded-full px-2 w-4 h-4 bg-white animate-bounce"
+                style={{ animationDelay: "100ms" }}
+              ></span>
+            </div>
+          </Button>
+        )}
       </section>
       {auth.user && auth.user.role === "admin" && (
         <section className="bg-red-200 w-11/12 max-w-screen-lg py-10 px-6 rounded space-y-5">
@@ -141,13 +156,14 @@ const Products = (props) => {
 export async function getServerSideProps({ query }) {
   const page = query.page || 1;
   const category = query.category || "all";
+  const showInStock = query.showInStock || "";
   const sort = query.sort || "";
   const search = query.search || "all";
 
   const res = await getData(
     `product?limit=${
       page * 6
-    }&category=${category}&sort=${sort}&title=${search}`
+    }&category=${category}&showInStock=${showInStock}&sort=${sort}&title=${search}`
   );
   // server side rendering
   return {

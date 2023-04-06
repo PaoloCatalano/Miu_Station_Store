@@ -296,9 +296,9 @@ const CreateProduct = () => {
             </Button>
           </Fieldset>
         </aside>
-        <div className="max-h-min ">
+        <div className="max-h-min">
           <Fieldset legend="Upload Images">
-            <div className=" my-4 ">
+            <div className=" my-4">
               <input
                 className="cursor-pointer w-[240px] md:w-auto"
                 type="file"

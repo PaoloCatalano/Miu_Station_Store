@@ -33,6 +33,11 @@ class APIfeatures {
 
     if (queryObj.category !== "all")
       this.queryDB.find({ category: queryObj.category });
+
+    if (queryObj.showInStock === "true") {
+      this.queryDB.find({ inStock: { $gte: 1 } });
+    }
+
     if (queryObj.title !== "all")
       this.queryDB.find({
         $or: [

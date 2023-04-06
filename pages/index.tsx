@@ -1,11 +1,21 @@
+import { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
 import Link from "next/link";
+import { getData } from "utils/fetchData";
 import BgBlue from "components/BgBlue";
 import pic from "public/images/logos/logo.png";
 
-const Home: NextPage = () => {
+const Home: NextPage = (props: { products: object }) => {
+  const [products, setProducts] = useState(props.products);
+
+  useEffect(() => {
+    setProducts(props.products);
+  }, [props.products]);
+
+  console.log(products);
+
   return (
     <>
       <NextSeo
@@ -20,23 +30,36 @@ const Home: NextPage = () => {
         }}
       />
       <BgBlue />
-      <h1 className="text-5xl font-bold md:text-6xl">
+      <h1 className="text-5xl mb-8 font-bold md:text-6xl">
         Welcome to Miu Station Store
       </h1>
 
-      <p className="mt-3 font-bold text-rose-700 text-2xl">
-        Get started with your purchase!
+      <p
+        className="my-5 px-2
+       font-bold text-rose-700 text-2xl"
+      >
+        Get started with your purchase by clicking the icon!
       </p>
       <Link href="/products" className="cursor-pointer p-4 m-5">
         <Image
           placeholder="blur"
           src={pic}
           alt="miu station store"
-          className="rounded w-[50vw] h-[50wh] md:max-w-[400px] hover:brightness-110 transition-all"
+          className="rounded max-w-[200px] md:max-w-[300px] hover:brightness-110 transition-all shadow-lg animate-boeing-once"
         />
       </Link>
     </>
   );
 };
+
+export async function getServerSideProps() {
+  const res = await getData("bestSeller");
+  return {
+    props: {
+      products: res.products,
+      result: res.result,
+    },
+  };
+}
 
 export default Home;

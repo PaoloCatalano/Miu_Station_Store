@@ -6,7 +6,7 @@ import Image from "next/image";
 import { z, ZodSchema } from "zod";
 import { useZorm } from "react-zorm";
 import { useCtx } from "store/globalState";
-import { patchData } from "utils/fetchData";
+import { patchData, postData } from "utils/fetchData";
 import { rgbDataURL } from "utils/blurData";
 import { imageUpload } from "utils/imageUpload";
 import { FiCamera } from "react-icons/fi";
@@ -21,11 +21,10 @@ import {
   addressSchema,
   mobileSchema,
   confirmPasswordSchema,
+  passwordSchema,
 } from "validators/valid";
 import ShowPassword from "components/ShowPassword";
 import SkeletonProfile from "components/SkeletonProfile";
-
-/**@TODO reset password functionality */
 
 const FormSchema = z.object({
   name: z.optional(nameSchema),
@@ -33,7 +32,16 @@ const FormSchema = z.object({
   mobile: mobileSchema,
 });
 
-const FormPassSchema = confirmPasswordSchema;
+const FormPassSchema = z
+  .object({
+    oldPassword: passwordSchema,
+    password: passwordSchema,
+    confirmPassword: passwordSchema,
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Confirm password did not match.",
+    path: ["confirmPassword"],
+  });
 
 const Profile = () => {
   const router = useRouter();
@@ -41,11 +49,20 @@ const Profile = () => {
   const [data, setData] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
-  const updatePassword = (password) => {
+  const updatePassword = (password, oldPassword) => {
     notify({ loading: true });
-    patchData("user/resetPassword", { password }, auth.token).then((res) => {
+
+    postData(
+      "auth/comparePassword",
+      { email: auth.user.email, password: oldPassword },
+      auth.token
+    ).then((res) => {
       if (res.err) return notify({ error: res.err });
-      return notify({ success: res.msg });
+
+      patchData("user/resetPassword", { password }, auth.token).then((res) => {
+        if (res.err) return notify({ error: res.err });
+        return notify({ success: res.msg });
+      });
     });
   };
 
@@ -109,7 +126,7 @@ const Profile = () => {
   const zoPass = useZorm("updatePassword", FormPassSchema, {
     onValidSubmit(e) {
       e.preventDefault();
-      updatePassword(e.data.password);
+      updatePassword(e.data.password, e.data.oldPassword);
     },
   });
 
@@ -220,7 +237,14 @@ const Profile = () => {
           <form ref={zoPass.ref}>
             <Fieldset legend="Update your Password">
               <Input
-                label="Password"
+                label="Old Password"
+                type={showPassword ? "text" : "password"}
+                description="minimum 6 characters"
+                name={zoPass.fields.oldPassword()}
+                errorMessage={zoPass.errors.oldPassword((e) => e.message)}
+              />
+              <Input
+                label="New Password"
                 type={showPassword ? "text" : "password"}
                 description="minimum 6 characters"
                 name={zoPass.fields.password()}

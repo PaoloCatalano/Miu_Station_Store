@@ -5,6 +5,7 @@ import filterSearch from "utils/filterSearch";
 import useDebounce from "utils/useDebounce";
 import Fieldset from "components/Fieldset";
 import Input from "components/Input";
+import CheckBox from "components/CheckBox";
 
 const Filter = () => {
   const router = useRouter();
@@ -20,6 +21,9 @@ const Filter = () => {
   const handleCategory = (e) => {
     setCategory(e.target.value);
     filterSearch({ router, category: e.target.value });
+  };
+  const handleShowInStock = (e) => {
+    filterSearch({ router, showInStock: e ? "true" : "false" });
   };
 
   const handleSort = (e) => {
@@ -89,6 +93,14 @@ const Filter = () => {
                 ))}
               </optgroup>
             </select>
+          </div>
+          <div className="ml-2 mb-4">
+            <CheckBox
+              isSelected={router?.query?.showInStock === "true" ? true : false}
+              onChange={handleShowInStock}
+            >
+              Show products in stock
+            </CheckBox>
           </div>
 
           {/* <input

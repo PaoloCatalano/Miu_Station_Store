@@ -22,8 +22,6 @@ const FormSchema = userSchema
     path: ["cf_password"],
   });
 
-/**@TODO limit register API */
-
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const { notify, notifyStatus } = useCtx();
@@ -66,7 +64,7 @@ export default function Register() {
       />
       <BgAnimated />
       <h1 className="text-6xl font-bold mb-10 text-blue-400">Register</h1>
-      <form ref={zo.ref} className="">
+      <form ref={zo.ref}>
         <Fieldset legend="Create your Account">
           <Input
             maxLength={20}
