@@ -4,14 +4,9 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useCtx } from "store/globalState";
 import { rgbDataURL } from "utils/blurData";
-import { useProduct } from "utils/swr";
-import { MdOutlineAddShoppingCart } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
-import Button from "components/Button";
-import CheckBox from "components/CheckBox";
 
-const ProductItem = ({ product, handleCheck }) => {
-  const { cart, auth, categories, addToCart, addModal } = useCtx();
+const ProductItem = ({ product }) => {
+  const { categories } = useCtx();
   const router = useRouter();
 
   const noSalePage = router.pathname !== "/sales";
@@ -21,8 +16,6 @@ const ProductItem = ({ product, handleCheck }) => {
       .filter((category) => category._id === product.category)
       .map((item) => item.name)
   );
-
-  const { prodSWR, isLoading, isError } = useProduct(product._id);
 
   return (
     <Link
