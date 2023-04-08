@@ -4,6 +4,12 @@ import Modal from "./Modal";
 import Footer from "./Footer";
 import Loading from "./Loading";
 import { useCtx } from "store/globalState";
+import { Merienda } from "@next/font/google";
+
+const merienda = Merienda({
+  subsets: ["latin"],
+  variable: "--font-handwriting",
+});
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { loading } = useCtx();
@@ -11,7 +17,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       {loading && <Loading simple />}
-      <div className="container flex min-h-screen flex-col items-center justify-center ">
+      <div
+        className={`${merienda.variable} container flex min-h-screen flex-col items-center justify-center`}
+      >
         <Notify />
         <Navbar />
         <Modal />

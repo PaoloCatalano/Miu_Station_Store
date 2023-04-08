@@ -52,7 +52,7 @@ const ProductItem = ({ product, handleCheck }) => {
         </Link>
         <Button
           hipster
-          className="!text-red-500 "
+          className="bg-red-300 hover:ring-red-200"
           onPress={() =>
             addModal([
               {
@@ -71,7 +71,7 @@ const ProductItem = ({ product, handleCheck }) => {
   };
 
   return (
-    <div className=" relative flex flex-col w-[247.2px] md:max-w-md md:min-w-[247.2px]  rounded my-2 overflow-hidden shadow-sm bg-slate-100 border-2 border-blue-300 transition md:w-80 hover:bg-blue-200 hover:shadow-md">
+    <div className="group relative flex flex-col w-[247.2px] md:max-w-md md:min-w-[247.2px]  rounded my-2 overflow-hidden shadow-none bg-slate-100 border-2 border-blue-200 transition md:w-80 hover:shadow-lg hover:border-blue-300">
       {noSalePage && auth.user && auth.user.role === "admin" && (
         <CheckBox
           aria-label="checkbox"
@@ -88,7 +88,7 @@ const ProductItem = ({ product, handleCheck }) => {
             </div>
           )}
           <Image
-            className="w-full h-full object-cover transition rounded-md-t"
+            className="w-full h-full object-cover transition rounded-md-t group-hover:scale-105"
             src={product.images[0].url}
             alt={product.images[0].url}
             placeholder="blur"
@@ -102,15 +102,15 @@ const ProductItem = ({ product, handleCheck }) => {
         </div>
       </Link>
 
-      <div className="uppercase text-left pl-4 mt-2 font-bold text-slate-600">
+      <div className="font-sans uppercase text-left line-clamp-1 pl-3 mt-2 font-bold text-xl text-slate-600">
         {product.title}
       </div>
-      <div className="text-xs text-left pl-4 text-slate-500 font-bold capitalize">
+      <div className="text-xs text-left pl-4 text-slate-500 font-bold first-letter:capitalize">
         {nameCategory}
       </div>
 
       <div className="p-2">
-        <div className="flex flex-col items-center justify-start my-8">
+        <div className="flex flex-row items-center justify-between my-auto px-2 py-2">
           {prodSWR ? (
             prodSWR.product?.inStock > 0 ? (
               <>
@@ -119,14 +119,15 @@ const ProductItem = ({ product, handleCheck }) => {
                     product.onSale
                       ? "text-rose-500 after:content-['_Sale!'] z-10 after:text-sm before:block before:absolute before:-inset-1 before:-z-10 before:-skew-y-3 before:bg-rose-200 before:animate-boeing-once relative inline-block"
                       : "text-slate-600"
-                  } font-bold text-4xl`}
+                  } `}
                 >
-                  €{product.price}
+                  <span className="text-sm mr-px">€</span>
+                  {product.price}
                 </div>
                 <div
                   className={`${
                     prodSWR.product?.inStock === 1
-                      ? "text-red-600 after:content-['_only!']"
+                      ? "text-red-500"
                       : "text-slate-500"
                   } text-xs z-10`}
                 >
@@ -134,20 +135,21 @@ const ProductItem = ({ product, handleCheck }) => {
                 </div>
               </>
             ) : (
-              <div className="text-red-600 text-2xl py-3">Out of Stock</div>
+              <div className="text-red-500 ">Out of Stock</div>
             )
           ) : (
             <>
               <div
                 className={`${
                   product.onSale ? "text-rose-500" : "text-slate-600"
-                } font-bold text-4xl`}
+                }`}
               >
-                €{product.price}
+                <span className="text-sm mr-px">€</span>
+                {product.price}
               </div>
               {isLoading && <span>...</span>}
               <div className="text-slate-400 text-xs">
-                {isError && `${product.inStock} in stock (may vary)`}
+                {isError && `${product.inStock} in stock`}
               </div>
             </>
           )}

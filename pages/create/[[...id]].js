@@ -238,7 +238,7 @@ const CreateProduct = () => {
               name={zo.fields.inStock()}
               errorMessage={zo.errors.inStock((e) => e.message)}
               label="inStock"
-              defaultValue={inStock ? inStock : null}
+              defaultValue={inStock ? inStock : "0"}
             />
 
             <Input

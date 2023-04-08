@@ -15,8 +15,9 @@ export default async (req, res) => {
 
 const getBestSeller = async (req, res) => {
   try {
-    const products = await Products.find({}).sort({ sold: -1 }).limit(3);
-
+    const products = await Products.find({ inStock: { $gte: 1 } })
+      .sort({ sold: -1 })
+      .limit(3);
     res.status(200).json({
       status: "success",
       result: products.length,

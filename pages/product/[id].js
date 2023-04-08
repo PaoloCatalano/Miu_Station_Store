@@ -125,13 +125,14 @@ const SingleProduct = (props) => {
         </aside>
         <div className="mt-10 md:mt-4 ">
           <article className=" border-2 border-blue-300 bg-slate-100 rounded w-full min-w-[247.2px] md:max-w-md">
-            <div className="uppercase text-center my-5 text-2xl text-sky-700">
+            <div className="font-sans uppercase text-center my-5 text-2xl text-sky-700">
               {product.title}
             </div>
             <div className="text-xl my-5 text-slate-600">
               Price:{" "}
               <span className="text-slate-700 font-bold">
-                € {product.price}
+                <span className="text-lg mr-1">€</span>
+                {product.price}
               </span>
               <p>
                 {product.onSale && <i className="text-rose-500"> On Sale!</i>}

@@ -266,4 +266,3 @@ const useCtx = () => {
 export { AppProvider, initialState, useCtx };
 
 /** @TODO wishlist functionality  */
-/** @TODO check if Button inside a form misses type="submit"  */

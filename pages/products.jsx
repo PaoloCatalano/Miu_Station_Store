@@ -22,7 +22,6 @@ const Products = (props) => {
   const router = useRouter();
 
   const { auth, addModal, loading } = useCtx();
-  console.log(products);
   useEffect(() => {
     setProducts(props.products);
   }, [props.products]);

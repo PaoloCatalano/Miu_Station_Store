@@ -15,7 +15,10 @@ export default async (req, res) => {
 
 const getProductsOnSale = async (req, res) => {
   try {
-    const products = await Products.find({ onSale: true }).sort({ price: 1 });
+    const products = await Products.find({
+      onSale: true,
+      inStock: { $gte: 1 },
+    }).sort({ price: 1 });
 
     res.status(200).json({
       status: "success",

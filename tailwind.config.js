@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const { fontFamily } = require("tailwindcss/defaultTheme");
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -14,10 +15,7 @@ module.exports = {
         out: "inset 1px 1px 1px #ffffff60, inset -1px -1px 1px rgba(94, 104, 121, 0.692)",
         in: "inset -1px -1px 1px #ffffff60, inset 1px 1px 1px rgba(94, 104,121, 0.692)",
       },
-      transformOrigin: {
-        "left-center": "left center",
-        "right-center": "right center",
-      },
+
       colors: {
         "miu-50": "#d1ecf1",
         "miu-100": "#a2dae3",
@@ -29,6 +27,9 @@ module.exports = {
         "miu-700": "#0e616e",
         "miu-800": "#09414a",
         "miu-900": "#052025",
+      },
+      fontFamily: {
+        sans: ["var(--font-handwriting)", ...fontFamily.sans],
       },
       keyframes: {
         appearUp: {
@@ -76,6 +77,10 @@ module.exports = {
         "fade-in": "fadeIn 1s ease-in 1",
         boeing: "boeing 3s linear infinite",
         "boeing-once": "boeing 3s linear 1",
+      },
+      transformOrigin: {
+        "left-center": "left center",
+        "right-center": "right center",
       },
     },
   },

@@ -6,15 +6,14 @@ import Link from "next/link";
 import { getData } from "utils/fetchData";
 import BgBlue from "components/BgBlue";
 import pic from "public/images/logos/logo.png";
+import SmallCard from "components/SmallCard";
 
 const Home: NextPage = (props: { products: object }) => {
-  const [products, setProducts] = useState(props.products);
+  const [products, setProducts] = useState<any>(props.products);
 
   useEffect(() => {
     setProducts(props.products);
   }, [props.products]);
-
-  console.log(products);
 
   return (
     <>
@@ -48,11 +47,18 @@ const Home: NextPage = (props: { products: object }) => {
           className="rounded max-w-[200px] md:max-w-[300px] hover:brightness-110 transition-all shadow-lg animate-boeing-once"
         />
       </Link>
+      <section>
+        {products.map((item) => (
+          <div key={item.title}>
+            <SmallCard product={item} />
+          </div>
+        ))}
+      </section>
     </>
   );
 };
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const res = await getData("bestSeller");
   return {
     props: {
