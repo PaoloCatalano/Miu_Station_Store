@@ -266,3 +266,4 @@ const useCtx = () => {
 export { AppProvider, initialState, useCtx };
 
 /** @TODO wishlist functionality  */
+/** @TODO make sure to implement res.revalidate('/') every time products change  */
