@@ -1,22 +1,8 @@
-import { useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { useCtx } from "store/globalState";
 import { rgbDataURL } from "utils/blurData";
 
 const ProductItem = ({ product }) => {
-  const { categories } = useCtx();
-  const router = useRouter();
-
-  const noSalePage = router.pathname !== "/sales";
-
-  const nameCategory = useCallback(
-    categories
-      .filter((category) => category._id === product.category)
-      .map((item) => item.name)
-  );
-
   return (
     <Link
       href={`/product/${product._id}`}
@@ -46,7 +32,7 @@ const ProductItem = ({ product }) => {
               {product.title}
             </div>
             <div className="text-xs text-left pl-4 text-slate-500 font-bold first-letter:capitalize">
-              {nameCategory}
+              {product.description}
             </div>
           </div>
         </div>

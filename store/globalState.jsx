@@ -266,4 +266,7 @@ const useCtx = () => {
 export { AppProvider, initialState, useCtx };
 
 /** @TODO wishlist functionality  */
+/** @TODO Categories page with 3 samples (SmallCards) */
+/** @TODO better home page */
+/** @TODO inStock = 0 bug  */
 /** @TODO make sure to implement res.revalidate('/') every time products change  */

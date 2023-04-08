@@ -7,8 +7,8 @@ export default function Footer() {
   const { auth } = useCtx();
 
   return (
-    <div className="md:max-w-screen-2xl md:bg-gradient-to-b md:from-transparent  md:to-slate-50 w-screen">
-      <footer className="flex flex-col h-auto w-full p-4 space-y-4 items-center justify-center text-center md:flex-row-reverse md:justify-between">
+    <div className="w-screen md:bg-gradient-to-b md:from-transparent  md:to-slate-50 ">
+      <footer className="flex flex-col h-auto w-full p-4 space-y-4 items-center justify-center text-center md:flex-row-reverse md:justify-between md:max-w-screen-2xl mx-auto">
         <div className="md:w-[191px] md:flex md:justify-end">
           <Social />
         </div>
