@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -8,16 +8,16 @@ import { useCtx } from "store/globalState";
 import { ACTIONS } from "store/actions";
 import { postData, putData } from "utils/fetchData";
 import { nameSchema } from "validators/valid";
-import BgStatic from "components/BgStatic";
 import Button from "components/Button";
 import Input from "components/Input";
 import TitleImage from "components/TitleImage";
 import pic from "public/images/logos/categories.png";
 import ErrorMessage from "components/ErrorMessage";
-import Title from "components/Title";
+import MoreItems from "components/MoreItems";
 
 const Categories = () => {
   const [name, setName] = useState("");
+  const [oldName, setOldName] = useState("");
   const [errorMsg, setErrorMsg] = useState(null);
   const [id, setId] = useState("");
 
@@ -25,6 +25,12 @@ const Categories = () => {
 
   const { categories, auth, notify, updateItem, addCategory, addModal } =
     useCtx();
+
+  useEffect(() => {
+    if (!name) {
+      setId("");
+    }
+  }, [name]);
 
   const createCategory = async () => {
     if (auth.user) {
@@ -35,6 +41,7 @@ const Categories = () => {
     notify({ loading: true });
 
     let res;
+
     if (id) {
       res = await putData(`categories/${id}`, { name }, auth.token);
       if (res.err) return notify({ error: res.err });
@@ -42,7 +49,10 @@ const Categories = () => {
       router.reload();
     } else {
       res = await postData("categories", { name }, auth.token);
-      if (res.err) return notify({ error: res.err });
+      if (res.err) {
+        setErrorMsg(res.err);
+        return notify({ error: res.err });
+      }
 
       addCategory([...categories, res.newCategory]);
     }
@@ -54,6 +64,8 @@ const Categories = () => {
   const handleEditCategory = (category) => {
     setId(category._id);
     setName(category.name);
+    setOldName(category.name);
+    handleSetName(category.name);
   };
 
   function handleSetName(e) {
@@ -86,17 +98,18 @@ const Categories = () => {
           url: "https://miustationstore.netlify.app/categories",
         }}
       />
-      <BgStatic />
-      <TitleImage image={pic} alt="categories" />
+      <TitleImage image={pic} alt="categories" id="top" />
       {auth.user?.role === "admin" && (
         <div className="mt-10 md:my-10">
           <Input
             type="text"
-            label="Add a new category"
+            label={id ? `Edit ${oldName}` : "Add a new category"}
             value={name}
             onChange={(e) => handleSetName(e)}
           />
+
           {errorMsg && <ErrorMessage message={errorMsg} />}
+
           <Button
             className="mt-1"
             isDisabled={errorMsg ? true : false}
@@ -106,26 +119,22 @@ const Categories = () => {
           </Button>
         </div>
       )}
-      <section className="md:bg-slate-50 md:border-2 border-slate-100 rounded">
-        <header className="hidden md:block">
-          <Title>All Categories</Title>
-        </header>
-        <ul className="my-10 flex flex-col  md:grid md:grid-cols-3 max-w-lg ">
+      <section>
+        <ul className="container my-10 flex flex-col md:flex-row flex-wrap justify-center">
           {categories.map((category) => (
             <li key={category._id} className="m-4 place-self-center">
-              <Link href={`/products?category=${category._id}#products`}>
-                <Button hipster className="capitalize">
-                  {category.name}
-                </Button>
-              </Link>
+              <MoreItems link={`/products?category=${category._id}`}>
+                {category.name}
+              </MoreItems>
               {auth.user?.role === "admin" && (
-                <div className="flex justify-between mx-auto mb-10 mt-2 w-20">
-                  <div
+                <div className="flex justify-between mx-auto mb-10 mt-2 w-60">
+                  <a
+                    href="#top"
                     className="cursor-pointer text-miu-600 p-1 border-2 border-miu-200 bg-slate-50 rounded transition hover:ring-2 hover:ring-miu-200"
                     onClick={() => handleEditCategory(category)}
                   >
                     <FaEdit className="text-2xl" />
-                  </div>
+                  </a>
 
                   <div
                     className="cursor-pointer text-red-500 p-1 border-2 border-red-200 bg-slate-50 rounded transition hover:ring-2 hover:ring-red-200"

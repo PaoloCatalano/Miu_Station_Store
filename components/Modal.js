@@ -75,12 +75,12 @@ const Modal = () => {
           <div className="flex flex-wrap items-center justify-end p-3 space-x-4 border-t border-t-slate-200">
             <button
               type="button"
-              className="underline text-red-500 decoration-2 hover:text-red-700 transition"
+              className="underline underline-offset-4 text-red-500 decoration-2 hover:text-red-700 transition"
               onClick={handleSubmit}
             >
-              Yes
+              Yes, Delete!
             </button>
-            <Button onPress={() => closeModal()}>Cancel</Button>
+            <Button onPress={() => closeModal()}>Exit</Button>
           </div>
         </div>
       </div>

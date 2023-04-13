@@ -29,9 +29,9 @@
   }
 
   body {
+    @apply text-slate-800 bg-slate-50;
     overflow-x: hidden;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    @apply text-slate-800 bg-slate-50;
   }
   legend {
     font-variant: small-caps;
@@ -243,14 +243,13 @@
   .jelly {
     position: fixed;
     top: 0;
-    transform: rotate(80deg);
     left: 0;
+    transform: rotate(80deg);
     width: 100rem;
     height: 90rem;
   }
 
   .wave {
-    position: fixed;
     top: 0;
     left: 0;
     opacity: 0.4;
@@ -458,6 +457,38 @@
   .justify-between-or-center:has(.justify-between-or-center:nth-child(2)) {
     @apply justify-between;
   }
+
+  .border-animation-color {
+    animation: borderAnimationColor 15s linear infinite;
+  }
+
+  @keyframes borderAnimationColor {
+    0%,
+    20% {
+      border-color: #17a2b8;
+    }
+    24%,
+    49%,
+    74%,
+    99% {
+      border-color: #fafafc;
+    }
+    25%,
+    45% {
+      border-color: #f6db8a;
+    }
+    50%,
+    70% {
+      border-color: #4386ad;
+    }
+    75%,
+    95% {
+      border-color: #de4561;
+    }
+    100% {
+      border-color: #17a2b8;
+    }
+  }
 }
 
 @layer utilities {
@@ -470,25 +501,15 @@
   }
 
   .fading-bg {
-    background: linear-gradient(
-        #f8fafc 10%,
-        transparent 15%,
-        transparent 90%,
-        #f8fafc 95%
-      ),
-      radial-gradient(
-        ellipse closest-corner at 40% 15%,
-        #f8fafc 70%,
-        transparent 80%
-      ),
-      radial-gradient(
-        ellipse farthest-corner at 90% 100%,
-        #f8fafc 20%,
-        transparent 30%
-      );
+    /** @TODO  DA ELIMINARE  */
+    background: linear-gradient(transparent 90%, #f8fafc 95%);
   }
 
   .smallcaps {
     font-variant: small-caps;
+  }
+
+  .custom-min-width {
+    min-width: 240px /* w-60 */;
   }
 }

@@ -8,7 +8,7 @@ const ProductItem = ({ product }) => {
       href={`/product/${product._id}`}
       className="group grow overflow-hidden"
     >
-      <div className="relative flex flex-col w-[247.2px] md:max-w-md md:min-w-[247.2px]  rounded-md my-2 overflow-hidden shadow-none bg-slate-100 border-2 border-blue-200 transition md:w-80 hover:shadow-lg hover:border-blue-300">
+      <div className="relative flex flex-col w-60 h-60  rounded-md overflow-hidden shadow-none bg-slate-100 border-2 border-blue-200 transition hover:shadow-lg hover:border-blue-300">
         <div className="relative h-full max-h-96">
           {product.onSale && (
             <div className="triangle z-[1] absolute -top-[8px] -right-[8px] float-left w-12 h-12 bg-rose-500/80 text-white rotate-45 text-center">

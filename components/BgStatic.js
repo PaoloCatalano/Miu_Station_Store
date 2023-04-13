@@ -5,9 +5,9 @@ import { rgbDataURL } from "utils/blurData";
 export default function BgStatic() {
   return (
     <>
-      <div className="fading-bg fixed inset-0 h-screen -z-40 "></div>
+      <div className="fading-bg absolute inset-0 h-screen -z-40 "></div>
 
-      <div className="fixed inset-0 -z-50  bg-fixed bg-cover animate-fade-in">
+      <div className="absolute inset-0 -z-50  bg-fixed bg-cover animate-fade-in">
         <Image
           className="w-full h-full object-cover transition"
           src={pic}

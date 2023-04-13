@@ -2,7 +2,7 @@ import { useTextField } from "react-aria";
 import { useState, useRef, useEffect } from "react";
 
 export default function TextField(props) {
-  let { label, defaultValue, callBack, className = "", search } = props;
+  let { label, defaultValue, callBack, className = "", value } = props;
   let ref = useRef();
   const [valueState, setValueState] = useState(defaultValue || null);
   let { labelProps, inputProps, descriptionProps, errorMessageProps } =
@@ -35,8 +35,10 @@ export default function TextField(props) {
       ? "border-red-300 focus:border-red-500"
       : "border-slate-200 focus:border-2 focus:border-slate-500"
   } form-control max-w-xs outline-none border-2 rounded-md py-[0.32rem] px-3 transition text-slate-700  ${
-    valueState ? "active" : ""
+    valueState || value ? "active" : ""
   }`;
+
+  /**@TODO added  valueState || value ?, check for bugs! */
 
   //textarea works better
   /* 

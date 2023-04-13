@@ -10,6 +10,7 @@ import { useProduct } from "utils/swr";
 import GoBack from "components/GoBack";
 import Button from "components/Button";
 import BgStatic from "components/BgStatic";
+import A from "components/A";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 
 const SingleProduct = (props) => {
@@ -123,8 +124,8 @@ const SingleProduct = (props) => {
             ))}
           </div>
         </aside>
-        <div className="mt-10 md:mt-4 ">
-          <article className=" border-2 border-blue-300 bg-slate-100 rounded w-full min-w-[247.2px] md:max-w-md">
+        <div className="mt-10 md:mt-4">
+          <article className=" border-2 border-blue-300 bg-slate-100 rounded w-full custom-min-width md:max-w-md">
             <div className="font-sans uppercase text-center my-5 text-2xl text-sky-700">
               {product.title}
             </div>
@@ -185,11 +186,8 @@ const SingleProduct = (props) => {
                 </Button>
               )}
               <div className="mt-6">
-                <Link
-                  href="/cart"
-                  className="my-3 px-5 ring-2 ring-miu-500 rounded p-2 text-miu-500 transition hover:ring-4 hover:text-miu-600"
-                >
-                  Go to Cart
+                <Link href="/cart">
+                  <A>Go to cart</A>
                 </Link>
               </div>
             </div>
@@ -204,7 +202,7 @@ const SingleProduct = (props) => {
             </div>
           </article>
           <article>
-            <div className="my-10 bg-slate-50 rounded border-2 border-slate-100">
+            <div className="my-10 px-4 bg-slate-50 rounded border-2 border-slate-100">
               <span className="text-slate-700">Category: </span>
               <Link href={`/products?category=${product.category}`}>
                 <Button hipster className="capitalize">

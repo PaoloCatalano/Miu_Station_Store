@@ -4,17 +4,45 @@ import { NextSeo } from "next-seo";
 import Image from "next/image";
 import Link from "next/link";
 import { getData } from "utils/fetchData";
-import BgAnimated from "components/BgAnimated";
+import BgStatic from "components/BgStatic";
 import pic from "public/images/logos/logo.png";
-import SmallCard from "components/SmallCard";
 import Title from "components/Title";
+import Button from "components/Button";
+import Preview from "components/Preview";
+import A from "components/A";
 
-const Home: NextPage = (props: { products: object }) => {
-  const [products, setProducts] = useState<any>(props.products);
+const Home: NextPage = (props: {
+  products: { stickers: object; kimono: object; accessories: object };
+}) => {
+  const [products, setProducts] = useState<Data>(null);
 
   useEffect(() => {
-    setProducts(props.products);
+    setProducts(data);
   }, [props.products]);
+
+  const data: Data = [
+    {
+      link: "/product?category=624afb102808cb15488d1fba",
+      category: "Stickers",
+      products: props.products.stickers,
+    },
+    {
+      link: "/product?category=624afb102808cb15488d1fba",
+      category: "Kimono",
+      products: props.products.kimono,
+    },
+    {
+      link: "/product?category=624b1f5809f7af00099f873e",
+      category: "Accessories",
+      products: props.products.accessories,
+    },
+  ];
+
+  type Data = {
+    link: string;
+    category: string;
+    products: object;
+  }[];
 
   return (
     <>
@@ -29,56 +57,61 @@ const Home: NextPage = (props: { products: object }) => {
           url: "https://miustationstore.netlify.app",
         }}
       />
-      <BgAnimated />
+      <BgStatic />
       <section className="my-10 container px-5">
-        <article className="max-w-md mx-auto mb-10">
-          <Title>Welcome to Miu Station Store</Title>
+        <article className="bg-slate-50 border-2 border-animation-color rounded p-5 pt-7 max-w-md mx-auto mb-10">
+          <Title>Miu Station Store</Title>
 
-          <p className="text-slate-800 text-2xl pb-4">
-            Online shop selling fabulous handmade items.
+          <p className="text-slate-600 text-2xl pb-4">
+            Online shop for fabulous handmade products!
           </p>
-          <p className="text-slate-800 text-2xl">
-            Navigating through the product page, you will find stickers, dolls,
-            clothes, kimonos, paintings, handcrafts, and much more.
+          <p className="text-slate-600 text-lg mb-6">
+            Here you will find stickers, dolls, clothes, kimonos, paintings,
+            handcrafts, and much more.
           </p>
           <Link href="/products" className="cursor-pointer p-4 m-5 ">
-            <p
-              className="my-5 px-2
-            font-bold text-rose-500 text-2xl"
-            >
-              Go to the Online Shop!
-            </p>
+            <Button cta>Shop Now</Button>
           </Link>
-          <Image
+          {/* <Image
             placeholder="blur"
             src={pic}
             alt="miu station store"
             className="rounded max-w-[200px] mx-auto md:max-w-[300px]"
-          />
+          /> */}
         </article>
       </section>
       <section className="my-10 container px-1">
-        <div className="font-sans text-5xl mb-8 font-bold md:text-6xl">
-          Most sold products
+        <div className="text-2xl mb-8 font-bold md:text-6xl text-miu-500">
+          Categories
         </div>
-        <div className="flex flex-row flex-wrap items-center justify-center gap-6">
-          {products.map((item) => (
-            <div key={item.title}>
-              <SmallCard product={item} />
-            </div>
-          ))}
-        </div>
+        {products?.map((prod) => (
+          <Preview key={prod.category} {...prod} />
+        ))}
+        <Link href="/categories">
+          <A>All Categories</A>
+        </Link>
       </section>
     </>
   );
 };
 
 export async function getStaticProps() {
-  const res = await getData("bestSeller");
+  const stickers = await getData(
+    "product?limit=2&category=6248c34a9695eb0009ac13b8&showInStock=&sort=&title=all"
+  );
+  const kimono = await getData(
+    "product?limit=2&category=624afb102808cb15488d1fba&showInStock=false&sort=&title=all"
+  );
+  const accessories = await getData(
+    "product?limit=2&category=624b1f5809f7af00099f873e&showInStock=&sort=&title=all"
+  );
   return {
     props: {
-      products: res.products,
-      result: res.result,
+      products: {
+        stickers: stickers.products,
+        kimono: kimono.products,
+        accessories: accessories.products,
+      },
     },
   };
 }

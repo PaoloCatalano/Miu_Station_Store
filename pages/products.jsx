@@ -11,7 +11,7 @@ import Filter from "components/Filter";
 import CheckBox from "components/CheckBox";
 import pic from "public/images/logos/products.png";
 import Button from "components/Button";
-import BgStatic from "components/BgStatic";
+import BgAnimated from "components/BgAnimated";
 import TitleImage from "components/TitleImage";
 
 const Products = (props) => {
@@ -78,7 +78,7 @@ const Products = (props) => {
           url: "https://miustationstore.netlify.app/products",
         }}
       />
-      <BgStatic />
+      {/* <BgAnimated /> */}
 
       <TitleImage image={pic} alt="products" />
       <section className="relative w-full container flex flex-col items-center justify-center gap-5 px-1 md:flex-row md:items-start md:space-x-10">
