@@ -71,7 +71,7 @@ const Home: NextPage = (props: {
           </p>
           <Link href="/products?search=all">
             {/* CTA Button (with component = bugs: loading spinner doesn't appear...!) */}
-            <button className="my-3 text-white rounded max-w-xs transition-all  hover:ring-4 active:shadow-in focus:outline-none focus:ring-4 bg-miu-600  hover:ring-miu-500 focus:ring-miu-500">
+            <button className="my-3 text-white rounded max-w-xs transition-all  hover:ring-4 active:shadow-in focus:outline-none focus:ring-4 bg-gradient-to-br from-blue-400 to-miu-600  hover:ring-miu-400 focus:ring-miu-500">
               <div className="px-5 p-2 transition-all active:translate-x-[1px] active:translate-y-[1px]">
                 Shop Now
               </div>
