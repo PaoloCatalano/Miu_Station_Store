@@ -19,9 +19,6 @@ const getBestSeller = async (req, res) => {
       .sort({ sold: -1 })
       .limit(3);
 
-    //ISR on-demand
-    res.revalidate("/");
-
     res.status(200).json({
       status: "success",
       result: products.length,

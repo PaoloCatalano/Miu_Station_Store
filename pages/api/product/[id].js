@@ -93,9 +93,6 @@ const updateProduct = async (req, res) => {
       }
     );
 
-    //ISR on-demand
-    res.revalidate("/");
-
     res.json({ msg: "Success! Product updated" });
   } catch (err) {
     if (err instanceof ZodError) {
@@ -116,9 +113,6 @@ const deleteProduct = async (req, res) => {
     const { id } = req.query;
 
     await Products.findByIdAndDelete(id);
-
-    //ISR on-demand
-    res.revalidate("/");
 
     res.json({ msg: "Product deleted. Refreshing page." });
   } catch (err) {

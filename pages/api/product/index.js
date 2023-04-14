@@ -138,9 +138,6 @@ const createProduct = async (req, res) => {
 
     await newProduct.save();
 
-    //ISR on-demand
-    res.revalidate("/");
-
     res.json({ msg: "Great! You created a new product" });
   } catch (err) {
     if (err instanceof ZodError) {

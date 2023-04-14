@@ -21,7 +21,7 @@ const initialState = {
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducers, initialState);
-  const { cart, auth } = state;
+  const { cart, auth, loading } = state;
 
   //dispatch all actions
   function isMenuOpen(isOpen) {
@@ -211,20 +211,22 @@ const AppProvider = ({ children }) => {
   }, [auth.token]);
 
   useEffect(() => {
-    Router.events.on("routeChangeStart", (url) => {
-      //console.log(url);
-      isLoading(true);
-      //console.log("start changing");
-    });
+    Router.events
+      .on("routeChangeStart", (url) => {
+        // console.log(url);
+        isLoading(true);
+        console.log("start changing");
+      })
+      .then();
 
     Router.events.on("routeChangeComplete", (url) => {
       isLoading(false);
-      //console.log("route changing finished");
+      // console.log("route changing finished");
     });
 
     Router.events.on("routeChangeError", (url) => {
       isLoading(false);
-      //console.log("route error");
+      // console.log("route error");
     });
   }, [Router]);
 
@@ -266,8 +268,5 @@ const useCtx = () => {
 export { AppProvider, initialState, useCtx };
 
 /** @TODO wishlist functionality  */
-/** @TODO Categories page with miniCard-link (come in home: more products) */
-/** @TODO better home page */
 /** @TODO inStock = 0 bug  */
-/** @TODO make sure to implement res.revalidate('/') every time products change  */
 /**@TODO removed w-[247.2px] */

@@ -71,9 +71,6 @@ const createOrder = async (req, res) => {
 
     await newOrder.save();
 
-    //ISR on-demand
-    res.revalidate("/");
-
     res.json({
       msg: "Order sent! We will contact you to confirm the order",
       newOrder,

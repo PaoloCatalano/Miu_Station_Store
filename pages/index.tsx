@@ -95,7 +95,7 @@ const Home: NextPage = (props: {
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const stickers = await getData(
     "product?limit=2&category=6248c34a9695eb0009ac13b8&showInStock=&sort=&title=all"
   );
@@ -113,7 +113,7 @@ export async function getStaticProps() {
         accessories: accessories.products,
       },
     },
-    revalidate: 60,
+    // revalidate: 60, with getStaticProps()
   };
 }
 

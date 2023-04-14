@@ -8,7 +8,7 @@ export default function Preview({ category, products, link }) {
         {category}
       </div>
       {products.map((item) => (
-        <div key={item.title}>
+        <div key={item._id}>
           <SmallCard product={item} />
         </div>
       ))}
