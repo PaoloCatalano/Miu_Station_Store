@@ -113,6 +113,7 @@ export async function getStaticProps() {
         accessories: accessories.products,
       },
     },
+    revalidate: 60,
   };
 }
 

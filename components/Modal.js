@@ -55,7 +55,7 @@ const Modal = () => {
         }  relative  w-auto -translate-y-3/4 pointer-events-none transition-all`}
         role="document"
       >
-        <div className="relative flex flex-col w-100 pointer-events-auto bg-white bg-clip-padding rounded border-2 border-slate-200 shadow-md outline-0">
+        <div className="relative max-w-screen-md flex flex-col w-100 pointer-events-auto bg-white bg-clip-padding break-all rounded border-2 border-slate-200 shadow-md outline-0">
           <div className="flex justify-end pt-1 pr-2">
             <button
               type="button"
