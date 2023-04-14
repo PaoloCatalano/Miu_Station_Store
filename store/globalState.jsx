@@ -212,17 +212,16 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     Router.events.on("routeChangeStart", (url) => {
-      // console.log(url);
       isLoading(true);
-      console.log("start changing");
+      console.log("start changing to ", url);
     });
 
-    Router.events.on("routeChangeComplete", (url) => {
+    Router.events.on("routeChangeComplete", () => {
       isLoading(false);
-      // console.log("route changing finished");
+      console.log("route changing finished");
     });
 
-    Router.events.on("routeChangeError", (url) => {
+    Router.events.on("routeChangeError", () => {
       isLoading(false);
       // console.log("route error");
     });

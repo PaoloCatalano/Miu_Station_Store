@@ -22,17 +22,17 @@ const Home: NextPage = (props: {
 
   const data: Data = [
     {
-      link: "/product?category=624afb102808cb15488d1fba",
+      link: "/products?category=624afb102808cb15488d1fba",
       category: "Stickers",
       products: props.products.stickers,
     },
     {
-      link: "/product?category=624afb102808cb15488d1fba",
+      link: "/products?category=624afb102808cb15488d1fba",
       category: "Kimono",
       products: props.products.kimono,
     },
     {
-      link: "/product?category=624b1f5809f7af00099f873e",
+      link: "/products?category=624b1f5809f7af00099f873e",
       category: "Accessories",
       products: props.products.accessories,
     },
@@ -59,7 +59,7 @@ const Home: NextPage = (props: {
       />
       <BgStatic />
       <section className="my-10 container px-5">
-        <article className="bg-slate-50 border-2 border-animation-color rounded p-5 pt-7 max-w-md mx-auto mb-10">
+        <article className="bg-slate-50 border-2 border-blue-200 rounded p-5 pt-7 max-w-md mx-auto mb-10">
           <Title>Miu Station Store</Title>
 
           <p className="text-slate-600 text-2xl pb-4">
@@ -69,8 +69,13 @@ const Home: NextPage = (props: {
             Here you will find stickers, dolls, clothes, kimonos, paintings,
             handcrafts, and much more.
           </p>
-          <Link href="/products" className="cursor-pointer p-4 m-5 ">
-            <Button cta>Shop Now</Button>
+          <Link href="/products?search=all">
+            {/* CTA Button (with component = bugs: loading spinner doesn't appear...!) */}
+            <button className="my-3 text-white rounded max-w-xs transition-all  hover:ring-4 active:shadow-in focus:outline-none focus:ring-4 bg-miu-600  hover:ring-miu-500 focus:ring-miu-500">
+              <div className="px-5 p-2 transition-all active:translate-x-[1px] active:translate-y-[1px]">
+                Shop Now
+              </div>
+            </button>
           </Link>
           {/* <Image
             placeholder="blur"
@@ -81,7 +86,7 @@ const Home: NextPage = (props: {
         </article>
       </section>
       <section className="my-10 container px-1">
-        <div className="text-2xl mb-8 font-bold md:text-6xl text-miu-500">
+        <div className="text-3xl mb-8 font-bold md:text-6xl text-miu-500">
           Categories
         </div>
         {products?.map((prod) => (

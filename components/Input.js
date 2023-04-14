@@ -39,6 +39,7 @@ export default function TextField(props) {
   }`;
 
   /**@TODO added  valueState || value ?, check for bugs! */
+  /**   @TODO check if the change from onChange to onInput has no bugs */
 
   //textarea works better
   /* 
@@ -52,8 +53,6 @@ export default function TextField(props) {
           />
   */
 
-  /**   @TODO check if the change from onChange to onInput has no bugs */
-
   return (
     <div className=" mb-2">
       <div className="relative max-w-min mx-auto ">
@@ -64,7 +63,7 @@ export default function TextField(props) {
           className={`${className} ${inputStyle}`}
         />
         <label
-          className={`form-label absolute top-[0.4rem] left-3 max-w-[90%] whitespace-nowrap overflow-hidden text-ellipsis mb-0 ml-0 px-1 align-bottom  pointer-events-none origin-top-left transition-all ease-out text-slate-500 ${
+          className={`form-label absolute top-[0.4rem] left-3 max-w-[90%] whitespace-nowrap overflow-hidden text-ellipsis mb-0 ml-0 px-1 align-bottom pointer-events-none origin-top-left transition-all ease-out text-slate-500 ${
             props.errorMessage
               ? "text-red-300 peer-focus:text-red-500"
               : "peer-focus:text-slate-600"
