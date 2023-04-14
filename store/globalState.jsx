@@ -211,13 +211,11 @@ const AppProvider = ({ children }) => {
   }, [auth.token]);
 
   useEffect(() => {
-    Router.events
-      .on("routeChangeStart", (url) => {
-        // console.log(url);
-        isLoading(true);
-        console.log("start changing");
-      })
-      .then();
+    Router.events.on("routeChangeStart", (url) => {
+      // console.log(url);
+      isLoading(true);
+      console.log("start changing");
+    });
 
     Router.events.on("routeChangeComplete", (url) => {
       isLoading(false);
