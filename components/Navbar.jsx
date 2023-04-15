@@ -14,7 +14,7 @@ export default function Navbar() {
   const { open, isMenuOpen, auth } = useCtx();
 
   return (
-    <nav className="relative w-screen flex justify-center z-20 bg-gradient-to-t from-blue-100  via-white to-slate-50   border-b-2 border-slate-200">
+    <nav className="relative w-screen flex justify-center z-20 bg-gradient-to-t from-blue-100  via-white to-slate-50 border-b-2 border-slate-200">
       {/* <button
         aria-pressed={open}
         className="rotate-[var(--rotate,_0)] fixed z-20 top-0 right-0 bg-slate-500/30 backdrop-blur rounded-lg m-2 outline-0 transition h-min md:hidden py-2 px-3 select-none"
@@ -27,7 +27,7 @@ export default function Navbar() {
           open ? "static h-0" : "fixed h-14"
         } w-screen  z-0 bg-gradient-to-b from-blue-100 to-slate-50 md:hidden`}
       >
-        <div className="absolute top-2 left-0 text-center w-full  md:static md:grow md:w-fit md:text-start">
+        <div className="absolute top-2 left-0 text-center w-full md:static md:grow md:w-fit md:text-start">
           <Link href="/">
             <Image
               src={logo}
@@ -48,18 +48,22 @@ export default function Navbar() {
       >
         <ul className="flex flex-col items-center justify-evenly   bg-gradient-to-t from-blue-100  via-white to-slate-50 backdrop-blur-2xl h-[var(--nav-height)] p-6  border-b-2 border-slate-200 md:border-b-0 md:flex-row md:h-auto md:items-baseline md:space-x-5">
           <li className="absolute top-2 left-0 text-center w-full  md:static md:grow md:w-fit md:text-start">
-            <div>
-              <Link href="/">
+            <div className="relative">
+              <Link
+                href="/"
+                className="z-20 absolute top-0 left-3 md:-top-8 md:-left-2"
+                onClick={() => isMenuOpen(false)}
+              >
                 <Image
                   src={logo}
                   alt="miu"
                   placeholder="blur"
-                  className="w-14 absolute top-0 left-3 rounded-full md:top-3"
+                  className="w-14 rounded-full "
                   sizes="50vw"
                 />
               </Link>
               {auth.user && (
-                <div className="block capitalize text-sm text-sky-500 pl-4 translate-y-4 md:inline md:pl-14 md:translate-y-0">
+                <div className="block capitalize text-sm text-sky-500 pl-4 translate-y-4 md:absolute md:pl-14 md:-translate-y-4">
                   Hi, {auth.user.name}
                   <Image
                     src={auth.user.avatar}

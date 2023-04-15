@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import { NextSeo } from "next-seo";
-import Image from "next/image";
 import Link from "next/link";
 import { getData } from "utils/fetchData";
 import BgStatic from "components/BgStatic";
+import Image from "next/image";
 import pic from "public/images/logos/logo.png";
 import Title from "components/Title";
-import Button from "components/Button";
 import Preview from "components/Preview";
 import A from "components/A";
 
@@ -70,8 +69,8 @@ const Home: NextPage = (props: {
             handcrafts, and much more.
           </p>
           <Link href="/products?search=all">
-            {/* CTA Button (with component = bugs: loading spinner doesn't appear...!) */}
-            <button className="my-3 text-white rounded max-w-xs transition-all  hover:ring-4 active:shadow-in focus:outline-none focus:ring-4 bg-gradient-to-br from-blue-400 to-miu-600  hover:ring-miu-400 focus:ring-miu-500">
+            {/* CTA Button ~ */}
+            <button className="my-3 text-white rounded max-w-xs transition-all  hover:ring-4 active:shadow-in focus:outline-none focus:ring-4 bg-gradient-to-br from-blue-400 to-miu-600 to-60% hover:ring-miu-400 focus:ring-miu-500 hover:to-70%">
               <div className="px-5 p-2 transition-all active:translate-x-[1px] active:translate-y-[1px]">
                 Shop Now
               </div>
@@ -93,7 +92,7 @@ const Home: NextPage = (props: {
           <Preview key={prod.category} {...prod} />
         ))}
         <Link href="/categories">
-          <A>All Categories</A>
+          <A>View All Categories</A>
         </Link>
       </section>
     </>

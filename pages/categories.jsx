@@ -14,6 +14,7 @@ import TitleImage from "components/TitleImage";
 import pic from "public/images/logos/categories.png";
 import ErrorMessage from "components/ErrorMessage";
 import MoreItems from "components/MoreItems";
+import SkeletonMoreItems from "components/SkeletonMoreItems";
 
 const Categories = () => {
   const [name, setName] = useState("");
@@ -120,41 +121,47 @@ const Categories = () => {
         </div>
       )}
       <section>
-        <ul className="container my-10 flex flex-col md:flex-row flex-wrap justify-center">
-          {categories.map((category) => (
-            <li key={category._id} className="m-4 place-self-center">
-              <MoreItems link={`/products?category=${category._id}`}>
-                {category.name}
-              </MoreItems>
-              {auth.user?.role === "admin" && (
-                <div className="flex justify-between mx-auto mb-10 mt-2 w-60">
-                  <a
-                    href="#top"
-                    className="cursor-pointer text-miu-600 p-1 border-2 border-miu-200 bg-slate-50 rounded transition hover:ring-2 hover:ring-miu-200"
-                    onClick={() => handleEditCategory(category)}
-                  >
-                    <FaEdit className="text-2xl" />
-                  </a>
+        <ul className="max-w-screen-xl my-10 flex flex-col md:flex-row flex-wrap justify-center">
+          {categories.length > 0
+            ? categories.map((category) => (
+                <li key={category._id} className="m-4 place-self-center">
+                  <MoreItems link={`/products?category=${category._id}`}>
+                    {category.name}
+                  </MoreItems>
+                  {auth.user?.role === "admin" && (
+                    <div className="flex justify-between mx-auto mb-10 mt-2 w-60">
+                      <a
+                        href="#top"
+                        className="cursor-pointer text-miu-600 p-1 border-2 border-miu-200 bg-slate-50 rounded transition hover:ring-2 hover:ring-miu-200"
+                        onClick={() => handleEditCategory(category)}
+                      >
+                        <FaEdit className="text-2xl" />
+                      </a>
 
-                  <div
-                    className="cursor-pointer text-red-500 p-1 border-2 border-red-200 bg-slate-50 rounded transition hover:ring-2 hover:ring-red-200"
-                    onClick={() =>
-                      addModal([
-                        {
-                          data: categories,
-                          id: category._id,
-                          title: category.name,
-                          type: ACTIONS.ADD_CATEGORY, //deleteCategories()
-                        },
-                      ])
-                    }
-                  >
-                    <FaTrashAlt className="text-2xl" />
-                  </div>
-                </div>
-              )}
-            </li>
-          ))}
+                      <div
+                        className="cursor-pointer text-red-500 p-1 border-2 border-red-200 bg-slate-50 rounded transition hover:ring-2 hover:ring-red-200"
+                        onClick={() =>
+                          addModal([
+                            {
+                              data: categories,
+                              id: category._id,
+                              title: category.name,
+                              type: ACTIONS.ADD_CATEGORY, //deleteCategories()
+                            },
+                          ])
+                        }
+                      >
+                        <FaTrashAlt className="text-2xl" />
+                      </div>
+                    </div>
+                  )}
+                </li>
+              ))
+            : placeholder.map((items) => (
+                <li key={items.id} className="m-4 place-self-center">
+                  <SkeletonMoreItems />
+                </li>
+              ))}
         </ul>
       </section>
     </>
@@ -162,3 +169,16 @@ const Categories = () => {
 };
 
 export default Categories;
+
+const placeholder = [
+  { id: 1 },
+  { id: 2 },
+  { id: 3 },
+  { id: 4 },
+  { id: 5 },
+  { id: 6 },
+  { id: 7 },
+  { id: 8 },
+  { id: 9 },
+  { id: 10 },
+];

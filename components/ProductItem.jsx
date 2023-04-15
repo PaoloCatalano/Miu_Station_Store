@@ -102,12 +102,16 @@ const ProductItem = ({ product, handleCheck }) => {
         </div>
       </Link>
 
-      <div className="font-sans uppercase text-left line-clamp-1 pl-3 mt-2 font-bold text-xl text-slate-600">
+      <div className="font-sans uppercase text-left line-clamp-1 pl-3 mt-2 mb-1 font-bold text-xl text-slate-600">
         {product.title}
       </div>
-      <div className="text-xs text-left pl-4 text-slate-400 font-bold first-letter:capitalize">
-        {nameCategory}
-      </div>
+      {categories.length > 0 ? (
+        <div className="text-xs text-left pl-4 text-slate-400 font-bold first-letter:capitalize">
+          {nameCategory}
+        </div>
+      ) : (
+        <div className="ml-4 mt-1 h-3 rounded w-20 bg-slate-300 animate-pulse"></div>
+      )}
 
       <div className="p-2">
         <div className="flex flex-row items-center justify-between my-auto px-2 py-2">
@@ -147,10 +151,14 @@ const ProductItem = ({ product, handleCheck }) => {
                 <span className="text-sm mr-px">€</span>
                 {product.price}
               </div>
-              {isLoading && <span>...</span>}
-              <div className="text-slate-400 text-xs">
-                {isError && `${product.inStock} in stock`}
-              </div>
+              {isLoading && (
+                <div className="mr-2 mt-2 h-3 rounded w-10 bg-slate-300 animate-pulse"></div>
+              )}
+              {isError && (
+                <div className="text-slate-400 text-xs">
+                  {product.inStock} in stock
+                </div>
+              )}
             </>
           )}
         </div>

@@ -57,7 +57,7 @@ const Filter = () => {
         >
           <div>
             <select
-              className="capitalize bg-slate-50 w-full mb-2 p-2 text-slate-700 cursor-pointer focus:outline-none focus:text-miu-600 transition"
+              className="capitalize bg-slate-50 w-full mb-2 p-2 text-slate-600 cursor-pointer focus:outline-none focus:text-miu-600 transition"
               value={sort}
               placeholder="Order"
               onChange={handleSort}
@@ -77,7 +77,7 @@ const Filter = () => {
 
           <div>
             <select
-              className="capitalize bg-slate-50 w-full mb-2 p-2 text-slate-700 cursor-pointer focus:outline-none focus:text-miu-600 transition"
+              className="capitalize bg-slate-50 w-full mb-2 p-2 text-slate-600 cursor-pointer focus:outline-none focus:text-miu-600 transition"
               value={category}
               onChange={handleCategory}
             >
@@ -94,7 +94,7 @@ const Filter = () => {
               </optgroup>
             </select>
           </div>
-          <div className="ml-2 mb-4">
+          <div className="ml-2 my-4 mb-6">
             <CheckBox
               isSelected={router?.query?.showInStock === "true" ? true : false}
               onChange={handleShowInStock}
