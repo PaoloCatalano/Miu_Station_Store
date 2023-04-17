@@ -7,10 +7,12 @@
     --nav-height: 100vh;
   }
 
-  :root:has(nav > div[aria-haspopup="true"]) {
+  /* :root:has(nav > div[aria-haspopup="true"]) {
     --open: 1;
-    /* --rotate: 90deg; */
-  }
+  } 
+  :HAS() IS NOT SUPPORTED IN FIREFOX AND OTHERS (4/2023)
+  */
+
   ::selection {
     @apply bg-sky-700/80 text-rose-200 rounded;
   }

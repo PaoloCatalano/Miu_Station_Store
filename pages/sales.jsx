@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { NextSeo } from "next-seo";
 import { getData } from "utils/fetchData";
 import ProductItem from "components/ProductItem";
-import BgStatic from "components/BgStatic";
-import Title from "components/Title";
 import TitleImage from "components/TitleImage";
+import Button from "components/Button";
 import pic from "public/images/logos/onSale.png";
 
 const OnSale = (props) => {
@@ -33,13 +33,18 @@ const OnSale = (props) => {
           url: "https://miustationstore.netlify.app/sales",
         }}
       />
-
-      <BgStatic />
       <TitleImage image={pic} alt="products on sale" />
 
       <div className="my-10">
         {products.length === 0 ? (
-          <Title>No Products</Title>
+          <div className="text-xl">
+            <p>No Products available On Sale in this moment.</p>
+            <div className="animate-fade-in my-10 w-full">
+              <Link href="/products" className="self-center">
+                <Button cta>Keep Shopping</Button>
+              </Link>
+            </div>
+          </div>
         ) : (
           products.map((product) => (
             <ProductItem

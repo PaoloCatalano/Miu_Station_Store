@@ -1,4 +1,10 @@
-import { useReducer, useContext, createContext, useEffect } from "react";
+import {
+  useReducer,
+  useContext,
+  createContext,
+  useEffect,
+  useMemo,
+} from "react";
 import Router from "next/router";
 import reducers from "./reducers";
 import { ACTIONS } from "./actions";
@@ -21,7 +27,7 @@ const initialState = {
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducers, initialState);
-  const { cart, auth, loading } = state;
+  const { cart, auth } = state;
 
   //dispatch all actions
   function isMenuOpen(isOpen) {
@@ -265,5 +271,4 @@ const useCtx = () => {
 export { AppProvider, initialState, useCtx };
 
 /** @TODO wishlist functionality  */
-/** @TODO inStock = 0 bug  */
 /**@TODO removed w-[247.2px] */

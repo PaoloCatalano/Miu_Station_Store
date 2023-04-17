@@ -66,7 +66,8 @@ const CreateProduct = () => {
     },
   });
 
-  const disabled = zo.validation?.success === false;
+  const disabled =
+    zo.validation?.success === false || zoEdit.validation?.success === false;
 
   useEffect(() => {
     if (
@@ -160,8 +161,8 @@ const CreateProduct = () => {
 
     if (
       !title ||
-      !price ||
-      !inStock ||
+      price < 0 ||
+      inStock < 0 ||
       !description ||
       !content ||
       category === "all" ||
@@ -220,7 +221,11 @@ const CreateProduct = () => {
             <Input
               type="text"
               name={zo.fields.title()}
-              errorMessage={zo.errors.title((e) => e.message)}
+              errorMessage={
+                onEdit
+                  ? zoEdit.errors.title((e) => e.message)
+                  : zo.errors.title((e) => e.message)
+              }
               label="Title"
               defaultValue={title ? title : null}
             />
@@ -228,22 +233,34 @@ const CreateProduct = () => {
             <Input
               type="number"
               name={zo.fields.price()}
-              errorMessage={zo.errors.price((e) => e.message)}
+              errorMessage={
+                onEdit
+                  ? zoEdit.errors.price((e) => e.message)
+                  : zo.errors.price((e) => e.message)
+              }
               label="Price"
-              defaultValue={price ? price : null}
+              defaultValue={price ? price : "0"}
             />
 
             <Input
               type="number"
               name={zo.fields.inStock()}
-              errorMessage={zo.errors.inStock((e) => e.message)}
+              errorMessage={
+                onEdit
+                  ? zoEdit.errors.inStock((e) => e.message)
+                  : zo.errors.inStock((e) => e.message)
+              }
               label="inStock"
               defaultValue={inStock ? inStock : "0"}
             />
 
             <Input
               name={zo.fields.description()}
-              errorMessage={zo.errors.description((e) => e.message)}
+              errorMessage={
+                onEdit
+                  ? zoEdit.errors.description((e) => e.message)
+                  : zo.errors.description((e) => e.message)
+              }
               cols="30"
               rows="3"
               label="Description"
@@ -252,7 +269,11 @@ const CreateProduct = () => {
 
             <TextArea
               name={zo.fields.content()}
-              errorMessage={zo.errors.content((e) => e.message)}
+              errorMessage={
+                onEdit
+                  ? zoEdit.errors.content((e) => e.message)
+                  : zo.errors.content((e) => e.message)
+              }
               cols="30"
               rows="4"
               label="Content"
@@ -276,16 +297,24 @@ const CreateProduct = () => {
                   ))}
                 </select>
               )}
-              {zo.errors.category((e) => (
-                <ErrorMessage message={e.message} />
-              ))}
+              {onEdit
+                ? zoEdit.errors.category((e) => (
+                    <ErrorMessage message={e.message} />
+                  ))
+                : zo.errors.category((e) => (
+                    <ErrorMessage message={e.message} />
+                  ))}
             </div>
 
             <CheckBox
               label="on sale"
               onChange={handleCheck}
               name={zo.fields.onSale()}
-              errorMessage={zo.errors.onSale((e) => e.message)}
+              errorMessage={
+                onEdit
+                  ? zoEdit.errors.onSale((e) => e.message)
+                  : zo.errors.onSale((e) => e.message)
+              }
               isSelected={checkOnSale}
             >
               Product on Sale?
@@ -298,7 +327,7 @@ const CreateProduct = () => {
         </aside>
         <div className="max-h-min">
           <Fieldset legend="Upload Images">
-            <div className=" my-4">
+            <div className="my-4">
               <input
                 className="cursor-pointer w-[240px] md:w-auto"
                 type="file"
@@ -308,9 +337,14 @@ const CreateProduct = () => {
                 accept="image/*"
                 // defaultValue={images ? images[0] : null}
               />
-              {zo.errors.images.size((e) => (
-                <ErrorMessage message={e.message} />
-              ))}
+
+              {onEdit
+                ? zoEdit.errors.images.size((e) => (
+                    <ErrorMessage message={e.message} />
+                  ))
+                : zo.errors.images.size((e) => (
+                    <ErrorMessage message={e.message} />
+                  ))}
             </div>
 
             <div className="flex flex-col items-center">
@@ -325,6 +359,7 @@ const CreateProduct = () => {
                       src={img.url ? img.url : URL.createObjectURL(img)}
                       alt={img.name ? img.name : "product"}
                       fill
+                      sizes="40vw"
                       className="object-contain rounded"
                     />
 
