@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function TitleImage({ image, alt = "" }) {
   return (
-    <div className="flex border-b-2 border-miu-600 mb-10 overflow-hidden">
+    <div className="flex border-b-2 border-miu-600 mb-10 overflow-hidden ">
       <Image
-        className="w-28  animate-up transition hover:translate-y-9 md:w-52 md:hover:translate-y-16"
+        className="animate-up transition md:hover:translate-y-16 w-28 h-20 md:w-52 md:h-36"
         alt={`miu station store ${alt}`}
         src={image}
         placeholder="blur"

@@ -10,7 +10,7 @@ export default function Hamburger({ open = false }) {
       }`}
     >
       <span
-        className={`text-sky-600 block absolute bottom-8 left-[2px] text-sm  ${
+        className={`text-sky-600 block absolute bottom-[33px] left-[2px] text-sm  ${
           open
             ? "animate-[menuLabel-open_1s_ease-in_forwards]"
             : "animate-[menuLabel-close_1s_ease-in_forwards]"
