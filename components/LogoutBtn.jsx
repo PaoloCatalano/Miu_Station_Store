@@ -19,11 +19,11 @@ export default function LogoutBtn() {
   return (
     <div className="w-full md:w-fit flex justify-end ">
       <button
-        className="text-slate-500 relative mr-5 hover:text-slate-700 text-sm"
+        className="group text-slate-500 relative mr-5 hover:text-slate-600 transition"
         onClick={handleLogout}
         aria-label="Logout"
       >
-        <span className="absolute pointer-events-none text-slate-500 text-xl -left-6">
+        <span className="absolute pointer-events-none text-slate-500 text-xl -left-6 translate-y-px group-hover:text-slate-600 transition">
           <TbLogout />
         </span>
         Logout

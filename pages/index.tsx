@@ -4,8 +4,6 @@ import { NextSeo } from "next-seo";
 import Link from "next/link";
 import { getData } from "utils/fetchData";
 import BgStatic from "components/BgStatic";
-import Image from "next/image";
-import pic from "public/images/logos/logo.png";
 import Title from "components/Title";
 import Preview from "components/Preview";
 import A from "components/A";
@@ -59,14 +57,20 @@ const Home: NextPage = (props: {
       <BgStatic />
       <section className="my-10 container px-5">
         <article className="bg-slate-50 border-2 border-blue-200 rounded p-5 pt-7 max-w-md mx-auto mb-10">
+          <p className="text-slate-600 text-2xl pb-4">Welcome to</p>
           <Title>Miu Station Store</Title>
 
           <p className="text-slate-600 text-2xl pb-4">
-            Online shop for fabulous handmade products!
+            Your online shop for fabulous handmade items!
           </p>
-          <p className="text-slate-600 text-lg mb-6">
-            Here you will find stickers, dolls, clothes, kimonos, paintings,
-            handcrafts, and much more.
+          <p className="text-slate-600 text-lg mb-6 text-left">
+            We offer a wide range of unique and creative products that mix
+            cultures from around the world, lovingly crafted by skilled
+            artisans.
+          </p>
+          <p className="text-slate-600 text-lg mb-6 text-left">
+            From stickers and dolls to clothes, kimonos, paintings, handcrafts,
+            and more, you'll find something truly special at our store.
           </p>
           <Link href="/products?search=all">
             {/* CTA Button ~ */}
@@ -76,12 +80,6 @@ const Home: NextPage = (props: {
               </div>
             </button>
           </Link>
-          {/* <Image
-            placeholder="blur"
-            src={pic}
-            alt="miu station store"
-            className="rounded max-w-[200px] mx-auto md:max-w-[300px]"
-          /> */}
         </article>
       </section>
       <section className="my-10 container px-1">
@@ -93,6 +91,28 @@ const Home: NextPage = (props: {
         ))}
         <Link href="/categories">
           <A>View All Categories</A>
+        </Link>
+      </section>
+      <section className="my-10 container px-5">
+        <p className="text-slate-600 text-lg mb-6 text-left">
+          At Miu Station Store, we are committed to providing our customers with
+          exceptional service and high-quality products. We source our handmade
+          items from artisans who share our passion for creativity and
+          craftsmanship.
+        </p>
+        <p className="text-slate-600 text-lg mb-6 text-left">
+          So why wait?
+          <br />
+          Start exploring our product page now and discover the wonderful world
+          of handmade treasures at Miu Station Store!
+        </p>
+        <Link href="/products?search=all">
+          {/* CTA Button ~ */}
+          <button className="my-3 text-white rounded max-w-xs transition-all  hover:ring-4 active:shadow-in focus:outline-none focus:ring-4 bg-gradient-to-br from-blue-400 to-miu-600 to-60% hover:ring-miu-400 focus:ring-miu-500 hover:to-70%">
+            <div className="px-5 p-2 transition-all active:translate-x-[1px] active:translate-y-[1px]">
+              Can't wait!
+            </div>
+          </button>
         </Link>
       </section>
     </>

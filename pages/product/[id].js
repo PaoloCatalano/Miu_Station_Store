@@ -193,10 +193,10 @@ const SingleProduct = (props) => {
             </div>
             {/* Description */}
             <div className="mt-10 p-5 bg-gradient-to-b from-transparent to-blue-200 rounded">
-              <div className="my-2 uppercase text-sky-700 text-xl">
+              <div className="my-2 mb-6 uppercase text-sky-700 text-xl">
                 {product.description}
               </div>
-              <div className="my-2  first-letter:uppercase text-slate-700">
+              <div className="my-2 text-left first-letter:uppercase text-slate-700">
                 {product.content}
               </div>
             </div>

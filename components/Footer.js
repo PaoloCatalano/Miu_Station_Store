@@ -12,16 +12,7 @@ export default function Footer() {
         <div className="mb-5 md:mb-0 md:w-[191px] md:flex md:justify-end">
           <Social />
         </div>
-        {auth.user ? (
-          <LogoutBtn />
-        ) : (
-          <Link
-            href="/login"
-            className="px-10 ring-2 ring-slate-600 rounded p-2 text-slate-600 transition hover:ring-4"
-          >
-            Login
-          </Link>
-        )}
+        {auth.user && <LogoutBtn />}
         <div className="text-slate !mt-7">
           MiuStationStore&copy; {new Date().getFullYear()}
         </div>

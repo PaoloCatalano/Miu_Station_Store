@@ -28,12 +28,12 @@ const ProductItem = ({ product }) => {
             priority
           />
           <div className="absolute w-full bottom-0 bg-white mb-4 pb-2 rounded border-2  scale-95 border-blue-200 group-hover:scale-90 transition group-hover:translate-y-2 group-hover:border-blue-300">
-            <div className="font-sans uppercase text-left line-clamp-1 pl-3 mt-2 font-bold text-xl text-slate-600">
+            <div className="font-sans uppercase text-center line-clamp-1 mt-2 font-bold text-xl text-slate-600">
               {product.title}
             </div>
-            <div className="text-xs text-left pl-4 text-slate-500 font-bold first-letter:capitalize">
+            {/* <div className="text-xs text-left pl-4 text-slate-500 font-bold first-letter:capitalize">
               {product.description}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

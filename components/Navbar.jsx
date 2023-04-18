@@ -57,8 +57,8 @@ export default function Navbar() {
                   sizes="50vw"
                 />
               </Link>
-              {auth.user && (
-                <div className="block capitalize text-sm text-sky-500 pl-4 translate-y-4 md:absolute md:pl-14 md:-translate-y-4">
+              {auth.user ? (
+                <div className="block capitalize text-sm text-miu-500 pl-4 translate-y-4 md:absolute md:pl-14 md:-translate-y-4">
                   Hi, {auth.user.name}
                   <Image
                     src={auth.user.avatar}
@@ -67,6 +67,12 @@ export default function Navbar() {
                     height={30}
                     className="ml-1 overflow-hidden aspect-square object-cover rounded-full shadow inline"
                   />
+                </div>
+              ) : (
+                <div className="block text-sm pl-4 translate-y-4 text-miu-500 transition hover:text-miu-600 md:absolute md:pl-16 md:-translate-y-4">
+                  <Link href="/login" onClick={() => isMenuOpen(false)}>
+                    Login / Register
+                  </Link>
                 </div>
               )}
             </div>
