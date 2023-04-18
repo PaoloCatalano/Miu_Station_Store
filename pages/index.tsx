@@ -19,9 +19,9 @@ const Home: NextPage = (props: {
 
   const data: Data = [
     {
-      link: "/products?category=624afb102808cb15488d1fba",
-      category: "Stickers",
-      products: props.products.stickers,
+      link: "/products?category=624b1f5809f7af00099f873e",
+      category: "Accessories",
+      products: props.products.accessories,
     },
     {
       link: "/products?category=624afb102808cb15488d1fba",
@@ -29,9 +29,9 @@ const Home: NextPage = (props: {
       products: props.products.kimono,
     },
     {
-      link: "/products?category=624b1f5809f7af00099f873e",
-      category: "Accessories",
-      products: props.products.accessories,
+      link: "/products?category=6248c34a9695eb0009ac13b8",
+      category: "Stickers",
+      products: props.products.stickers,
     },
   ];
 
@@ -119,15 +119,15 @@ const Home: NextPage = (props: {
   );
 };
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const stickers = await getData(
-    "product?limit=2&category=6248c34a9695eb0009ac13b8&showInStock=&sort=&title=all"
+    "product?limit=2&category=6248c34a9695eb0009ac13b8&showInStock=false&sort=oldest&title=black"
   );
   const kimono = await getData(
-    "product?limit=2&category=624afb102808cb15488d1fba&showInStock=false&sort=&title=all"
+    "product?limit=2&category=624afb102808cb15488d1fba&showInStock=false&sort=oldest&title=blue yukata"
   );
   const accessories = await getData(
-    "product?limit=2&category=624b1f5809f7af00099f873e&showInStock=&sort=&title=all"
+    "product?limit=2&category=624b1f5809f7af00099f873e&showInStock=false&sort=oldest&title=no.1"
   );
   return {
     props: {
@@ -137,7 +137,7 @@ export async function getServerSideProps() {
         accessories: accessories.products,
       },
     },
-    // revalidate: 60, with getStaticProps()
+    // revalidate: 60
   };
 }
 

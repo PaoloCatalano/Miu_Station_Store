@@ -4,7 +4,6 @@ import { NextSeo } from "next-seo";
 import { postData } from "utils/fetchData";
 import { useCtx } from "store/globalState";
 import { useRouter } from "next/router";
-import Button from "components/Button";
 import Banner from "components/Banner";
 
 export default function VerifyEmail() {
@@ -50,8 +49,13 @@ export default function VerifyEmail() {
           <Banner text="Thank you! Your account has been verified correctly." />
         )}
       </div>
-      <Link href="/products">
-        <Button cta>Enjoy Shopping</Button>
+      <Link href="/products?search=all" className="self-center">
+        {/* CTA Button ~ */}
+        <button className="my-3 text-white rounded max-w-xs transition-all  hover:ring-4 active:shadow-in focus:outline-none focus:ring-4 bg-gradient-to-br from-blue-400 to-miu-600 to-60% hover:ring-miu-400 focus:ring-miu-500 hover:to-70%">
+          <div className="px-5 p-2 transition-all active:translate-x-[1px] active:translate-y-[1px]">
+            Enjoy Shopping
+          </div>
+        </button>
       </Link>
     </>
   );
