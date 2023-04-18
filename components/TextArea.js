@@ -38,6 +38,7 @@ export default function TextField(props) {
             ref.current.focus();
             setValueState(e.target.value);
           }}
+          rows="5"
           ref={ref}
           className={`peer ${
             props.errorMessage

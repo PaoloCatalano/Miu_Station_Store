@@ -41,7 +41,7 @@ export default function Navbar() {
           open ? "translate-y-[var(--nav-height)]" : "translate-y-0"
         } fixed -top-[var(--nav-height)] w-full right-0 duration-500 ease-[cubic-bezier(1,1.6,.31,.69)] md: max-w-screen-2xl md:sticky md:translate-y-0 md:top-0`}
       >
-        <ul className="flex flex-col items-center justify-evenly   bg-gradient-to-t from-blue-100  via-white to-slate-50 backdrop-blur-2xl h-[var(--nav-height)] p-6  border-b-2 border-slate-200 md:border-b-0 md:flex-row md:h-auto md:items-baseline md:space-x-5">
+        <ul className="flex flex-col items-center justify-evenly   bg-gradient-to-t from-blue-100  via-white to-slate-50 backdrop-blur-2xl h-[var(--nav-height)] p-6 pb-16 md:pb-6 border-b-2 border-slate-200 md:border-b-0 md:flex-row md:h-auto md:items-baseline md:space-x-5">
           <li className="absolute top-2 left-0 text-center w-full  md:static md:grow md:w-fit md:text-start">
             <div className="relative">
               <Link

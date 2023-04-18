@@ -41,12 +41,12 @@ class APIfeatures {
     if (queryObj.title !== "all")
       this.queryDB.find({
         $or: [
-          { title: { $regex: queryObj.title } },
+          { title: { $regex: queryObj.title, $options: "i" } },
           {
-            content: { $regex: queryObj.title },
+            content: { $regex: queryObj.title, $options: "i" },
           },
           {
-            description: { $regex: queryObj.title },
+            description: { $regex: queryObj.title, $options: "i" },
           },
         ],
       });
@@ -123,11 +123,11 @@ const createProduct = async (req, res) => {
       return res.status(400).json({ err: "Please add all the fields." });
 
     const newProduct = new Products({
-      title: title.toLowerCase(),
+      title,
       price,
       inStock,
-      description: description.toLowerCase(),
-      content: content.toLowerCase(),
+      description,
+      content,
       onSale,
       category,
       images,

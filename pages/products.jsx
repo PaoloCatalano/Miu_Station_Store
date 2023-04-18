@@ -12,6 +12,7 @@ import CheckBox from "components/CheckBox";
 import pic from "public/images/logos/products.png";
 import Button from "components/Button";
 import TitleImage from "components/TitleImage";
+import Title from "components/Title";
 
 const Products = (props) => {
   const [products, setProducts] = useState(props.products);
@@ -77,8 +78,6 @@ const Products = (props) => {
           url: "https://miustationstore.netlify.app/products",
         }}
       />
-      {/* <BgAnimated /> */}
-
       <TitleImage image={pic} alt="products" />
       <section className="relative w-full container flex flex-col items-center justify-center gap-5 px-1 md:flex-row md:items-start md:space-x-10">
         <aside className="top-1 md:pl-4 md:sticky">
@@ -95,7 +94,9 @@ const Products = (props) => {
         <div className="grow">
           <div className="flex flex-wrap justify-center md:justify-center gap-6 ">
             {products.length === 0 ? (
-              <h2>No Products</h2>
+              <div className="mt-10">
+                <Title>No Products</Title>
+              </div>
             ) : (
               products.map((product) => (
                 <ProductItem

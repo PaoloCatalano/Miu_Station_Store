@@ -82,11 +82,11 @@ const updateProduct = async (req, res) => {
     await Products.findOneAndUpdate(
       { _id: id },
       {
-        title: title.toLowerCase(),
+        title,
         price,
         inStock,
-        description: description.toLowerCase(),
-        content: content.toLowerCase(),
+        description,
+        content,
         onSale,
         category,
         images,

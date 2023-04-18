@@ -101,7 +101,9 @@ const CreateProduct = () => {
         setProduct(res.product);
         setCheckOnSale(res.product.onSale);
         setImages(res.product.images);
-        setCheckLoad(true);
+        setTimeout(() => {
+          setCheckLoad(true);
+        }, 500);
       });
     } else {
       setOnEdit(false);
@@ -274,8 +276,6 @@ const CreateProduct = () => {
                   ? zoEdit.errors.content((e) => e.message)
                   : zo.errors.content((e) => e.message)
               }
-              cols="30"
-              rows="4"
               label="Content"
               defaultValue={content ? content : null}
             />

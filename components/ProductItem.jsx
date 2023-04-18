@@ -106,7 +106,7 @@ const ProductItem = ({ product, handleCheck }) => {
         {product.title}
       </div>
       {categories.length > 0 ? (
-        <div className="text-xs text-left pl-4 text-slate-400 font-bold first-letter:capitalize">
+        <div className="text-xs text-left pl-4 text-slate-400 font-bold first-letter:capitalize select-none">
           {nameCategory}
         </div>
       ) : (

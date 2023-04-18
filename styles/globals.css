@@ -14,7 +14,7 @@
   */
 
   ::selection {
-    @apply bg-sky-700/80 text-rose-200 rounded;
+    @apply bg-sky-100/80 text-rose-400 rounded;
   }
   ::-webkit-scrollbar {
     @apply w-2;
