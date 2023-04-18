@@ -11,7 +11,6 @@ import Filter from "components/Filter";
 import CheckBox from "components/CheckBox";
 import pic from "public/images/logos/products.png";
 import Button from "components/Button";
-import BgAnimated from "components/BgAnimated";
 import TitleImage from "components/TitleImage";
 
 const Products = (props) => {
@@ -94,7 +93,7 @@ const Products = (props) => {
           <Filter />
         </aside>
         <div className="grow">
-          <div className="flex flex-wrap justify-center md:justify-evenly gap-8">
+          <div className="flex flex-wrap justify-center md:justify-center gap-6 ">
             {products.length === 0 ? (
               <h2>No Products</h2>
             ) : (
@@ -113,14 +112,16 @@ const Products = (props) => {
       <section className="my-10">
         {!loading ? (
           <button
-            className="px-10 ring-2 ring-slate-600 rounded p-2 text-slate-600 transition hover:ring-4"
+            className="uppercase px-10 ring-2 ring-slate-600 rounded p-2 text-slate-600 transition hover:ring-4 disabled:pointer-events-none 
+            disabled:bg-slate-100 disabled:text-slate-400 disabled:ring-slate-400
+            "
             disabled={loading || props.result < page * 6}
             onClick={handleLoadMore}
           >
             Load more
           </button>
         ) : (
-          <button className="px-10 ring-2 ring-slate-600 rounded p-2 transition hover:ring-4 pointer-events-none">
+          <button className="w-[177.56px] px-10 ring-2 ring-slate-600 rounded p-2 transition hover:ring-4 pointer-events-none">
             <div className="flex gap-2 px-[11px] py-1">
               <span className="rounded-full px-2 w-4 h-4 bg-slate-600 animate-bounce"></span>
               <span

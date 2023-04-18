@@ -13,7 +13,7 @@ export default function Footer() {
           <Social />
         </div>
         {auth.user && <LogoutBtn />}
-        <div className="text-slate !mt-7">
+        <div className="text-sky-700 !mt-7">
           MiuStationStore&copy; {new Date().getFullYear()}
         </div>
       </footer>

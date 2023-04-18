@@ -69,9 +69,9 @@ const ProductItem = ({ product, handleCheck }) => {
       </div>
     );
   };
-  /**@TODO md:max-w-md md:custom-min-width works?? */
+
   return (
-    <div className="group relative flex flex-col w-60 md:max-w-md md:custom-min-width rounded my-2 overflow-hidden shadow-none bg-slate-100 border-2 border-blue-200 transition md:w-80 hover:shadow-lg hover:border-blue-300">
+    <div className="group relative flex flex-col w-60 md:max-w-md md:custom-min-width rounded overflow-hidden shadow-none bg-slate-100 border-2 border-blue-200 transition md:w-80 hover:shadow-lg hover:border-blue-300">
       {noSalePage && auth.user && auth.user.role === "admin" && (
         <CheckBox
           aria-label="checkbox"
