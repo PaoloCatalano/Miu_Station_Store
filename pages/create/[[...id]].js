@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { NextSeo } from "next-seo";
@@ -101,9 +101,6 @@ const CreateProduct = () => {
         setProduct(res.product);
         setCheckOnSale(res.product.onSale);
         setImages(res.product.images);
-        setTimeout(() => {
-          setCheckLoad(true);
-        }, 500);
       });
     } else {
       setOnEdit(false);
@@ -121,6 +118,10 @@ const CreateProduct = () => {
       setProduct({ ...product, onSale: checkOnSale });
     }
   }, [checkOnSale]);
+
+  useEffect(() => {
+    setCheckLoad(true);
+  }, [product]);
 
   const handleUploadInput = (e) => {
     notify({});
@@ -281,7 +282,7 @@ const CreateProduct = () => {
             />
 
             <div className="text-left ml-2 -mt-4 mb-2">
-              {checkLoad && (
+              {categories && checkLoad && (
                 <select
                   className="capitalize bg-slate-50 w-full mb-2 text-slate-500 cursor-pointer focus:outline-none focus:text-slate-600 transition"
                   name={zo.fields.category()}

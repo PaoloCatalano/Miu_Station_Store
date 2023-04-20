@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { NextSeo, ProductJsonLd } from "next-seo";
 import Link from "next/link";
 import Image from "next/image";
@@ -17,18 +17,37 @@ const SingleProduct = (props) => {
   if (props.product === null) {
     return <NoProduct />;
   }
-  const { cart, categories, addToCart } = useCtx();
+  const {
+    cart,
+    categories,
+    addToCart,
+    isLoading: isLoading_globalState,
+    loading,
+  } = useCtx();
 
   const prodID = props.product._id;
 
   const [product] = useState(props.product);
   const [tab, setTab] = useState(0);
+  const [tabVisited, setTabVisited] = useState([]);
 
   const nameCategory = useCallback(
     categories
       .filter((category) => category._id === product.category)
       .map((item) => item.name)
   );
+
+  useEffect(() => {
+    if (!tabVisited.includes(tab)) isLoading_globalState(true);
+
+    setTabVisited(() => {
+      if (tabVisited.includes(tab)) {
+        return tabVisited;
+      } else {
+        return [...tabVisited, tab];
+      }
+    });
+  }, [tab]);
 
   //SWR
   const { prodSWR, isLoading, isError } = useProduct(prodID);
@@ -94,13 +113,17 @@ const SingleProduct = (props) => {
             <Image
               className="mx-auto rounded mt-4 w-100"
               src={product.images[tab].url}
-              alt={product.images[tab].url}
+              alt={product.title}
               placeholder="blur"
               blurDataURL={rgbDataURL()}
               quality={100}
               width={600}
               height={600}
               priority
+              sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+              onLoadingComplete={() => isLoading_globalState(false)}
             />
           </div>
 
@@ -111,11 +134,11 @@ const SingleProduct = (props) => {
                 className={`relative cursor-pointer mt-1 rounded-sm mr-1 w-[60px] h-16 brightness-75 hover:ring-2 hover:ring-blue-200 hover:brightness-100 transition  ${isActive(
                   index
                 )}`}
-                key={index}
+                key={img.public_id}
               >
                 <Image
                   src={img.url}
-                  alt={img.url}
+                  alt={`thumbnail for ${product.title} (${img.public_id})`}
                   className="object-cover rounded-sm"
                   fill
                   sizes="10vw"
@@ -153,8 +176,14 @@ const SingleProduct = (props) => {
                 )
               ) : (
                 <div className="text-slate-600">
-                  {isLoading && <p>...</p>}
-                  {isError && <p>{product.inStock} in stock (may vary)</p>}
+                  {isLoading && (
+                    <div className="mx-auto my-4 h-4 rounded w-20 bg-slate-300 animate-pulse"></div>
+                  )}
+                  {isError && (
+                    <div className="text-slate-400 text-xs">
+                      {product.inStock} in stock
+                    </div>
+                  )}{" "}
                 </div>
               )}
 
@@ -168,8 +197,11 @@ const SingleProduct = (props) => {
                 </div>
               ) : (
                 <div className="text-slate-600">
-                  {isLoading && <p>...</p>}
-                  {product.sold} sold
+                  {isLoading ? (
+                    <div className="mx-auto my-4 h-4 rounded w-20 bg-slate-300 animate-pulse"></div>
+                  ) : (
+                    <> {product.sold} sold </>
+                  )}
                 </div>
               )}
             </div>
