@@ -25,6 +25,7 @@ import {
 } from "validators/valid";
 import ShowPassword from "components/ShowPassword";
 import SkeletonProfile from "components/SkeletonProfile";
+import LogoutBtn from "components/LogoutBtn";
 
 const FormSchema = z.object({
   name: z.optional(nameSchema),
@@ -374,6 +375,9 @@ const Profile = () => {
           </Link>
         </section>
       )}
+      <section className="w-full flex justify-end">
+        <LogoutBtn />
+      </section>
     </>
   );
 };

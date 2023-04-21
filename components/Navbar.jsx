@@ -8,6 +8,7 @@ import { CgProfile } from "react-icons/cg";
 import Links from "./Links";
 import { useCtx } from "store/globalState";
 import Hamburger from "./Hamburger";
+import LogoutBtn from "./LogoutBtn";
 import logo from "public/images/logos/icon.png";
 
 export default function Navbar() {
@@ -58,15 +59,8 @@ export default function Navbar() {
                 />
               </Link>
               {auth.user ? (
-                <div className="block capitalize text-sm text-miu-500 pl-4 translate-y-4 md:absolute md:pl-14 md:-translate-y-4">
-                  Hi, {auth.user.name}
-                  <Image
-                    src={auth.user.avatar}
-                    alt={auth.user.avatar}
-                    width={30}
-                    height={30}
-                    className="ml-1 overflow-hidden aspect-square object-cover rounded-full shadow inline"
-                  />
+                <div className="flex flex-row flex-nowrap justify-center text-sm  pl-14 translate-y-4 md:absolute md:-translate-y-[14px] md:pl-24">
+                  <LogoutBtn />
                 </div>
               ) : (
                 <div className="block text-sm pl-4 translate-y-4 text-miu-500 transition hover:text-miu-600 md:absolute md:pl-16 md:-translate-y-4">
