@@ -79,7 +79,7 @@ export default function Register() {
             name={zo.fields.email()}
             errorMessage={zo.errors.email((e) => e.message)}
           />
-          <Input
+          <input
             label="Address"
             type="text"
             name={zo.fields.address()}

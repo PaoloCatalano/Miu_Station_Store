@@ -44,16 +44,16 @@ const register = async (req, res) => {
     });
 
     if (checkWord(name) || checkWord(address) || checkWord(mobile)) {
-      return res.status(403).json({
+      return res.status(400).json({
         err: `${checkWord(name) ? name : ""} ${
           checkWord(address) ? address : ""
-        }  ${checkWord(mobile) ? mobile : ""}: not accepted.`,
+        }  ${checkWord(mobile) ? mobile : ""} not accepted.`,
       });
     }
 
     const user = await Users.findOne({ email });
     if (user)
-      return res.status(400).json({ err: "This email already exists." });
+      return res.status(403).json({ err: "This email already exists." });
 
     const passwordHash = await bcrypt.hash(password, 12);
     const verificationToken = bcrypt.genSaltSync(20);

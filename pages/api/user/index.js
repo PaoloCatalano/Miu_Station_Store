@@ -56,7 +56,7 @@ const uploadInfo = async (req, res) => {
       return res.status(400).json({
         err: `${checkWord(name) ? name : ""} ${
           checkWord(address) ? address : ""
-        }  ${checkWord(mobile) ? mobile : ""}: not accepted.`,
+        }  ${checkWord(mobile) ? mobile : ""} not accepted.`,
       });
     }
 
