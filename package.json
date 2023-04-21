@@ -8,6 +8,7 @@
   "dependencies": {
     "@next/font": "^13.3.0",
     "@sendgrid/mail": "^7.7.0",
+    "bad-words": "^3.0.4",
     "bcrypt": "^5.1.0",
     "js-cookie": "^3.0.1",
     "jsonwebtoken": "^8.5.1",

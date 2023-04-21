@@ -52,6 +52,14 @@ const uploadInfo = async (req, res) => {
     mobileSchema.parse(mobile);
     avatarSchema.parse(avatar);
 
+    if (checkWord(name) || checkWord(address) || checkWord(mobile)) {
+      return res.status(400).json({
+        err: `${checkWord(name) ? name : ""} ${
+          checkWord(address) ? address : ""
+        }  ${checkWord(mobile) ? mobile : ""}: not accepted.`,
+      });
+    }
+
     const newUser = await Users.findOneAndUpdate(
       { _id: result.id },
       { name, address, mobile, avatar }

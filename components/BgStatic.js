@@ -23,3 +23,5 @@ export default function BgStatic() {
     </>
   );
 }
+
+//pic from https://pattern.monster/waves-1/

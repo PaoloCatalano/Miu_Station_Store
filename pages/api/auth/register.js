@@ -7,6 +7,7 @@ import userSchema from "validators/userSchema";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 import rateLimit from "utils/rate-limit";
+import checkWord from "validators/clean";
 
 connectDB();
 
@@ -42,9 +43,17 @@ const register = async (req, res) => {
       confirmPassword: cf_password,
     });
 
+    if (checkWord(name) || checkWord(address) || checkWord(mobile)) {
+      return res.status(403).json({
+        err: `${checkWord(name) ? name : ""} ${
+          checkWord(address) ? address : ""
+        }  ${checkWord(mobile) ? mobile : ""}: not accepted.`,
+      });
+    }
+
     const user = await Users.findOne({ email });
     if (user)
-      return res.status(403).json({ err: "This email already exists." });
+      return res.status(400).json({ err: "This email already exists." });
 
     const passwordHash = await bcrypt.hash(password, 12);
     const verificationToken = bcrypt.genSaltSync(20);
