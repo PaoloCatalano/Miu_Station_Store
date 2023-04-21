@@ -18,6 +18,16 @@ module.exports = {
     domains: ["res.cloudinary.com"],
     formats: ["image/avif", "image/webp"],
   },
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      require("./sitemap/generate-sitemap");
+    }
+
+    return config;
+  },
+  experimental: {
+    scrollRestoration: true,
+  },
   async redirects() {
     return [
       {
