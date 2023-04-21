@@ -12,6 +12,7 @@ import userSchema from "validators/userSchema";
 import { passwordSchema } from "validators/valid";
 import ShowPassword from "../components/ShowPassword";
 import BgAnimated from "components/BgAnimated";
+import Title from "components/Title";
 
 const FormSchema = userSchema
   .extend({
@@ -63,7 +64,12 @@ export default function Register() {
         }}
       />
       <BgAnimated />
-      <h1 className="text-6xl font-bold mb-10 text-blue-400">Register</h1>
+      <Title>Register</Title>
+      <p className="text-sm text-slate-700">
+        <b>IMPORTANT: </b>
+        We will not send you any spam, promotional emails or advertisement at
+        anytime!
+      </p>
       <form ref={zo.ref}>
         <Fieldset legend="Create your Account">
           <Input
@@ -79,7 +85,7 @@ export default function Register() {
             name={zo.fields.email()}
             errorMessage={zo.errors.email((e) => e.message)}
           />
-          <input
+          <Input
             label="Address"
             type="text"
             name={zo.fields.address()}
