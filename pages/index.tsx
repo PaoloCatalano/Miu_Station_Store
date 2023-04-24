@@ -18,7 +18,7 @@ type Props = {
 type Data = {
   link: string;
   category: string;
-  products: Product;
+  products: any;
 }[];
 
 const Home: NextPage = (props: Props) => {
@@ -27,6 +27,8 @@ const Home: NextPage = (props: Props) => {
   useEffect(() => {
     setProducts(data);
   }, [props]);
+
+  console.log(products);
 
   const data: Data = [
     {
