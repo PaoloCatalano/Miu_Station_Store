@@ -28,8 +28,6 @@ const Home: NextPage = (props: Props) => {
     setProducts(data);
   }, [props]);
 
-  console.log(products);
-
   const data: Data = [
     {
       link: "/products?category=624b1f5809f7af00099f873e",
