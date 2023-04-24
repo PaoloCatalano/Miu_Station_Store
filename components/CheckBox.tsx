@@ -6,7 +6,9 @@ import { VisuallyHidden } from "@react-aria/visually-hidden";
 import { useFocusRing } from "@react-aria/focus";
 import { mergeProps } from "@react-aria/utils";
 
-type AriaCheckboxPropsWithClassName = AriaCheckboxProps & { className: string };
+type AriaCheckboxPropsWithClassName = AriaCheckboxProps & {
+  className?: string;
+};
 
 export default function Checkbox(props: AriaCheckboxPropsWithClassName) {
   let state = useToggleState(props);

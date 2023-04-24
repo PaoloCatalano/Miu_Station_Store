@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import type { NextPage } from "next";
+import type { Product } from "utils/types";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
 import { getData } from "utils/fetchData";
@@ -6,19 +8,18 @@ import ProductItem from "components/ProductItem";
 import TitleImage from "components/TitleImage";
 import pic from "public/images/logos/onSale.png";
 
-const OnSale = (props) => {
+type Props = {
+  result: number;
+  products: Product[];
+};
+
+const OnSale: NextPage = (props: Props) => {
   const [products, setProducts] = useState(props.products);
 
   useEffect(() => {
     setProducts(props.products);
   }, [props.products]);
 
-  const handleCheck = (id) => {
-    products.forEach((product) => {
-      if (product._id === id) product.checked = !product.checked;
-    });
-    setProducts([...products]);
-  };
   return (
     <>
       <NextSeo
@@ -51,11 +52,7 @@ const OnSale = (props) => {
           </div>
         ) : (
           products.map((product) => (
-            <ProductItem
-              key={product._id}
-              product={product}
-              handleCheck={handleCheck}
-            />
+            <ProductItem key={product._id} product={product} />
           ))
         )}
       </div>

@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import type { Product, Category } from "utils/types";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -10,7 +11,13 @@ import { FaEdit } from "react-icons/fa";
 import Button from "components/Button";
 import CheckBox from "components/CheckBox";
 
-const ProductItem = ({ product, handleCheck }) => {
+const ProductItem = ({
+  product,
+  handleCheck,
+}: {
+  product: Product;
+  handleCheck?: Function;
+}) => {
   const { cart, auth, categories, addToCart, addModal } = useCtx();
   const router = useRouter();
 
@@ -18,8 +25,9 @@ const ProductItem = ({ product, handleCheck }) => {
 
   const nameCategory = useCallback(
     categories
-      .filter((category) => category._id === product.category)
-      .map((item) => item.name)
+      .filter((category: Category) => category._id === product.category)
+      .map((item: Category) => item.name),
+    [categories]
   );
 
   const { prodSWR, isLoading, isError } = useProduct(product._id);

@@ -1,53 +1,63 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
+    <loc>http://localhost:3000/404</loc>
+    <lastmod>2023-04-24T02:47:41.013Z</lastmod>    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>http://localhost:3000/500</loc>
+    <lastmod>2023-04-24T02:47:41.013Z</lastmod>    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
     <loc>http://localhost:3000/cart</loc>
-    <lastmod>2023-04-21T16:32:05.482Z</lastmod>    <changefreq>monthly</changefreq>
+    <lastmod>2023-04-24T02:47:41.013Z</lastmod>    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>http://localhost:3000/categories</loc>
-    <lastmod>2023-04-21T16:32:05.482Z</lastmod>    <changefreq>monthly</changefreq>
+    <lastmod>2023-04-24T02:47:41.013Z</lastmod>    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>http://localhost:3000</loc>
-    <lastmod>2023-04-21T16:32:05.482Z</lastmod>    <changefreq>monthly</changefreq>
+    <lastmod>2023-04-24T02:47:41.013Z</lastmod>    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>http://localhost:3000/login</loc>
-    <lastmod>2023-04-21T16:32:05.482Z</lastmod>    <changefreq>monthly</changefreq>
+    <lastmod>2023-04-24T02:47:41.013Z</lastmod>    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>http://localhost:3000/order</loc>
-    <lastmod>2023-04-21T16:32:05.482Z</lastmod>    <changefreq>monthly</changefreq>
+    <lastmod>2023-04-24T02:47:41.013Z</lastmod>    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>http://localhost:3000/product</loc>
-    <lastmod>2023-04-21T16:32:05.482Z</lastmod>    <changefreq>monthly</changefreq>
+    <lastmod>2023-04-24T02:47:41.013Z</lastmod>    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>http://localhost:3000/products</loc>
-    <lastmod>2023-04-21T16:32:05.482Z</lastmod>    <changefreq>monthly</changefreq>
+    <lastmod>2023-04-24T02:47:41.013Z</lastmod>    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>http://localhost:3000/profile</loc>
-    <lastmod>2023-04-21T16:32:05.482Z</lastmod>    <changefreq>monthly</changefreq>
+    <lastmod>2023-04-24T02:47:41.013Z</lastmod>    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>http://localhost:3000/register</loc>
-    <lastmod>2023-04-21T16:32:05.482Z</lastmod>    <changefreq>monthly</changefreq>
+    <lastmod>2023-04-24T02:47:41.013Z</lastmod>    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>http://localhost:3000/sales</loc>
-    <lastmod>2023-04-21T16:32:05.482Z</lastmod>    <changefreq>monthly</changefreq>
+    <lastmod>2023-04-24T02:47:41.013Z</lastmod>    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 </urlset>

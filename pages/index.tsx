@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import type { NextPage } from "next";
+import type { Product } from "utils/types";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import { getData } from "utils/fetchData";
@@ -8,38 +9,42 @@ import Title from "components/Title";
 import Preview from "components/Preview";
 import A from "components/A";
 
-const Home: NextPage = (props: {
-  products: { stickers: object; kimono: object; accessories: object };
-}) => {
+type Props = {
+  stickers: Product;
+  kimono: Product;
+  accessories: Product;
+};
+
+type Data = {
+  link: string;
+  category: string;
+  products: Product;
+}[];
+
+const Home: NextPage = (props: Props) => {
   const [products, setProducts] = useState<Data>(null);
 
   useEffect(() => {
     setProducts(data);
-  }, [props.products]);
+  }, [props]);
 
   const data: Data = [
     {
       link: "/products?category=624b1f5809f7af00099f873e",
       category: "Accessories",
-      products: props.products.accessories,
+      products: props.accessories,
     },
     {
       link: "/products?category=624afb102808cb15488d1fba",
       category: "Kimono",
-      products: props.products.kimono,
+      products: props.kimono,
     },
     {
       link: "/products?category=6248c34a9695eb0009ac13b8",
       category: "Stickers",
-      products: props.products.stickers,
+      products: props.stickers,
     },
   ];
-
-  type Data = {
-    link: string;
-    category: string;
-    products: object;
-  }[];
 
   return (
     <>
@@ -131,11 +136,9 @@ export async function getStaticProps() {
   );
   return {
     props: {
-      products: {
-        stickers: stickers.products,
-        kimono: kimono.products,
-        accessories: accessories.products,
-      },
+      stickers: stickers.products,
+      kimono: kimono.products,
+      accessories: accessories.products,
     },
     // revalidate: 60
   };

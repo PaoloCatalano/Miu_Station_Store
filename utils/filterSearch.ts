@@ -1,3 +1,5 @@
+import type { NextRouter } from "next/router";
+
 const filterSearch = ({
   router,
   page,
@@ -5,6 +7,13 @@ const filterSearch = ({
   showInStock,
   sort,
   search,
+}: {
+  router: NextRouter;
+  page?: string;
+  category?: string;
+  showInStock?: string;
+  sort?: string;
+  search?: string;
 }) => {
   const path = router.pathname;
   const query = router.query;
