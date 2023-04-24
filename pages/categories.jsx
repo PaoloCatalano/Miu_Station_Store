@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
 import { NextSeo } from "next-seo";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { fromZodError } from "zod-validation-error";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";

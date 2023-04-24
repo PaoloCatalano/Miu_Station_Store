@@ -34,7 +34,7 @@ const ForgotPassword = () => {
 
   const disabled = zo.validation?.success === false;
 
-  const handleSubmit = async (user) => {
+  const handleSubmit = async (user: { email?: string }) => {
     notify({ loading: true });
     const res = await postData("resetPassword/forgot-password", user);
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import type { Order } from "utils/types";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
@@ -20,7 +21,6 @@ import {
   nameSchema,
   addressSchema,
   mobileSchema,
-  confirmPasswordSchema,
   passwordSchema,
 } from "validators/valid";
 import ShowPassword from "components/ShowPassword";
@@ -50,7 +50,7 @@ const Profile = () => {
   const [data, setData] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
-  const updatePassword = (password, oldPassword) => {
+  const updatePassword = (password: string, oldPassword: string) => {
     notify({ loading: true });
 
     postData(
@@ -84,8 +84,16 @@ const Profile = () => {
     setData(file);
   };
 
-  const updateInfo = async ({ name, address, mobile }) => {
-    let media;
+  const updateInfo = async ({
+    name,
+    address,
+    mobile,
+  }: {
+    name?: string;
+    address?: string;
+    mobile?: string;
+  }) => {
+    let media: any;
     notify({ loading: true });
 
     if (data) media = await imageUpload([data]);
@@ -207,8 +215,8 @@ const Profile = () => {
               <Input
                 label="Email"
                 type="email"
-                name={zo.fields.email()}
-                errorMessage={zo.errors.email((e) => e.message)}
+                // name={zo.fields.email()}
+                // errorMessage={zo.errors.email((e) => e.message)}
                 defaultValue={auth.user.email}
                 isReadyOnly
                 isDisabled
@@ -310,7 +318,7 @@ const Profile = () => {
               </thead>
 
               <tbody className="text-slate-700 ">
-                {orders?.map((order) => (
+                {orders?.map((order: Order) => (
                   <tr
                     key={order._id}
                     className="[&:nth-child(even)]:bg-slate-200"

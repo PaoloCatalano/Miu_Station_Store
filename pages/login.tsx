@@ -40,7 +40,10 @@ export default function Login() {
 
   const disabled = zo.validation?.success === false;
 
-  const handleSubmit = async (userObj) => {
+  const handleSubmit = async (userObj: {
+    email?: string;
+    password?: string;
+  }) => {
     notify({ loading: true });
     const res = await postData("auth/login", userObj);
 
@@ -59,9 +62,9 @@ export default function Login() {
     });
 
     if (session) {
-      sessionStorage.setItem("sessionLogin", true);
+      sessionStorage.setItem("sessionLogin", true as unknown as string);
     } else {
-      localStorage.setItem("firstLogin", true);
+      localStorage.setItem("firstLogin", true as unknown as string);
     }
   };
 

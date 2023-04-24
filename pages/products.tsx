@@ -145,7 +145,7 @@ const Products: NextPage = (props: Props) => {
           </button>
         ) : (
           <button className="w-[177.56px] px-10 ring-2 ring-slate-600 rounded p-2 transition hover:ring-4 pointer-events-none">
-            <div className="flex gap-2 px-[11px] py-1">
+            <div className="flex justify-center gap-2 px-[11px] py-1">
               <span className="rounded-full px-2 w-4 h-4 bg-slate-600 animate-bounce"></span>
               <span
                 className="rounded-full px-2 w-4 h-4 bg-slate-600 animate-bounce"
