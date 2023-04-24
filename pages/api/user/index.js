@@ -9,6 +9,7 @@ import {
   avatarSchema,
   mobileSchema,
 } from "validators/valid";
+import checkWord from "validators/clean";
 
 connectDB();
 

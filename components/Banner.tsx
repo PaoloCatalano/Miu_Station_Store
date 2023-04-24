@@ -1,6 +1,12 @@
 import React from "react";
 
-export default function Banner({ text, role = "" }) {
+export default function Banner({
+  text,
+  role = "",
+}: {
+  text: string;
+  role?: string;
+}) {
   const roleStyle = role === "alert" ? `bg-red-400` : `bg-miu-300`;
 
   return (

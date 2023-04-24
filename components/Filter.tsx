@@ -6,6 +6,7 @@ import useDebounce from "utils/useDebounce";
 import Fieldset from "components/Fieldset";
 import Input from "components/Input";
 import CheckBox from "components/CheckBox";
+import { Category } from "utils/types";
 
 const Filter = () => {
   const router = useRouter();
@@ -16,22 +17,22 @@ const Filter = () => {
   );
   const debouncedSearchTerm = useDebounce(search);
 
-  const { categories } = useCtx();
+  const { categories }: { categories: Category[] } = useCtx();
 
-  const handleCategory = (e) => {
+  const handleCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
     filterSearch({ router, category: e.target.value });
   };
-  const handleShowInStock = (e) => {
+  const handleShowInStock = (e: boolean) => {
     filterSearch({ router, showInStock: e ? "true" : "false" });
   };
 
-  const handleSort = (e) => {
+  const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSort(e.target.value);
     filterSearch({ router, sort: e.target.value });
   };
 
-  const AZsort = (a, b) => {
+  const AZsort = (a: { name: string }, b: { name: string }) => {
     if (a.name.toLowerCase() < b.name.toLowerCase()) {
       return -1;
     }

@@ -276,105 +276,107 @@ const Profile = () => {
           </form>
         </article>
 
-        <article className="mt-10">
-          <div className="uppercase">Orders</div>
-          <div className="my-8 pl-4 text-slate-500">
-            <p>
-              <span className="flex items-center">
-                <FcPaid
-                  aria-label="paid"
-                  title="paid"
-                  className="text-xl mr-2 "
-                />{" "}
-                Paid
-              </span>
-            </p>
-            <p>
-              <span className="flex items-center">
-                <TbTruckDelivery
-                  aria-label="delivered"
-                  title="delivered"
-                  className="text-xl mr-2"
-                />{" "}
-                Delivered
-              </span>
-            </p>
-            {auth.user.role === "admin" && (
-              <p className="text-rose-600 text-left">Email not verified</p>
-            )}
-          </div>
-          <div className="my-3">
-            <table className="text-sm mx-auto">
-              <thead className="bg-slate-300">
-                <tr>
-                  {auth.user.role === "admin" && (
-                    <th className="p-2 hidden md:table-cell">user email</th>
-                  )}
-                  <th className="p-2">date</th>
-                  <th className="p-2">total</th>
-                  <th className="p-2">status</th>
-                  <th className="p-2">info</th>
-                </tr>
-              </thead>
-
-              <tbody className="text-slate-700 ">
-                {orders?.map((order: Order) => (
-                  <tr
-                    key={order._id}
-                    className="[&:nth-child(even)]:bg-slate-200"
-                  >
+        {orders?.length > 0 && (
+          <article className="mt-10">
+            <div className="uppercase">Orders</div>
+            <div className="my-8 pl-4 text-slate-500">
+              <p>
+                <span className="flex items-center">
+                  <FcPaid
+                    aria-label="paid"
+                    title="paid"
+                    className="text-xl mr-2 "
+                  />{" "}
+                  Paid
+                </span>
+              </p>
+              <p>
+                <span className="flex items-center">
+                  <TbTruckDelivery
+                    aria-label="delivered"
+                    title="delivered"
+                    className="text-xl mr-2"
+                  />{" "}
+                  Delivered
+                </span>
+              </p>
+              {auth.user.role === "admin" && (
+                <p className="text-rose-600 text-left">Email not verified</p>
+              )}
+            </div>
+            <div className="my-3">
+              <table className="text-sm mx-auto">
+                <thead className="bg-slate-300">
+                  <tr>
                     {auth.user.role === "admin" && (
-                      <td className="p-2 hidden md:table-cell ">
-                        {order?.user?._id ? (
-                          <Link href={`/user/${order.user._id}`}>
-                            <div
-                              className={`lowercase underline hover:text-slate-800 transition ${
-                                order.user.isVerified ? "" : "text-rose-600"
-                              }`}
-                            >
-                              {order.user.email}
-                            </div>
-                          </Link>
-                        ) : (
-                          <div className="text-red-800">USER DELETED</div>
-                        )}
-                      </td>
+                      <th className="p-2 hidden md:table-cell">user email</th>
                     )}
-
-                    <td className="p-2">
-                      {new Date(order.createdAt).toLocaleDateString()}
-                    </td>
-                    <td className="p-2">${order.total}</td>
-
-                    <td className="p-2 flex justify-evenly ">
-                      <span>
-                        {order.paid && (
-                          <FcPaid aria-label="paid" title="paid" />
-                        )}
-                      </span>
-                      <span>
-                        {order.delivered && (
-                          <TbTruckDelivery
-                            aria-label="delivered"
-                            title="delivered"
-                          />
-                        )}
-                      </span>
-                    </td>
-                    <td className="p-2 cursor-pointer">
-                      <Link
-                        href={`/order/${order._id}`}
-                        className="underline hover:text-slate-800 transition "
-                      >
-                        more
-                      </Link>
-                    </td>
+                    <th className="p-2">date</th>
+                    <th className="p-2">total</th>
+                    <th className="p-2">status</th>
+                    <th className="p-2">info</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </article>
+                </thead>
+
+                <tbody className="text-slate-700 ">
+                  {orders.map((order: Order) => (
+                    <tr
+                      key={order._id}
+                      className="[&:nth-child(even)]:bg-slate-200"
+                    >
+                      {auth.user.role === "admin" && (
+                        <td className="p-2 hidden md:table-cell ">
+                          {order?.user?._id ? (
+                            <Link href={`/user/${order.user._id}`}>
+                              <div
+                                className={`lowercase underline hover:text-slate-800 transition ${
+                                  order.user.isVerified ? "" : "text-rose-600"
+                                }`}
+                              >
+                                {order.user.email}
+                              </div>
+                            </Link>
+                          ) : (
+                            <div className="text-red-800">USER DELETED</div>
+                          )}
+                        </td>
+                      )}
+
+                      <td className="p-2">
+                        {new Date(order.createdAt).toLocaleDateString()}
+                      </td>
+                      <td className="p-2">${order.total}</td>
+
+                      <td className="p-2 flex justify-evenly ">
+                        <span>
+                          {order.paid && (
+                            <FcPaid aria-label="paid" title="paid" />
+                          )}
+                        </span>
+                        <span>
+                          {order.delivered && (
+                            <TbTruckDelivery
+                              aria-label="delivered"
+                              title="delivered"
+                            />
+                          )}
+                        </span>
+                      </td>
+                      <td className="p-2 cursor-pointer">
+                        <Link
+                          href={`/order/${order._id}`}
+                          className="underline hover:text-slate-800 transition "
+                        >
+                          more
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </article>
+        )}
       </section>
       {auth.user.role === "admin" && (
         <section className="my-10">

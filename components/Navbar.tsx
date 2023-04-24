@@ -1,3 +1,4 @@
+import { HTMLAttributes, DetailedHTMLProps } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { GiShirtButton } from "react-icons/gi";
@@ -11,8 +12,19 @@ import Hamburger from "./Hamburger";
 import LogoutBtn from "./LogoutBtn";
 import logo from "public/images/logos/icon.png";
 
+type ExtendedDivProps = DetailedHTMLProps<
+  HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+> & {
+  onClick: () => void;
+};
+
 export default function Navbar() {
   const { open, isMenuOpen, auth } = useCtx();
+
+  const divProps: ExtendedDivProps = {
+    onClick: () => isMenuOpen(!open),
+  };
 
   return (
     <nav className="relative w-screen flex justify-center z-20 bg-gradient-to-t from-blue-100  via-white to-slate-50 border-b-2 border-slate-200">
@@ -33,7 +45,7 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
-      <div onClick={() => isMenuOpen(!open)}>
+      <div {...divProps}>
         <Hamburger open={open} />
       </div>
       <div

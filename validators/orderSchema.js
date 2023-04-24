@@ -9,7 +9,7 @@ const orderSchema = z.object({
     z.object({
       _id: z.string(),
       title: z.string(),
-      images: z.array(),
+      images: z.array(), //z.array(z.string()) to check
       price: z.number().gte(0),
       inStock: z.number().gte(0),
       sold: z.number().gte(0),

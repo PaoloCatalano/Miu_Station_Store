@@ -1,6 +1,13 @@
+import { StaticImageData } from "next/image";
 import Image from "next/image";
 
-export default function TitleImage({ image, alt = "" }) {
+export default function TitleImage({
+  image,
+  alt = "",
+}: {
+  image: StaticImageData;
+  alt: string;
+}) {
   return (
     <div className="flex border-b-2 border-miu-600 mb-10 overflow-hidden ">
       <Image

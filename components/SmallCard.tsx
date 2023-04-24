@@ -1,8 +1,9 @@
+import { Product } from "utils/types";
 import Link from "next/link";
 import Image from "next/image";
 import { rgbDataURL } from "utils/blurData";
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product }: { product: Product }) => {
   return (
     <Link
       href={`/product/${product._id}`}

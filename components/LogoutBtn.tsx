@@ -1,12 +1,20 @@
+import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import { TbLogout } from "react-icons/tb";
 import { useCtx } from "store/globalState";
-import Button from "./Button";
+
+type ExtendedButtonProps = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+> & {
+  onClick: () => void;
+};
 
 export default function LogoutBtn() {
   const { notify, authUser, isMenuOpen } = useCtx();
   const router = useRouter();
+
   const handleLogout = () => {
     Cookie.remove("refreshtoken", { path: "api/auth/accessToken" });
     localStorage.removeItem("firstLogin");
@@ -16,12 +24,17 @@ export default function LogoutBtn() {
     isMenuOpen(false);
     return router.push("/login");
   };
+
+  const buttonProps: ExtendedButtonProps = {
+    onClick: handleLogout,
+  };
+
   return (
     <div className="w-fit md:w-fit flex justify-center ">
       <button
         className="group text-slate-500 relative mr-5 hover:text-slate-600 transition"
-        onClick={handleLogout}
         aria-label="Logout"
+        {...buttonProps}
       >
         <span className="absolute pointer-events-none text-slate-500 text-xl -left-6 translate-y-px group-hover:text-slate-600 transition">
           <TbLogout />

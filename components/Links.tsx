@@ -1,13 +1,22 @@
 import Link from "next/link";
+import { Cart } from "utils/types";
 import { useRouter } from "next/router";
 import { useCtx } from "store/globalState";
 
-export default function Links({ icon, url, title }) {
+export default function Links({
+  icon,
+  url,
+  title,
+}: {
+  icon: JSX.Element;
+  url: string;
+  title: string;
+}) {
   const router = useRouter();
 
-  const { isMenuOpen, cart } = useCtx();
+  const { isMenuOpen, cart }: { isMenuOpen: Function; cart: Cart[] } = useCtx();
 
-  const calcTotItems = cart.reduce((acc, item) => {
+  const calcTotItems = cart.reduce((acc: number, item) => {
     return acc + item.quantity;
   }, 0);
 

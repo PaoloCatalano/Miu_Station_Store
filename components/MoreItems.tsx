@@ -1,7 +1,13 @@
 import Link from "next/link";
 import { FaChevronRight } from "react-icons/fa";
 
-export default function MoreItems({ children, link }) {
+export default function MoreItems({
+  children,
+  link,
+}: {
+  children: React.ReactNode;
+  link: string;
+}) {
   return (
     <Link href={link}>
       <div className="group relative w-60 h-60 rounded-md border-2 border-slate-200 shadow-none bg-slate-100 hover:border-slate-300 transition overflow-hidden hover:shadow-lg">
