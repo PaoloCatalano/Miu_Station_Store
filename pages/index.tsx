@@ -75,7 +75,7 @@ const Home: NextPage = (props: Props) => {
           </p>
           <p className="text-slate-600 text-lg mb-6 text-left">
             From stickers and dolls to clothes, kimonos, paintings, handcrafts,
-            and more, you'll find something truly special!
+            and more, you'll find something truly special!!
           </p>
           <Link href="/products?search=all">
             {/* CTA Button ~ */}
