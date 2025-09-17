@@ -11,11 +11,11 @@ const ProductItem = ({ product }: { product: Product }) => {
     >
       <div className="relative flex flex-col w-60 h-60  rounded-md overflow-hidden shadow-none bg-slate-100 border-2 border-blue-200 transition hover:shadow-lg hover:border-blue-300">
         <div className="relative h-full max-h-96">
-          {product.onSale && (
+          {/* {product.onSale && (
             <div className="triangle z-[1] absolute -top-[8px] -right-[8px] float-left w-12 h-12 bg-rose-500/80 text-white rotate-45 text-center">
               <p className="mt-[7px] text-sm">sale</p>
             </div>
-          )}
+          )} */}
           <Image
             className="w-full h-full object-cover transition rounded-md-t group-hover:scale-105"
             src={product.images[0].url}

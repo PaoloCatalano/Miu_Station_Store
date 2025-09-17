@@ -11,7 +11,7 @@ export default function BgStatic() {
         <Image
           className="w-full h-full object-cover transition"
           src={pic}
-          alt="Miu Station Store Products background"
+          alt="Miu Station Products background"
           placeholder="blur"
           blurDataURL={rgbDataURL()}
           sizes="100vw"

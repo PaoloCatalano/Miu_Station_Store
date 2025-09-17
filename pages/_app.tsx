@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     url: "https://miustationstore.netlify.app/images/logos/logo.png",
                     width: 1000,
                     height: 1000,
-                    alt: "Miu Station Store - Online Shop",
+                    alt: "Miu Station",
                   },
                 ],
               }}

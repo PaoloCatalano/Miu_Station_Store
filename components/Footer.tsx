@@ -8,7 +8,7 @@ export default function Footer() {
           <Social />
         </div>
         <div className="text-sky-700 !mt-7">
-          MiuStationStore&copy; {new Date().getFullYear()}
+          MiuStation&copy; {new Date().getFullYear()}
         </div>
       </footer>
     </div>

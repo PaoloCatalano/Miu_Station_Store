@@ -27,6 +27,9 @@ const FormSchema = z.object({
 });
 
 const Cart = () => {
+  // NO_PAY
+  return;
+
   const { cart, auth, orders, addCart, addOrder, addModal, notify } = useCtx();
 
   const [total, setTotal] = useState(0);
@@ -188,11 +191,11 @@ const Cart = () => {
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Cart`}
         canonical="https://miustationstore.netlify.app/cart"
-        description={`My shopping bag in Miu Station Store`}
+        description={`My shopping bag in Miu Station`}
         openGraph={{
           title: `${process.env.WEBSITE_NAME} | Cart`,
           url: "https://miustationstore.netlify.app/cart",
-          description: `My shopping bag in Miu Station Store`,
+          description: `My shopping bag in Miu Station`,
         }}
       />
       <BgAnimated />

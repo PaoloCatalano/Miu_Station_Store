@@ -82,10 +82,10 @@ export default function Login() {
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Login`}
         canonical="https://miustationstore.netlify.app/login"
-        description="Login page for Miu Station Store"
+        description="Login page for Miu Station"
         openGraph={{
           url: "https://miustationstore.netlify.app/login",
-          description: "Login page for Miu Station Store",
+          description: "Login page for Miu Station",
           title: `${process.env.WEBSITE_NAME} | Login}`,
         }}
       />
@@ -134,7 +134,7 @@ export default function Login() {
       {Object.keys(auth).length !== 0 && (
         <Banner text="Login Successful! Redirect" />
       )}
-      <section className="mb-14">
+      {/* <section className="mb-14">
         <div className="my-2 text-slate-600">
           No account yet?{" "}
           <Link
@@ -144,7 +144,7 @@ export default function Login() {
             Register Now
           </Link>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }

@@ -34,15 +34,16 @@ const ProductItem = ({
 
   const userLink = () => {
     return (
-      <div className="flex space-x-4">
-        <Button
+      <div className="flex space-x-4 justify-center">
+        {/* <Button
           className="grow animate-none"
           cta
           isDisabled={prodSWR?.product?.inStock === 0 ? true : false}
           onPress={() => addToCart(product, cart)}
         >
           <MdOutlineAddShoppingCart className="inline text-2xl -mt-2" /> Add
-        </Button>
+        </Button> */}
+
         <Link href={`/product/${product._id}`}>
           <Button hipster>Info</Button>
         </Link>
@@ -90,11 +91,11 @@ const ProductItem = ({
       )}
       <Link href={`/product/${product._id}`} className="grow overflow-hidden">
         <div className="relative h-full max-h-96">
-          {product.onSale && (
+          {/* {product.onSale && (
             <div className="triangle z-[1] absolute -top-[8px] -right-[8px] float-left w-12 h-12 bg-rose-500/80 text-white rotate-45 text-center">
               <p className="mt-[7px] text-sm">sale</p>
             </div>
-          )}
+          )} */}
           <Image
             className="w-full h-full object-cover transition rounded-md-t group-hover:scale-105"
             src={product.images[0].url}
@@ -122,7 +123,7 @@ const ProductItem = ({
       )}
 
       <div className="p-2">
-        <div className="flex flex-row items-center justify-between my-auto px-2 py-2">
+        {/* <div className="flex flex-row items-center justify-between my-auto px-2 py-2">
           {prodSWR ? (
             prodSWR.product?.inStock > 0 ? (
               <>
@@ -169,7 +170,7 @@ const ProductItem = ({
               )}
             </>
           )}
-        </div>
+        </div> */}
 
         <div className="row justify-content-between mx-0">
           {!auth.user || auth.user.role !== "admin" ? userLink() : adminLink()}

@@ -69,9 +69,9 @@ const Filter = () => {
               >
                 <option value="-createdAt">Newest</option>
                 <option value="oldest">Oldest</option>
-                <option value="-sold">Best sales</option>
+                {/* <option value="-sold">Best sales</option>
                 <option value="price">Lowest Price</option>
-                <option value="-price">Highest Price</option>
+                <option value="-price">Highest Price</option> */}
               </optgroup>
             </select>
           </div>
@@ -95,16 +95,16 @@ const Filter = () => {
               </optgroup>
             </select>
           </div>
-          <div className="ml-2 my-4 mb-6">
+          {/* <div className="ml-2 my-4 mb-6">
             <CheckBox
               isSelected={router?.query?.showInStock === "true" ? true : false}
               onChange={handleShowInStock}
             >
               Show products in stock
             </CheckBox>
-          </div>
+          </div> */}
 
-          {/* <input
+          {/* HIDDEN ALREADY BEFORE NO_PAY <input
           placeholder="Search..."
           type="search"
           className=""

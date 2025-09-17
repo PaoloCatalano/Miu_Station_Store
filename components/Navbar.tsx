@@ -77,7 +77,7 @@ export default function Navbar() {
               ) : (
                 <div className="block text-sm pl-4 translate-y-4 text-miu-500 transition hover:text-miu-600 md:absolute md:pl-16 md:-translate-y-4">
                   <Link href="/login" onClick={() => isMenuOpen(false)}>
-                    Login / Register
+                    Login {/* / Register */}
                   </Link>
                 </div>
               )}
@@ -103,19 +103,19 @@ const links = [
     title: "categories",
     icon: <AiFillTags />,
   },
-  {
-    url: "/sales",
-    title: "sales",
-    icon: <TbDiscount2 />,
-  },
-  {
-    url: "/cart",
-    title: "cart",
-    icon: <TiShoppingCart />,
-  },
+  // {
+  //   url: "/sales",
+  //   title: "sales",
+  //   icon: <TbDiscount2 />,
+  // },
+  // {
+  //   url: "/cart",
+  //   title: "cart",
+  //   icon: <TiShoppingCart />,
+  // },
   {
     url: "/profile",
-    title: "profile",
+    title: "admin",
     icon: <CgProfile />,
   },
 ];

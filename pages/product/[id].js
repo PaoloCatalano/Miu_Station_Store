@@ -85,21 +85,21 @@ const SingleProduct = (props) => {
         productName={product.title}
         images={product.images.map((i) => i.url)}
         description={product.description}
-        manufacturerName="Miu Station Store"
+        manufacturerName="Miu Station"
         manufacturerLogo="https://miustationstore.netlify.app/images/logos/icon.png"
         disambiguatingDescription={product.content}
         releaseDate={product.updatedAt}
         productionDate={product.createdAt}
         offers={[
           {
-            price: product.price,
+            // price: product.price,
             priceCurrency: "EUR",
             priceValidUntil: "2050-12-05",
             itemCondition: "https://schema.org/NewCondition",
             availability: "https://schema.org/InStock",
             url: `https://miustationstore.netlify.app/product/${product._id}`,
             seller: {
-              name: "Miu Station Store",
+              name: "Miu Station",
             },
           },
         ]}
@@ -152,7 +152,7 @@ const SingleProduct = (props) => {
             <div className="font-sans uppercase text-center my-5 text-2xl text-sky-700">
               {product.title}
             </div>
-            <div className="text-xl my-5 text-slate-600">
+            {/* <div className="text-xl my-5 text-slate-600">
               Price:{" "}
               <span className="text-slate-700 font-bold">
                 <span className="text-lg mr-1">€</span>
@@ -222,7 +222,7 @@ const SingleProduct = (props) => {
                   <A>Go to cart</A>
                 </Link>
               </div>
-            </div>
+            </div> */}
             {/* Description */}
             <div className="mt-10 p-5 bg-gradient-to-b from-transparent to-blue-200 rounded-sm">
               <div className="my-2 mb-6 uppercase text-sky-700 text-lg">

@@ -27,11 +27,11 @@ const DetailOrder = () => {
     <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Order Detail`}
-        description={`Summary of my order in Miu Station Store`}
+        description={`Summary of my order in Miu Station`}
         canonical={`https://miustationstore.netlify.app/order/${orderDetail[0]._id}`}
         openGraph={{
           title: `${process.env.WEBSITE_NAME} | Order Detail`,
-          description: `Summary of my order in Miu Station Store`,
+          description: `Summary of my order in Miu Station`,
           url: `${
             "https://miustationstore.netlify.app/order/" + orderDetail[0]._id
           }`,

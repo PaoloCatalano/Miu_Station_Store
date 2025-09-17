@@ -24,6 +24,9 @@ const FormSchema = userSchema
   });
 
 export default function Register() {
+  //NO_PAY
+  return;
+
   const [showPassword, setShowPassword] = useState(false);
   const { notify, notifyStatus } = useCtx();
   const router = useRouter();
@@ -56,10 +59,10 @@ export default function Register() {
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Register`}
         canonical="https://miustationstore.netlify.app/register"
-        description="Sign up page for Miu Station Store"
+        description="Sign up page for Miu Station"
         openGraph={{
           url: "https://miustationstore.netlify.app/register",
-          description: "Sign up page for Miu Station Store",
+          description: "Sign up page for Miu Station",
           title: `${process.env.WEBSITE_NAME} | Register}`,
         }}
       />

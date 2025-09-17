@@ -91,12 +91,12 @@ const Products: NextPage = (props: Props) => {
     <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} 🚉🛍️ Products`}
-        description={`Miu Station Store is an online shop selling various handmade items. Navigating through the product page, you will find stickers, dolls, clothes, kimonos, paintings, handcrafts, and much more.
+        description={`Miu Station displays various handmade items. Navigating through the product page, you will find stickers, dolls, clothes, kimonos, paintings, handcrafts, and much more.
 `}
         canonical="https://miustationstore.netlify.app/products"
         openGraph={{
           title: `${process.env.WEBSITE_NAME} 🚉🛍️ Products`,
-          description: `Miu Station Store is an online shop selling various handmade items. Navigating through the product page, you will find stickers, dolls, clothes, kimonos, paintings, handcrafts, and much more.`,
+          description: `Miu Station displays various handmade items. Navigating through the product page, you will find stickers, dolls, clothes, kimonos, paintings, handcrafts, and much more.`,
           url: "https://miustationstore.netlify.app/products",
         }}
       />
