@@ -100,11 +100,11 @@ const Categories = () => {
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Categories`}
         description={`Miu Station is a website where you will find categories like: ${AllCategories} and many more!`}
-        canonical="https://miustationstore.netlify.app/categories"
+        canonical="https://miustation.netlify.app/categories"
         openGraph={{
           title: `${process.env.WEBSITE_NAME} | Categories`,
           description: `All the categories of our products`,
-          url: "https://miustationstore.netlify.app/categories",
+          url: "https://miustation.netlify.app/categories",
         }}
       />
       <TitleImage image={pic} alt="categories" id="top" />

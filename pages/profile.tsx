@@ -158,10 +158,10 @@ const Profile = () => {
     <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | ${auth?.user.name} Profile`}
-        canonical="https://miustationstore.netlify.app/profile"
+        canonical="https://miustation.netlify.app/profile"
         description="My profile page for Miu Station"
         openGraph={{
-          url: "https://miustationstore.netlify.app/profile",
+          url: "https://miustation.netlify.app/profile",
           description: "My profile page for Miu Station",
           title: `${process.env.WEBSITE_NAME} | ${auth?.user.name} Profile`,
         }}

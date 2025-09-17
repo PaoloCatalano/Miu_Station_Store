@@ -27,13 +27,13 @@ const OnSale: NextPage = (props: Props) => {
     <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | On Sale`}
-        canonical="https://miustationstore.netlify.app/sales"
+        canonical="https://miustation.netlify.app/sales"
         description="Here you can find all the Special Offers and product On Sale!"
         openGraph={{
           title: `${process.env.WEBSITE_NAME} | On Sale`,
           description:
             "Here you can find all the Special Offers and product On Sale!",
-          url: "https://miustationstore.netlify.app/sales",
+          url: "https://miustation.netlify.app/sales",
         }}
       />
       <TitleImage image={pic} alt="products on sale" />

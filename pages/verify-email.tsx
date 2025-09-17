@@ -41,7 +41,7 @@ export default function VerifyEmail() {
     <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Verify Email`}
-        canonical="https://miustationstore.netlify.app/verify-email"
+        canonical="https://miustation.netlify.app/verify-email"
         description="Verify email for Miu Station"
       />
       <div className="mb-10">

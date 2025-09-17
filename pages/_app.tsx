@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 siteName: process.env.WEBSITE_NAME,
                 images: [
                   {
-                    url: "https://miustationstore.netlify.app/images/logos/logo.png",
+                    url: "https://miustation.netlify.app/images/logos/logo.png",
                     width: 1000,
                     height: 1000,
                     alt: "Miu Station",

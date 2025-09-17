@@ -67,10 +67,10 @@ const SingleProduct = (props) => {
         description={
           nameCategory + ", " + product.description + ", " + product.content
         }
-        canonical={`https://miustationstore.netlify.app/product/${product._id}`}
+        canonical={`https://miustation.netlify.app/product/${product._id}`}
         openGraph={{
           title: `${process.env.WEBSITE_NAME} | ${product.title.toUpperCase()}`,
-          url: `https://miustationstore.netlify.app/product/${product._id}`,
+          url: `https://miustation.netlify.app/product/${product._id}`,
           images: [
             {
               url: `${process.env.BASE_URL}/_next/image?url=${product.images[0].url}&w=3840&q=100`,
@@ -86,7 +86,7 @@ const SingleProduct = (props) => {
         images={product.images.map((i) => i.url)}
         description={product.description}
         manufacturerName="Miu Station"
-        manufacturerLogo="https://miustationstore.netlify.app/images/logos/icon.png"
+        manufacturerLogo="https://miustation.netlify.app/images/logos/icon.png"
         disambiguatingDescription={product.content}
         releaseDate={product.updatedAt}
         productionDate={product.createdAt}
@@ -97,7 +97,7 @@ const SingleProduct = (props) => {
             priceValidUntil: "2050-12-05",
             itemCondition: "https://schema.org/NewCondition",
             availability: "https://schema.org/InStock",
-            url: `https://miustationstore.netlify.app/product/${product._id}`,
+            url: `https://miustation.netlify.app/product/${product._id}`,
             seller: {
               name: "Miu Station",
             },

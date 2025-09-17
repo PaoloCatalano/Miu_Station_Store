@@ -52,11 +52,11 @@ const Home: NextPage = (props: Props) => {
         title={`${process.env.WEBSITE_NAME} 🚉🛍️`}
         description={`Miu Station displays fabulous handmade items. Navigating through the product page, you will find stickers, dolls, clothes, kimonos, paintings, handcrafts, and much more.
 `}
-        canonical="https://miustationstore.netlify.app"
+        canonical="https://miustation.netlify.app"
         openGraph={{
           title: `${process.env.WEBSITE_NAME} 🚉🛍️`,
           description: `Miu Station displays fabulous handmade items. Navigating through the product page, you will find stickers, dolls, clothes, kimonos, paintings, handcrafts, and much more.`,
-          url: "https://miustationstore.netlify.app",
+          url: "https://miustation.netlify.app",
         }}
       />
       <BgStatic />

@@ -190,11 +190,11 @@ const Cart = () => {
     <>
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Cart`}
-        canonical="https://miustationstore.netlify.app/cart"
+        canonical="https://miustation.netlify.app/cart"
         description={`My shopping bag in Miu Station`}
         openGraph={{
           title: `${process.env.WEBSITE_NAME} | Cart`,
-          url: "https://miustationstore.netlify.app/cart",
+          url: "https://miustation.netlify.app/cart",
           description: `My shopping bag in Miu Station`,
         }}
       />

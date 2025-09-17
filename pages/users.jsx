@@ -17,7 +17,7 @@ const Users = () => {
       <NextSeo
         title={`${process.env.WEBSITE_NAME} | Users`}
         openGraph={{
-          url: "https://miustationstore.netlify.app/users",
+          url: "https://miustation.netlify.app/users",
         }}
       />
       <Title>All Users</Title>
